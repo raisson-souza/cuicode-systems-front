@@ -12,34 +12,40 @@ import InternalHome from "./screens/Home/InternalHome"
 import UserRegistryScreen from "./screens/Users/UserRegistry"
 import LoginScreen from "./screens/Auth/Login"
 import AccountRecoveryScreen from "./screens/Auth/AccountRecovery"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function CreateRoute
 (
     path : string,
     element : JSX.Element,
+    protectedRoute : boolean = true,
     errorElement : JSX.Element = <DefaultError />
 ) {
     return {
-        path: path,
-        element: element,
-        errorElement: errorElement
+        "path": path,
+        "element": protectedRoute
+            ? (<ProtectedRoute>{ element }</ProtectedRoute>)
+            : element,
+        "protected": protectedRoute,
+        "errorElement": errorElement
     }
 }
 
 const router = createBrowserRouter([
-    { ...CreateRoute("/", <ExternalHome />), index: true },
-    CreateRoute("/user_registry", <UserRegistryScreen />),
-    CreateRoute("/login", <LoginScreen />),
+    CreateRoute("*", <>404</>, false),
+    { ...CreateRoute("/", <ExternalHome />, false), index: true },
+    CreateRoute("/user_registry", <UserRegistryScreen />, false),
+    CreateRoute("/login", <LoginScreen />, false),
     CreateRoute("/home", <InternalHome />),
-    CreateRoute("/account_recovery", <AccountRecoveryScreen />),
+    CreateRoute("/account_recovery", <AccountRecoveryScreen />, false),
     CreateRoute("/users", <Users />),
     CreateRoute("/user/:userId", <User />),
     CreateRoute("/group_registry", <>Rota não desenvolvida</>),
     CreateRoute("/group/:groupId", <>Rota não desenvolvida</>),
-    CreateRoute("/groups/", <>Rota não desenvolvida</>),
+    CreateRoute("/groups", <>Rota não desenvolvida</>),
     CreateRoute("/board_registry", <>Rota não desenvolvida</>),
     CreateRoute("/board/:boardId", <>Rota não desenvolvida</>),
-    CreateRoute("/boards/", <>Rota não desenvolvida</>),
+    CreateRoute("/boards", <>Rota não desenvolvida</>),
 ])
 
 export default router
