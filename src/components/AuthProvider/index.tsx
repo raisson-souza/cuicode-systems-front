@@ -25,7 +25,7 @@ export default function AuthProvider({
     )
 }
 
-export const useAuth = () => {
+const useAuth = () => {
     const context = useContext(AuthContext)
 
     if (context === undefined)
@@ -33,3 +33,18 @@ export const useAuth = () => {
 
     return context
 }
+
+// async function IsLogged() {
+//     const token = LocalStorage.GetToken()
+
+//     if (IsNil(token))
+//         return false
+
+//     return await AuthEndpoints.ValidateJwt(token!)
+//         .then(async (res) => {
+//             console.log('AuthEndpoints.ValidateJwt(token!)', res)
+//             return res.Data as boolean
+//         })
+// }
+
+export { useAuth }
