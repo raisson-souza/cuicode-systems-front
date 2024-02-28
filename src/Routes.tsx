@@ -26,7 +26,6 @@ function CreateRoute
         "element": protectedRoute
             ? (<ProtectedRoute>{ element }</ProtectedRoute>)
             : element,
-        "protected": protectedRoute,
         "errorElement": errorElement
     }
 }
@@ -37,10 +36,10 @@ const router = createBrowserRouter([
     CreateRoute("/user_registry", <UserRegistryScreen />, false),
     CreateRoute("/login", <LoginScreen />, false),
     CreateRoute("/home", <InternalHome />),
-    CreateRoute("/account_recovery", <AccountRecoveryScreen />, false),
+    CreateRoute("/account_recovery", <AccountRecoveryScreen />),
     CreateRoute("/users", <Users />),
     CreateRoute("/user/:userId", <User />),
-    CreateRoute("/group_registry", <>Rota não desenvolvida</>),
+    CreateRoute("/group_registry", (<ProtectedRoute><>Rota não desenvolvida</></ProtectedRoute>)),
     CreateRoute("/group/:groupId", <>Rota não desenvolvida</>),
     CreateRoute("/groups", <>Rota não desenvolvida</>),
     CreateRoute("/board_registry", <>Rota não desenvolvida</>),

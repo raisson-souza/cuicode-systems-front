@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './Routes'
-import AuthProvider from './components/AuthProvider'
 
 /*
 REACT HOOK FORM
@@ -16,8 +15,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <AuthProvider isLogged={ false }>
-      <RouterProvider router={ router } />
-    </AuthProvider>
+    <RouterProvider router={ router } />
   </React.StrictMode>
 )
