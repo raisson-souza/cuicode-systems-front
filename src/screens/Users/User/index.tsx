@@ -4,6 +4,8 @@ export default function UserScreen() {
     const params = useParams<{ userId: string }>()
 
     return (
-        <div>User { params.userId }</div>
+        <div>
+            <h1>User { params.userId }</h1>
+        </div>
     )
 }

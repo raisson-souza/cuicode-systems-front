@@ -11,6 +11,7 @@ import UserRegistryScreen from "./screens/Users/UserRegistry"
 import LoginScreen from "./screens/Auth/Login"
 import AccountRecoveryScreen from "./screens/Auth/AccountRecovery"
 import ProtectedRoute from "./components/ProtectedRoute"
+import NotFoundScreen from "./screens/Error/NotFound"
 
 type CreateRouteProp = {
     path : string,
@@ -31,7 +32,7 @@ function CreateRoute({ path, element, protectedRoute = true } : CreateRouteProp)
 const router = createBrowserRouter([
     CreateRoute({
         path: "*",
-        element: (<>404</>),
+        element: <NotFoundScreen />,
         protectedRoute: false
     }),
     CreateRoute({
