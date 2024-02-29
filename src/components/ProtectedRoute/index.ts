@@ -11,7 +11,7 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
 
     useEffect(() => {
         const ToLogin = () => {
-            navigate('/login')
+            navigate('/login', { replace: true })
             return null
         }
 

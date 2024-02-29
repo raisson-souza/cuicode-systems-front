@@ -13,6 +13,10 @@ export default abstract class LocalStorage
         localStorage.setItem('cuicode_systems_user_token', jwt)
     }
 
+    static RemoveToken() {
+        localStorage.removeItem('cuicode_systems_user_token')
+    }
+
     static GetCredentials() {
         return {
             "email": localStorage.getItem('cuicode_systems_user_email'),
