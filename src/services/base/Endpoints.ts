@@ -10,4 +10,6 @@ export default abstract class Endpoints
             "action": ""
         }
     )
+
+    static DefaultHeaders = { 'Content-Type': 'application/json' }
 }

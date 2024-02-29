@@ -15,20 +15,51 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
             return null
         }
 
-        (async () => {
-            const token = LocalStorage.GetToken()
+        const PerformAuthentication = async () => {
+            let token = LocalStorage.GetToken()
+            const { email, password } = LocalStorage.GetCredentials()
+            let isLogged = false
 
-            if (IsNil(token))
+            if (
+                IsNil(token) &&
+                IsNil(email) &&
+                IsNil(password)
+            )
                 return ToLogin()
 
-            const isLogged = await AuthEndpoints.ValidateJwt(token!)
-                .then(async (response) => {
-                    return await response.Data as boolean
-                })
+            if (!IsNil(token)) {
+                isLogged = await AuthEndpoints.ValidateJwt(token!)
+                    .then(async (response) => {
+                        return await response.Data as boolean
+                    })
+            }
+
+            if (
+                !isLogged &&
+                !IsNil(email) &&
+                !IsNil(password)
+            ) {
+                const loginResponse = await AuthEndpoints.Login(email!, password!)
+                    .then(async (response) => {
+                        return response
+                    })
+
+                if (loginResponse.Success) {
+                    token = loginResponse.Data["token"] as string
+                    LocalStorage.SetToken(token)
+
+                    isLogged = await AuthEndpoints.ValidateJwt(token)
+                        .then(async (response) => {
+                            return await response.Data as boolean
+                        })
+                }
+            }
 
             if (!isLogged)
                 return ToLogin()
-        })()
+        }
+
+        PerformAuthentication()
     }, [navigate])
 
     return children as JSX.Element
