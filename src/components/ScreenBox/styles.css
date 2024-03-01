@@ -1,0 +1,11 @@
+.screen-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100vh;
+}/*# sourceMappingURL=styles.css.map */
