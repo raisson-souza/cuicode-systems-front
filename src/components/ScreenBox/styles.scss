@@ -8,4 +8,18 @@
     min-width: 100vw;
     min-height: 100vh;
     height: 100vh;
+    -webkit-animation: ScreenBoxAnimation 20s ease infinite;
+    animation: ScreenBoxAnimation 20s ease infinite;
+}
+
+@-webkit-keyframes ScreenBoxAnimation {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+
+@keyframes ScreenBoxAnimation {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
 }

@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import LocalStorage from "../../../data/classes/LocalStorage"
+import { GetSystemStyle } from "../../../components/InitialFetch"
+import ScreenBox from "../../../components/ScreenBox"
 
 export default function InternalHomeScreen() {
     const navigate = useNavigate()
+    const systemStyle = GetSystemStyle()
 
     const LogOff = () => {
         LocalStorage.RemoveToken()
@@ -10,9 +13,9 @@ export default function InternalHomeScreen() {
     }
 
     return (
-        <div>
+        <ScreenBox systemStyle={ systemStyle }>
             <h1>InternalHome</h1>
             <button onClick={() => { LogOff() }}>LogOff</button>
-        </div>
+        </ScreenBox>
     )
 }

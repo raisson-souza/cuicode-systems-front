@@ -3,6 +3,7 @@ import SystemStyle from "../../data/classes/SystemStyle"
 import SystemEndpoints from "../../services/SystemEndpoints"
 import IsNil from "../../functions/IsNil"
 import { useNavigate } from "react-router-dom"
+import DefaultSystemStyle from "../../data/defaultStyle"
 
 type GlobalPropsType = {
     systemStyle : SystemStyle,
@@ -46,4 +47,12 @@ export default function InitialFetch({ children } : InitialFetchProps) {
 
 function GetGlobalProps() { return useContext(GlobalProps) }
 
-export { GetGlobalProps }
+function GetSystemStyle() {
+    const systemStyles = useContext(GlobalProps)?.systemStyle
+
+    return IsNil(systemStyles)
+        ? new SystemStyle(DefaultSystemStyle)
+        : systemStyles!
+}
+
+export { GetGlobalProps, GetSystemStyle }
