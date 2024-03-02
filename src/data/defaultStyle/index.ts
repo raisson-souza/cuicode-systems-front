@@ -8,8 +8,9 @@ const DefaultSystemStyle = {
     BackgroundTerciaryColor: "#cdf7f8",
     PrimaryColor: "#a2c4e6",
     SecondaryColor: "#1dd5db",
+    TerciaryColor: "#8eeaed",
     TextColor: "black",
-    StyleName: "default",
+    StyleName: "DEFAULT FRONTEND",
 }
 
 export default DefaultSystemStyle
