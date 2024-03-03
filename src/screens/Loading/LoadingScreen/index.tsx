@@ -1,13 +1,12 @@
 import { GetSystemStyle } from "../../../components/InitialFetch"
 import ScreenBox from "../../../components/ScreenBox"
 
-export default function SystemUnderMaintenceScreen() {
+export default function LoadingScreen() {
     const systemStyle = GetSystemStyle()
 
     return (
         <ScreenBox systemStyle={ systemStyle }>
-            <h1>Sistema em Manutenção</h1>
-            <h3>Tente atualizar a página, se não voltar ao normal retorne em alguns minutos!</h3>
+            <h1>CARREGANDO...</h1>
         </ScreenBox>
     )
 }

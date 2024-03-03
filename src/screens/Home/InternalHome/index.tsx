@@ -10,6 +10,7 @@ export default function InternalHomeScreen() {
     const LogOff = () => {
         LocalStorage.RemoveToken()
         navigate('/login')
+        return null
     }
 
     return (

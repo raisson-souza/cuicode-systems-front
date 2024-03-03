@@ -13,7 +13,6 @@ import AccountRecoveryScreen from "./screens/Auth/AccountRecovery"
 import ProtectedRoute from "./components/ProtectedRoute"
 import NotFoundScreen from "./screens/Error/NotFound"
 import InitialFetch from "./components/InitialFetch"
-import SystemUnderMaintenceScreen from "./screens/Error/SystemUnderMaintence"
 
 type CreateRouteProp = {
     path : string,
@@ -46,11 +45,6 @@ const router = createBrowserRouter([
     CreateRoute({
         path: "/",
         element: <ExternalHome />,
-        protectedRoute: false
-    }),
-    CreateRoute({
-        path: "/system_under_maintence",
-        element: <SystemUnderMaintenceScreen />,
         protectedRoute: false
     }),
     CreateRoute({

@@ -2,8 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react"
 import SystemStyle from "../../data/classes/SystemStyle"
 import SystemEndpoints from "../../services/SystemEndpoints"
 import IsNil from "../../functions/IsNil"
-import { useNavigate } from "react-router-dom"
 import DefaultSystemStyle from "../../data/defaultStyle"
+import SystemUnderMaintenceScreen from "../../screens/Error/SystemUnderMaintence"
+import LoadingScreen from "../../screens/Loading/LoadingScreen"
 
 type GlobalPropsType = {
     systemStyle : SystemStyle,
@@ -17,8 +18,8 @@ type InitialFetchProps = {
 }
 
 export default function InitialFetch({ children } : InitialFetchProps) {
-    const navigate = useNavigate()
     const [ globalProps, setGlobalProps ] = useState<GlobalPropsType | null>(null)
+    let globalStyle : JSX.Element | null = null
 
     useEffect(() => {
         const fetchAll = async () => {
@@ -35,16 +36,33 @@ export default function InitialFetch({ children } : InitialFetchProps) {
             fetchAll()
     }, [globalProps])
 
-    if (globalProps?.systemUnderMaintence)
-        navigate('/system_under_maintence', { replace: true })
+    if (!IsNil(globalProps)) {
+        if (globalProps?.systemUnderMaintence) {
+            return (
+                <GlobalProps.Provider value={ globalProps }>
+                    { globalStyle }
+                    <SystemUnderMaintenceScreen />
+                </GlobalProps.Provider>
+            )
+        }
+
+        globalStyle = (
+            <style
+                dangerouslySetInnerHTML={{ __html: `
+                    * {
+                        color: ${ globalProps?.systemStyle.TextColor }
+                    }
+                `}}
+            />
+        )
+    }
+
+    if (IsNil(globalProps))
+        return (<LoadingScreen />)
 
     return (
         <GlobalProps.Provider value={ globalProps }>
-            <style dangerouslySetInnerHTML={{ __html: `
-                * {
-                    color: ${ globalProps?.systemStyle.TextColor }
-                }
-            `}} />
+            { globalStyle }
             { children }
         </GlobalProps.Provider>
     )
