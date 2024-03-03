@@ -23,6 +23,4 @@ const Header = styled.div<HeaderProps>`
     `}
 `
 
-export {
-    Header
-}
+export { Header }

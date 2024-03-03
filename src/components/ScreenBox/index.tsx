@@ -1,5 +1,5 @@
 import SystemStyle from "../../data/classes/SystemStyle"
-import { Header } from "../StyledComponents"
+import { Header } from "../StyledComponents/Header"
 import "./styles.css"
 
 type ScreenBoxScreenProps = {

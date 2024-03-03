@@ -40,6 +40,11 @@ export default function InitialFetch({ children } : InitialFetchProps) {
 
     return (
         <GlobalProps.Provider value={ globalProps }>
+            <style dangerouslySetInnerHTML={{ __html: `
+                * {
+                    color: ${ globalProps?.systemStyle.TextColor }
+                }
+            `}} />
             { children }
         </GlobalProps.Provider>
     )
