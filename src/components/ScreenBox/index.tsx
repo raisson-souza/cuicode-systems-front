@@ -20,11 +20,11 @@ export default function ScreenBox({
             }}
         >
             <Header
-                backgroundColor={ systemStyle.HeaderColor }
-                textColor="black"
-                hasShadow
+                backgroundcolor={ systemStyle.HeaderColor }
+                textcolor="black"
+                hasshadow
             >
-                CuiCode Systems SGPISG
+                <h2>CuiCode Systems SGPISG</h2>
             </Header>
             { children }
         </div>

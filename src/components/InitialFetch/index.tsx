@@ -22,8 +22,8 @@ export default function InitialFetch({ children } : InitialFetchProps) {
 
     useEffect(() => {
         const fetchAll = async () => {
-            const systemStyles = await SystemEndpoints.GetStyle()
             const systemUnderMaintence = await SystemEndpoints.VerifySystemMaintence()
+            const systemStyles = await SystemEndpoints.GetStyle()
 
             setGlobalProps({
                 systemStyle: systemStyles,

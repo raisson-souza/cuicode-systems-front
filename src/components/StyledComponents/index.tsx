@@ -1,23 +1,28 @@
 import styled, { css } from "styled-components"
 
-// Atentar-se aos estilos pré-definidos no backend
-// definir estilo padrão no front
-
 type HeaderProps = {
-    backgroundColor? : string
-    hasShadow? : boolean
-    textColor? : string
+    backgroundcolor : string
+    hasshadow : boolean
+    textcolor : string
 }
 
 const Header = styled.div<HeaderProps>`
-    ${({ backgroundColor, textColor }) => css`
-        background-color: ${ backgroundColor };
-        color: ${ textColor };
-        height: 5%;
-        font-size: 30px
+    ${({ backgroundcolor, textcolor, hasshadow }) => css`
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        background-color: ${ backgroundcolor };
+        color: ${ textcolor };
+        height: 8%;
+        ${
+            hasshadow
+                ? 'box-shadow:  5px 5px 20px #bebebe, -5px -5px 20px #ffffff; border-radius: 0px 0px 20px 20px'
+                : null
+        }
     `}
 `
 
 export {
-    Header,
+    Header
 }
