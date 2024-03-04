@@ -7,8 +7,8 @@ export default function NotFoundScreen() {
 
     return (
         <ScreenBox systemStyle={ systemStyle }>
-            <h1>404</h1>
-            <Link to={'/'}>ExternalHome</Link>
+            <h1>Página não encontrada!</h1>
+            <h4>Volte ao <Link to={'/'}>começo</Link>.</h4>
         </ScreenBox>
     )
 }
