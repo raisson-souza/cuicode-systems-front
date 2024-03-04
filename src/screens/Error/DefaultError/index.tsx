@@ -7,8 +7,8 @@ export default function DefaultErrorScreen() {
 
     return (
         <ScreenBox systemStyle={ systemStyle }>
-            <h1>DefaultError</h1>
-            <Link to={'/'}>ExternalHome</Link>
+            <h1>Ocorreu um erro inesperado no sistema!</h1>
+            <h4>Atualize a página ou volte para o <Link to={'/'}>começo</Link>.</h4>
         </ScreenBox>
     )
 }
