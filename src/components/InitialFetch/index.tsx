@@ -5,6 +5,7 @@ import IsNil from "../../functions/IsNil"
 import DefaultSystemStyle from "../../data/defaultStyle"
 import SystemUnderMaintenceScreen from "../../screens/Error/SystemUnderMaintence"
 import LoadingScreen from "../../screens/Loading/LoadingScreen"
+import GenerateGlobalStyle from "./GlobalStyles"
 
 type GlobalPropsType = {
     systemStyle : SystemStyle,
@@ -19,9 +20,11 @@ type InitialFetchProps = {
 
 export default function InitialFetch({ children } : InitialFetchProps) {
     const [ globalProps, setGlobalProps ] = useState<GlobalPropsType | null>(null)
-    let globalStyleAll : JSX.Element | null = null
-    let globalStyleInput : JSX.Element | null = null
-    let globalStyleButton : JSX.Element | null = null
+    let globalStyle = GenerateGlobalStyle({
+        systemStyle: IsNil(globalProps?.systemStyle)
+            ? DefaultSystemStyle
+            : globalProps!.systemStyle
+    })
 
     useEffect(() => {
         const fetchAll = async () => {
@@ -42,49 +45,11 @@ export default function InitialFetch({ children } : InitialFetchProps) {
         if (globalProps?.systemUnderMaintence) {
             return (
                 <GlobalProps.Provider value={ globalProps }>
-                    { globalStyleAll }
-                    { globalStyleInput }
-                    { globalStyleButton }
+                    { globalStyle }
                     <SystemUnderMaintenceScreen />
                 </GlobalProps.Provider>
             )
         }
-
-        globalStyleAll = (
-            <style
-                dangerouslySetInnerHTML={{ __html: `
-                    * {
-                        color: ${ globalProps?.systemStyle.TextColor };
-                    };
-                `}}
-            />
-        )
-        globalStyleInput = (
-            <style
-                dangerouslySetInnerHTML={{ __html: `
-                    input {
-                        background-color: ${
-                            globalProps?.systemStyle.TextColor === 'black'
-                                ? 'white'
-                                : 'black'
-                        }
-                    }
-                `}}
-            />
-        )
-        globalStyleButton = (
-            <style
-                dangerouslySetInnerHTML={{ __html: `
-                    button {
-                        background-color: ${
-                            globalProps?.systemStyle.TextColor === 'black'
-                                ? 'white'
-                                : 'black'
-                        }
-                    }
-                `}}
-            />
-        )
     }
 
     if (IsNil(globalProps))
@@ -92,9 +57,7 @@ export default function InitialFetch({ children } : InitialFetchProps) {
 
     return (
         <GlobalProps.Provider value={ globalProps }>
-            { globalStyleAll }
-            { globalStyleInput }
-            { globalStyleButton }
+            { globalStyle }
             { children }
         </GlobalProps.Provider>
     )
