@@ -23,4 +23,9 @@ export default abstract class LocalStorage
             "password": localStorage.getItem('cuicode_systems_user_password')
         }
     }
+
+    static SetCredentials(email : string, password : string) {
+        localStorage.setItem('cuicode_systems_user_email', email)
+        localStorage.setItem('cuicode_systems_user_password', password)
+    }
 }

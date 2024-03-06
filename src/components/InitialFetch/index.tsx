@@ -19,7 +19,9 @@ type InitialFetchProps = {
 
 export default function InitialFetch({ children } : InitialFetchProps) {
     const [ globalProps, setGlobalProps ] = useState<GlobalPropsType | null>(null)
-    let globalStyle : JSX.Element | null = null
+    let globalStyleAll : JSX.Element | null = null
+    let globalStyleInput : JSX.Element | null = null
+    let globalStyleButton : JSX.Element | null = null
 
     useEffect(() => {
         const fetchAll = async () => {
@@ -40,17 +42,45 @@ export default function InitialFetch({ children } : InitialFetchProps) {
         if (globalProps?.systemUnderMaintence) {
             return (
                 <GlobalProps.Provider value={ globalProps }>
-                    { globalStyle }
+                    { globalStyleAll }
+                    { globalStyleInput }
+                    { globalStyleButton }
                     <SystemUnderMaintenceScreen />
                 </GlobalProps.Provider>
             )
         }
 
-        globalStyle = (
+        globalStyleAll = (
             <style
                 dangerouslySetInnerHTML={{ __html: `
                     * {
-                        color: ${ globalProps?.systemStyle.TextColor }
+                        color: ${ globalProps?.systemStyle.TextColor };
+                    };
+                `}}
+            />
+        )
+        globalStyleInput = (
+            <style
+                dangerouslySetInnerHTML={{ __html: `
+                    input {
+                        background-color: ${
+                            globalProps?.systemStyle.TextColor === 'black'
+                                ? 'white'
+                                : 'black'
+                        }
+                    }
+                `}}
+            />
+        )
+        globalStyleButton = (
+            <style
+                dangerouslySetInnerHTML={{ __html: `
+                    button {
+                        background-color: ${
+                            globalProps?.systemStyle.TextColor === 'black'
+                                ? 'white'
+                                : 'black'
+                        }
                     }
                 `}}
             />
@@ -62,7 +92,9 @@ export default function InitialFetch({ children } : InitialFetchProps) {
 
     return (
         <GlobalProps.Provider value={ globalProps }>
-            { globalStyle }
+            { globalStyleAll }
+            { globalStyleInput }
+            { globalStyleButton }
             { children }
         </GlobalProps.Provider>
     )

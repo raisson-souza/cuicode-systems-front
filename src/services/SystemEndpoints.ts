@@ -29,4 +29,15 @@ export default abstract class SystemEndpoints extends Endpoints
             return true
         }
     }
+
+    static async GetForm(form : string) {
+        try
+        {
+            return await this.Get(`/get_form/${ form }`)
+        }
+        catch
+        {
+            return this.FailFetchResponse
+        }
+    }
 }
