@@ -33,7 +33,7 @@ export default function LoginScreen() {
         }
 
         fetchLoginForm()
-    }, [])
+    }, [navigate])
 
     const loginFetch = async (formFieldsValues : FormFieldsValues[]) => {
         let email : string = ""

@@ -57,7 +57,12 @@ export default class FormField
                 >
                     { this.Options!.map(option => {
                         return (
-                            <option value={ option.Id }>{ option.Description }</option>
+                            <option
+                                value={ option.Id }
+                                key={ option.Id }
+                            >
+                                { option.Description }
+                            </option>
                         )
                     })}
                 </select>
@@ -66,34 +71,36 @@ export default class FormField
 
         if (this.MaxLen === Infinity) {
             return (
-                <>
-                    <label htmlFor={ this.Name } key={ `${this.FieldId}_label` }>{ this.Name }</label>
+                <div key={ `${this.FieldId}_input` }>
+                    <label htmlFor={ this.Name }>
+                        { this.Name }
+                    </label>
                     <input
                         type={ this.Type }
                         placeholder={ this.PlaceHolder }
                         name={ this.Name }
-                        key={ this.FieldId }
                         required={ !this.Nullable }
                         id={ this.FieldId }
                     />
-                </>
+                </div>
             )
         }
 
         return (
-            <>
-                <label htmlFor={ this.Name } key={ `${this.FieldId}_label` }>{ this.Name }</label>
+            <div key={ `${this.FieldId}_input` }>
+                <label htmlFor={ this.Name }>
+                    { this.Name }
+                </label>
                 <input
                     type={ this.Type }
                     placeholder={ this.PlaceHolder }
                     maxLength={ this.MaxLen }
                     max={ this.MaxLen }
                     name={ this.Name }
-                    key={ this.FieldId }
                     required={ !this.Nullable }
                     id={ this.FieldId }
                 />
-            </>
+            </div>
         )
     }
 }

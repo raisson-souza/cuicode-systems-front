@@ -1,3 +1,4 @@
+import React from "react"
 import FindValue from "../../functions/FindValue"
 import IsNil from "../../functions/IsNil"
 import FormField from "./FormField"
@@ -84,13 +85,20 @@ export default class FormBuilder
         }
 
         return (
-            <form onSubmit={ submitForm }>
+            <form
+                onSubmit={ submitForm }
+                id={ this.FormId }
+            >
                 {
                     this.Fields!.map(field => {
                         return field.BuildField()
                     })
                 }
-                <input type="submit" value="Enviar" id={ this.FormId } />
+                <input
+                    type="submit"
+                    value={ this.FormSubmitButtonMsg }
+                    id={ `${ this.FormId }_submit` }
+                />
             </form>
         )
     }
