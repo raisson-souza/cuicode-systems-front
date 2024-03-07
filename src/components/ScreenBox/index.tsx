@@ -23,6 +23,7 @@ export default function ScreenBox({
                 backgroundcolor={ systemStyle.HeaderColor }
                 textcolor="black"
                 hasshadow
+                screenBackgroundFirstHexStr={ systemStyle.BackgroundPrimaryColor[1]}
             >
                 <h2>CuiCode Systems SGPISG</h2>
             </Header>
