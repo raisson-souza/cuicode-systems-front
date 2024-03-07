@@ -1,5 +1,5 @@
 import SystemStyle from "../../data/classes/SystemStyle"
-import { Header } from "../StyledComponents/Header"
+import Header from "../StyledComponents/Header"
 import "./styles.css"
 
 type ScreenBoxScreenProps = {
@@ -20,9 +20,8 @@ export default function ScreenBox({
             }}
         >
             <Header
-                backgroundcolor={ systemStyle.HeaderColor }
-                textcolor="black"
-                hasshadow
+                backgroundColor={ systemStyle.HeaderColor }
+                hasShadow={ true }
                 screenBackgroundFirstHexStr={ systemStyle.BackgroundPrimaryColor[1]}
             >
                 <h2>CuiCode Systems SGPISG</h2>

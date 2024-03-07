@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components"
 
 type HeaderProps = {
-    backgroundcolor : string
-    hasshadow : boolean
-    textcolor : string
+    backgroundColor : string
+    hasShadow : boolean
     screenBackgroundFirstHexStr : string
+    children : JSX.Element
 }
 
 function GetShadowColor1(screenBackgroundFirstHexStr : string) {
@@ -55,25 +55,32 @@ function GetShadowColor2(screenBackgroundFirstHexStr : string) {
     }
 }
 
-const hasShadowMounted = (screenBackgroundFirstHexStr : string) => {
-    return `box-shadow:  5px 5px 20px ${ GetShadowColor1(screenBackgroundFirstHexStr) }, -5px -5px 20px ${ GetShadowColor2(screenBackgroundFirstHexStr) }; border-radius: 0px 0px 20px 20px`
+const defineBoxShadow = (hasShadow : boolean, screenBackgroundFirstHexStr : string) => {
+    return hasShadow
+        ? `5px 5px 20px ${ GetShadowColor1(screenBackgroundFirstHexStr) }, -5px -5px 20px ${ GetShadowColor2(screenBackgroundFirstHexStr) }`
+        : 'none'
 }
 
-const Header = styled.div<HeaderProps>`
-    ${({ backgroundcolor, textcolor, hasshadow, screenBackgroundFirstHexStr }) => css`
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        background-color: ${ backgroundcolor };
-        color: ${ textcolor };
-        height: 8%;
-        ${
-            hasshadow
-                ? hasShadowMounted(screenBackgroundFirstHexStr)
-                : null
-        }
-    `}
-`
-
-export { Header }
+export default function Header({
+    backgroundColor,
+    hasShadow,
+    screenBackgroundFirstHexStr,
+    children,
+} : HeaderProps) {
+    return (
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                backgroundColor: backgroundColor,
+                height: '8%',
+                boxShadow: defineBoxShadow(hasShadow, screenBackgroundFirstHexStr),
+                borderRadius: '0px 0px 20px 20px'
+            }}
+        >
+            { children }
+        </div>
+    )
+}
