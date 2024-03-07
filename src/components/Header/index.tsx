@@ -1,5 +1,3 @@
-import styled, { css } from "styled-components"
-
 type HeaderProps = {
     backgroundColor : string
     hasShadow : boolean
