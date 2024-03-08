@@ -5,9 +5,6 @@ import { GetUserAuth } from "../../../components/ProtectedRoute"
 
 export default function InternalHomeScreen() {
     const navigate = useNavigate()
-    const userAuth = GetUserAuth()
-
-    console.log(userAuth)
 
     const LogOff = () => {
         LocalStorage.RemoveToken()

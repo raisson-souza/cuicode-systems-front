@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import IsNil from "../../functions/IsNil"
 import DefineShadow from "../../functions/style/DefineShadow"
 import { GetUserAuth } from "../ProtectedRoute"
@@ -28,12 +28,17 @@ export default function Header({
     const systemStyle = GetSystemStyle()
 
     const renderHeaderBox = () => {
-        if (location === "/login" || location === "/user_registry")
+        const width = 15 //%
+
+        if (
+            location === "/login" ||
+            location === "/user_registry"
+        )
             return null
 
         return IsNil(user)
-            ? <LoginRegistryBox />
-            : <AuthUserBox userAuth={ user! } />
+            ? <LoginRegistryBox width={ width } />
+            : <AuthUserBox width={ width } userAuth={ user! } />
     }
 
     return (

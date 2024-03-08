@@ -1,14 +1,21 @@
 import User from "../../data/classes/User"
 
 type AuthUserBoxProps = {
-    userAuth : User
+    userAuth : User,
+    width : number,
 }
 
 export default function AuthUserBox ({
-    userAuth
+    userAuth,
+    width,
 } : AuthUserBoxProps) {
     return (
-        <div>
+        <div
+            className="auth_user_box"
+            style={{
+                width: `${ width }%`
+            }}
+        >
             <img
                 src={ userAuth.PhotoBase64 }
                 alt="Foto do Usuário"

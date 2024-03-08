@@ -11,6 +11,7 @@ export default class SystemStyle
     BackgroundTerciaryColor : string
     PrimaryColor : string
     SecondaryColor : string
+    TerciaryColor : string
     TextColor : string
     StyleName : string
 
@@ -26,6 +27,7 @@ export default class SystemStyle
         this.BackgroundTerciaryColor = data["BackgroundTerciaryColor"]
         this.PrimaryColor = data["PrimaryColor"]
         this.SecondaryColor = data["SecondaryColor"]
+        this.TerciaryColor = data["TerciaryColor"]
         this.TextColor = data["TextColor"]
         this.StyleName = data["StyleName"]
     }

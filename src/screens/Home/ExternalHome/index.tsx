@@ -6,8 +6,6 @@ export default function ExternalHomeScreen() {
     return (
         <ScreenBox>
             <h1>ExternalHome</h1>
-            <Link to={'/login'}>Login</Link>
-            <Link to={'/user_registry'}>UserRegistry</Link>
             <Link to={'/boards'}>Boards</Link>
             <StuckPresentationalBox
                 imagePath="..."
