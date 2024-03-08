@@ -14,8 +14,8 @@ export default function ScreenBox({
     const systemStyle = GetSystemStyle()
 
     const boxShadow = () => {
-        const [ shadow1, shadow2 ] = DefineShadow(systemStyle.BackgroundPrimaryColor[1])
-        return `inset 5px 5px 10px ${ shadow1 }, inset -5px -5px 10px ${ shadow2 }`
+        const [ shadow1 ] = DefineShadow(systemStyle.BackgroundPrimaryColor[1])
+        return `inset 5px 5px 10px ${ shadow1 }, inset -5px -5px 10px ${ shadow1 }`
     }
 
     const content = (

@@ -8,9 +8,9 @@ type FooterProps = {
 }
 
 const defineBoxShadow = (hasShadow : boolean, screenBackgroundFirstHexStr : string) => {
-    const [ shadow1, shadow2 ] = DefineShadow(screenBackgroundFirstHexStr)
+    const [ shadow1 ] = DefineShadow(screenBackgroundFirstHexStr)
     return hasShadow
-        ? `5px 5px 20px ${ shadow1 }, -5px -5px 20px ${ shadow2 }`
+        ? `5px 5px 20px ${ shadow1 }, -5px -5px 20px ${ shadow1 }`
         : 'none'
 }
 
@@ -24,7 +24,7 @@ export default function Footer({
         <div
             className="footer"
             style={{
-                backgroundColor: systemStyle.HeaderColor,
+                backgroundColor: systemStyle.FooterColor,
                 boxShadow: defineBoxShadow(hasShadow, systemStyle.BackgroundPrimaryColor[1]),
             }}
         >
