@@ -1,3 +1,5 @@
+import IsNil from "../../functions/IsNil"
+
 export default class SystemStyle
 {
     HeaderColor : string
@@ -15,7 +17,9 @@ export default class SystemStyle
     constructor(data : any) {
         this.HeaderColor = data["HeaderColor"]
         this.FooterColor = data["FooterColor"]
-        this.Logo = "../../assets/cuicode_systems_logo.png"
+        this.Logo = IsNil(data["Logo"])
+            ? "../../assets/cuicode_systems_logo.png"
+            : data["Logo"]
         this.ModulesColumnColor = data["ModulesColumnColor"]
         this.BackgroundPrimaryColor = data["BackgroundPrimaryColor"]
         this.BackgroundSecondaryColor = data["BackgroundSecondaryColor"]

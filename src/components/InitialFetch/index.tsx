@@ -20,11 +20,7 @@ type InitialFetchProps = {
 
 export default function InitialFetch({ children } : InitialFetchProps) {
     const [ globalProps, setGlobalProps ] = useState<GlobalPropsType | null>(null)
-    let globalStyle = GenerateGlobalStyle({
-        systemStyle: IsNil(globalProps?.systemStyle)
-            ? DefaultSystemStyle
-            : globalProps!.systemStyle
-    })
+    let globalStyle = GenerateGlobalStyle(globalProps?.systemStyle)
 
     useEffect(() => {
         const fetchAll = async () => {
