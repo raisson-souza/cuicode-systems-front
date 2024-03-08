@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
 import ScreenBox from "../../../components/ScreenBox"
-import { GetSystemStyle } from "../../../components/InitialFetch"
 import { useEffect, useState } from "react"
 import FormBuilder, { FormFieldsValues } from "../../../data/classes/FormBuilder"
 import SystemEndpoints from "../../../services/SystemEndpoints"
@@ -11,7 +10,6 @@ import LocalStorage from "../../../data/classes/LocalStorage"
 import User from "../../../data/classes/User"
 
 export default function LoginScreen() {
-    const systemStyle = GetSystemStyle()
     const [ loginForm, setLoginForm ] = useState<FormBuilder | null>(null)
     const navigate = useNavigate()
 
@@ -67,7 +65,7 @@ export default function LoginScreen() {
         : loginForm!.BuildForm(loginFetch)
 
     return (
-        <ScreenBox systemStyle={ systemStyle }>
+        <ScreenBox>
             <h1>LoginScreen</h1>
             <Link to={'/'}>ExternalHome</Link>
             <Link to={'/account_recovery'}>AccountRecovery</Link>

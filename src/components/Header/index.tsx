@@ -1,84 +1,51 @@
+import { useLocation } from "react-router-dom"
+import IsNil from "../../functions/IsNil"
+import DefineShadow from "../../functions/style/DefineShadow"
+import { GetUserAuth } from "../ProtectedRoute"
+import LoginRegistryBox from "../LoginRegistryBox"
+import AuthUserBox from "../AuthUserBox"
+import "./style.css"
+import { GetSystemStyle } from "../InitialFetch"
+
 type HeaderProps = {
-    backgroundColor : string
     hasShadow : boolean
-    screenBackgroundFirstHexStr : string
     children : JSX.Element
 }
 
-function GetShadowColor1(screenBackgroundFirstHexStr : string) {
-    switch (screenBackgroundFirstHexStr) {
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-            return '#000'
-        case '9':
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-            return '#bebebe'
-        default:
-            return '#bebebe'
-    }
-}
-
-function GetShadowColor2(screenBackgroundFirstHexStr : string) {
-    switch (screenBackgroundFirstHexStr) {
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-            return '#818181'
-        case '9':
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-            return '#ffffff'
-        default:
-            return '#ffffff'
-    }
-}
-
 const defineBoxShadow = (hasShadow : boolean, screenBackgroundFirstHexStr : string) => {
+    const [ shadow1, shadow2 ] = DefineShadow(screenBackgroundFirstHexStr)
     return hasShadow
-        ? `5px 5px 20px ${ GetShadowColor1(screenBackgroundFirstHexStr) }, -5px -5px 20px ${ GetShadowColor2(screenBackgroundFirstHexStr) }`
+        ? `5px 5px 20px ${ shadow1 }, -5px -5px 20px ${ shadow2 }`
         : 'none'
 }
 
 export default function Header({
-    backgroundColor,
     hasShadow,
-    screenBackgroundFirstHexStr,
     children,
 } : HeaderProps) {
+    const user = GetUserAuth()?.UserAuth
+    const location = useLocation().pathname
+    const systemStyle = GetSystemStyle()
+
+    const renderHeaderBox = () => {
+        if (location === "/login" || location === "/user_registry")
+            return null
+
+        return IsNil(user)
+            ? <LoginRegistryBox />
+            : <AuthUserBox userAuth={ user! } />
+    }
+
     return (
         <div
+            className="header"
             style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                backgroundColor: backgroundColor,
-                height: '8%',
-                boxShadow: defineBoxShadow(hasShadow, screenBackgroundFirstHexStr),
-                borderRadius: '0px 0px 20px 20px'
+                backgroundColor: systemStyle.HeaderColor,
+                boxShadow: defineBoxShadow(hasShadow, systemStyle.BackgroundPrimaryColor[1]),
             }}
         >
             { children }
+            { renderHeaderBox() }
         </div>
     )
 }

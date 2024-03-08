@@ -1,13 +1,13 @@
 .screen-box {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     flex: 1;
     flex-grow: 1;
     flex-shrink: 1;
     flex-wrap: nowrap;
     min-width: 100vw;
     min-height: 100vh;
-    height: 100vh;
     -webkit-animation: ScreenBoxAnimation 20s ease infinite;
     animation: ScreenBoxAnimation 20s ease infinite;
 }

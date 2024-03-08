@@ -1,10 +1,10 @@
-import SystemStyle from "../../../data/classes/SystemStyle"
+import { GetSystemStyle } from ".."
 
-type GenerateGlobalStyleProps = {
-    systemStyle: SystemStyle
-}
+type GenerateGlobalStyleProps = { }
 
-export default function GenerateGlobalStyle({ systemStyle } : GenerateGlobalStyleProps) : JSX.Element {
+export default function GenerateGlobalStyle({ } : GenerateGlobalStyleProps) : JSX.Element {
+    const systemStyle = GetSystemStyle()
+
     const globalStyleAll = (
         <style
             dangerouslySetInnerHTML={{ __html: `
