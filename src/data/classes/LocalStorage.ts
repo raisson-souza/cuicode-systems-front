@@ -28,4 +28,14 @@ export default abstract class LocalStorage
         localStorage.setItem('cuicode_systems_user_email', email)
         localStorage.setItem('cuicode_systems_user_password', password)
     }
+
+    static RemoveCredentials() {
+        localStorage.removeItem('cuicode_systems_user_email')
+        localStorage.removeItem('cuicode_systems_user_password')
+    }
+
+    static RemoveAllAuth() {
+        this.RemoveToken()
+        this.RemoveCredentials()
+    }
 }

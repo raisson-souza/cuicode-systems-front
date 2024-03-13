@@ -1,0 +1,22 @@
+.auth_user_box {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "user_img user_use" "user_img user_opt";
+  padding: 5px;
+  border-radius: 10px;
+}
+.auth_user_box #user_img {
+  grid-area: user_img;
+}
+.auth_user_box #user_username {
+  grid-area: user_use;
+}
+.auth_user_box #options {
+  grid-area: user_opt;
+}
+
+#user_img, #user_username, #options {
+  justify-self: center;
+  align-self: center;
+}/*# sourceMappingURL=styles.css.map */

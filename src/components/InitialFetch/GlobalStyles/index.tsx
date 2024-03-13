@@ -1,9 +1,12 @@
 import SystemStyle from "../../../data/classes/SystemStyle"
 import IsNil from "../../../functions/IsNil"
+import InvertedTextColor from "../../../functions/style/InvertedTextColor"
 
 export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.Element | null {
     if (IsNil(systemStyle))
         return null
+
+    const invertedTextColor = InvertedTextColor(systemStyle!.TextColor)
 
     const globalStyleAll = (
         <style
@@ -18,11 +21,7 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
         <style
             dangerouslySetInnerHTML={{ __html: `
                 input {
-                    background-color: ${
-                        systemStyle!.TextColor === 'black'
-                            ? 'white'
-                            : 'black'
-                    };
+                    background-color: ${ invertedTextColor };
                     border-radius: 5px
                 }
             `}}
@@ -32,11 +31,16 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
         <style
             dangerouslySetInnerHTML={{ __html: `
                 button {
-                    background-color: ${
-                        systemStyle!.TextColor === 'black'
-                            ? 'white'
-                            : 'black'
-                    }
+                    background-color: ${ invertedTextColor }
+                }
+            `}}
+        />
+    )
+    const globalStyleLi = (
+        <style
+            dangerouslySetInnerHTML={{ __html: `
+                li {
+                    color: ${ invertedTextColor }
                 }
             `}}
         />
@@ -47,6 +51,7 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
             { globalStyleAll }
             { globalStyleInput }
             { globalStyleButton }
+            { globalStyleLi }
         </>
     )
 }
