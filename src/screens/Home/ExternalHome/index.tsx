@@ -4,7 +4,7 @@ import StuckPresentationalBox from "../../../components/StuckPresentationalBox"
 
 export default function ExternalHomeScreen() {
     return (
-        <ScreenBox>
+        <ScreenBox hasFooter>
             <h1>ExternalHome</h1>
             <Link to={'/boards'}>Boards</Link>
             <StuckPresentationalBox

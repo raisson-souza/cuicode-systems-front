@@ -9,10 +9,12 @@ import IsNil from "../../functions/IsNil"
 
 type ScreenBoxScreenProps = {
     children : JSX.Element | JSX.Element[],
+    hasFooter? : boolean,
 }
 
 export default function ScreenBox({
     children,
+    hasFooter = false
 } : ScreenBoxScreenProps) {
     const systemStyle = GetSystemStyle()
     const location = useLocation().pathname
@@ -29,6 +31,12 @@ export default function ScreenBox({
         navigate(IsNil(user) ? '/' : '/home')
     }
 
+    const screenBoxStyle = {
+        "justifyContent": hasFooter
+            ? "space-between"
+            : "auto"
+    }
+
     const content = (
         <>
             <Header hasShadow={ true }>
@@ -42,9 +50,15 @@ export default function ScreenBox({
             <main>
                 { children }
             </main>
-            <Footer hasShadow={ true }>
-                <h2>Contatos...</h2>
-            </Footer>
+            {
+                hasFooter
+                    ? (
+                        <Footer hasShadow={ true }>
+                            <h2>Contatos...</h2>
+                        </Footer>
+                    )
+                    : null
+            }
         </>
     )
 
@@ -53,7 +67,8 @@ export default function ScreenBox({
             className="screen-box"
             style={{
                 background: `linear-gradient(220deg, ${ systemStyle.BackgroundPrimaryColor }, ${ systemStyle.BackgroundSecondaryColor }, ${ systemStyle.BackgroundTerciaryColor })`,
-                boxShadow: boxShadow()
+                boxShadow: boxShadow(),
+                ...screenBoxStyle
             }}
         >
             { content }
