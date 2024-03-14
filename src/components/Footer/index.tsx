@@ -3,7 +3,7 @@ import { GetSystemStyle } from "../InitialFetch"
 import "./styles.css"
 
 type FooterProps = {
-    children : JSX.Element
+    children : JSX.Element | JSX.Element[]
     hasShadow : boolean
 }
 

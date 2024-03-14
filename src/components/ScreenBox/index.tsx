@@ -10,11 +10,13 @@ import IsNil from "../../functions/IsNil"
 type ScreenBoxScreenProps = {
     children : JSX.Element | JSX.Element[],
     hasFooter? : boolean,
+    footerComponent? : JSX.Element | JSX.Element[],
 }
 
 export default function ScreenBox({
     children,
-    hasFooter = false
+    hasFooter = false,
+    footerComponent = <></>,
 } : ScreenBoxScreenProps) {
     const systemStyle = GetSystemStyle()
     const location = useLocation().pathname
@@ -54,7 +56,7 @@ export default function ScreenBox({
                 hasFooter
                     ? (
                         <Footer hasShadow={ true }>
-                            <h2>Contatos...</h2>
+                            { footerComponent }
                         </Footer>
                     )
                     : null

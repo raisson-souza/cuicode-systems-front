@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom"
 import ScreenBox from "../../../components/ScreenBox"
 import StuckPresentationalBox from "../../../components/StuckPresentationalBox"
+import FooterContacts from "../../../components/FooterContacts"
 
 export default function ExternalHomeScreen() {
     return (
-        <ScreenBox hasFooter>
+        <ScreenBox
+            hasFooter
+            footerComponent={ <FooterContacts /> }
+        >
             <h1>ExternalHome</h1>
             <Link to={'/boards'}>Boards</Link>
             <StuckPresentationalBox
