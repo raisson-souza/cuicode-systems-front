@@ -12,12 +12,10 @@ import UserPhoto from "../UserPhoto"
 
 type AuthUserBoxProps = {
     userAuth : User,
-    width : number,
 }
 
 export default function AuthUserBox ({
     userAuth,
-    width,
 } : AuthUserBoxProps) {
     const systemStyle = GetSystemStyle()
     const authUser = GetUserAuth()
@@ -63,7 +61,6 @@ export default function AuthUserBox ({
         <div
             className="auth_user_box"
             style={{
-                width: `${ width }%`,
                 background: `linear-gradient(145deg, ${ systemStyle.PrimaryColor }, ${ systemStyle.SecondaryColor })`
             }}
         >

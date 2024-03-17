@@ -39,6 +39,14 @@ export default function ScreenBox({
             : "auto"
     }
 
+    const footer = hasFooter
+        ? (
+            <Footer hasShadow={ true }>
+                { footerComponent }
+            </Footer>
+        )
+        : null
+
     const content = (
         <>
             <Header hasShadow={ true }>
@@ -52,15 +60,7 @@ export default function ScreenBox({
             <main>
                 { children }
             </main>
-            {
-                hasFooter
-                    ? (
-                        <Footer hasShadow={ true }>
-                            { footerComponent }
-                        </Footer>
-                    )
-                    : null
-            }
+            { footer }
         </>
     )
 

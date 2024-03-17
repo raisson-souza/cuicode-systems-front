@@ -10,6 +10,10 @@
 .login_registry_box div {
   padding: 6px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-wrap: wrap;
 }
 .login_registry_box div:hover {
   border: 1px solid black;

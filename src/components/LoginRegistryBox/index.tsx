@@ -2,13 +2,9 @@ import { useNavigate } from "react-router-dom"
 import { GetSystemStyle } from "../InitialFetch"
 import "./styles.css"
 
-type LoginRegistryBoxProps = {
-    width : number
-}
+type LoginRegistryBoxProps = { }
 
-export default function LoginRegistryBox({
-    width,
-} : LoginRegistryBoxProps) {
+export default function LoginRegistryBox({ } : LoginRegistryBoxProps) {
     const systemStyle = GetSystemStyle()
     const navigate = useNavigate()
 
@@ -16,7 +12,6 @@ export default function LoginRegistryBox({
         <div
             className="login_registry_box"
             style={{
-                width: `${ width }%`,
                 background: `linear-gradient(145deg, ${ systemStyle.PrimaryColor }, ${ systemStyle.SecondaryColor })`
             }}
         >

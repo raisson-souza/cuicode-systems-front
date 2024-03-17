@@ -28,8 +28,6 @@ export default function Header({
     const systemStyle = GetSystemStyle()
 
     const renderHeaderBox = () => {
-        const width = 15 //%
-
         if (
             location === "/login" ||
             location === "/user_registry"
@@ -37,8 +35,8 @@ export default function Header({
             return null
 
         return IsNil(user)
-            ? <LoginRegistryBox width={ width } />
-            : <AuthUserBox width={ width } userAuth={ user! } />
+            ? <LoginRegistryBox />
+            : <AuthUserBox userAuth={ user! } />
     }
 
     return (
