@@ -1,4 +1,4 @@
-.header {
+header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 700px) {
-  .header {
+  header {
     flex-direction: column;
     gap: 20px;
   }

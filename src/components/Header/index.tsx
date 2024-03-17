@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import IsNil from "../../functions/IsNil"
 import DefineShadow from "../../functions/style/DefineShadow"
 import { GetUserAuth } from "../ProtectedRoute"
@@ -40,8 +40,7 @@ export default function Header({
     }
 
     return (
-        <div
-            className="header"
+        <header
             style={{
                 backgroundColor: systemStyle.HeaderColor,
                 boxShadow: defineBoxShadow(hasShadow, systemStyle.BackgroundPrimaryColor[1]),
@@ -49,6 +48,6 @@ export default function Header({
         >
             { children }
             { renderHeaderBox() }
-        </div>
+        </header>
     )
 }

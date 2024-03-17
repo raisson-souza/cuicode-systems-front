@@ -40,7 +40,7 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
         <style
             dangerouslySetInnerHTML={{ __html: `
                 li {
-                    color: ${ invertedTextColor }
+                    color: black !important;
                 }
             `}}
         />

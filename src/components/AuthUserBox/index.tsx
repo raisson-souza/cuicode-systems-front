@@ -14,6 +14,12 @@ type AuthUserBoxProps = {
     userAuth : User,
 }
 
+const gridAreasStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+}
+
 export default function AuthUserBox ({
     userAuth,
 } : AuthUserBoxProps) {
@@ -29,6 +35,14 @@ export default function AuthUserBox ({
     const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null)
     // Booleano referente ao estado aberto / fechado do menu
     const userOptionsMenuOpen = Boolean(anchorEl)
+
+    // Configurações do botão
+    const buttonAriaControls = userOptionsMenuOpen ? 'basic-menu' : undefined
+    const buttonAriaExpanded = userOptionsMenuOpen ? 'true' : undefined
+
+    const authUserBoxStyle = {
+        background: `linear-gradient(145deg, ${ systemStyle.PrimaryColor }, ${ systemStyle.SecondaryColor })`
+    }
 
     const optHandleClick = (event : any) => {
         const option = Number.parseInt(event.target.value)
@@ -60,31 +74,32 @@ export default function AuthUserBox ({
     return (
         <div
             className="auth_user_box"
-            style={{
-                background: `linear-gradient(145deg, ${ systemStyle.PrimaryColor }, ${ systemStyle.SecondaryColor })`
-            }}
+            style={ authUserBoxStyle }
         >
             <Tooltip
                 title="Foto do Usuário"
-                id="user_img"
+                style={ gridAreasStyle }
             >
-                <div>
+                <div id="user_img">
                     <UserPhoto userName={ userAuth.Name } userPhoto={ userAuth.PhotoBase64 } />
                 </div>
             </Tooltip>
             <Tooltip
                 title="Nome do Usuário"
-                id="user_use"
+                style={ gridAreasStyle }
             >
-                <p>{ userAuth.Username }</p>
+                <p id="user_use">{ userAuth.Username }</p>
             </Tooltip>
-            <div id="user_opt">
+            <div
+                id="user_opt"
+                style={ gridAreasStyle }
+            >
                 <Button
                     onClick={ (event) => { setAnchorEl(event.currentTarget) } }
                     id="basic-button"
-                    aria-controls={ userOptionsMenuOpen ? 'basic-menu' : undefined }
+                    aria-controls={ buttonAriaControls }
                     aria-haspopup="true"
-                    aria-expanded={ userOptionsMenuOpen ? 'true' : undefined }
+                    aria-expanded={ buttonAriaExpanded }
                 >
                     <Tooltip title="Opções" >
                         <MenuIcon />
@@ -95,9 +110,7 @@ export default function AuthUserBox ({
                     anchorEl={ anchorEl }
                     open={ userOptionsMenuOpen }
                     onClose={ () => { setAnchorEl(null) } }
-                    MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                    }}
+                    MenuListProps={{ 'aria-labelledby': 'basic-button' }}
                     onClick={ (event) => { optHandleClick(event) } }
                 >
                     <MenuItem value={ 1 } style={ menuTextColor }>Ver Perfil</MenuItem>
