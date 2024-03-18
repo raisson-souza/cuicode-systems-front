@@ -1,16 +1,17 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import DefineShadow from "../../functions/style/DefineShadow"
+import DefineShadow from "../../functions/style/DefineShadowColor"
 import Footer from "../Footer"
 import Header from "../Header"
 import { GetSystemStyle } from "../InitialFetch"
 import "./styles.css"
 import { GetUserAuth } from "../ProtectedRoute"
 import IsNil from "../../functions/IsNil"
+import DefineLinearGradient from "../../functions/style/DefineLinearGradient"
 
 type ScreenBoxScreenProps = {
-    children : JSX.Element | JSX.Element[],
-    hasFooter? : boolean,
-    footerComponent? : JSX.Element | JSX.Element[],
+    children : JSX.Element | JSX.Element[]
+    hasFooter? : boolean
+    footerComponent? : JSX.Element | JSX.Element[]
 }
 
 export default function ScreenBox({
@@ -68,7 +69,7 @@ export default function ScreenBox({
         <div
             className="screen-box"
             style={{
-                background: `linear-gradient(220deg, ${ systemStyle.BackgroundPrimaryColor }, ${ systemStyle.BackgroundSecondaryColor }, ${ systemStyle.BackgroundTerciaryColor })`,
+                background: DefineLinearGradient(systemStyle),
                 boxShadow: boxShadow(),
                 ...screenBoxStyle
             }}

@@ -1,4 +1,4 @@
-import DefineShadow from "../../functions/style/DefineShadow"
+import DefineShadow from "../../functions/style/DefineShadowColor"
 import { GetSystemStyle } from "../InitialFetch"
 import "./styles.css"
 

@@ -36,10 +36,10 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
             `}}
         />
     )
-    const globalStyleLi = (
+    const globalStyleMuiMenu = (
         <style
             dangerouslySetInnerHTML={{ __html: `
-                li {
+                li.MuiButtonBase-root {
                     color: black !important;
                 }
             `}}
@@ -51,7 +51,7 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
             { globalStyleAll }
             { globalStyleInput }
             { globalStyleButton }
-            { globalStyleLi }
+            { globalStyleMuiMenu }
         </>
     )
 }

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
 import IsNil from "../../functions/IsNil"
-import DefineShadow from "../../functions/style/DefineShadow"
+import DefineShadow from "../../functions/style/DefineShadowColor"
 import { GetUserAuth } from "../ProtectedRoute"
 import LoginRegistryBox from "../LoginRegistryBox"
 import AuthUserBox from "../AuthUserBox"
