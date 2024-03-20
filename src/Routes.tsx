@@ -63,7 +63,8 @@ const router = createBrowserRouter([
     }),
     CreateRoute({
         path: "/account_recovery",
-        element: <AccountRecoveryScreen />
+        element: <AccountRecoveryScreen />,
+        protectedRoute: false
     }),
     CreateRoute({
         path: "/users",

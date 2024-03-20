@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import ScreenBox from "../../../components/ScreenBox"
 import { useEffect, useState } from "react"
-import FormBuilder, { FormFieldsValues } from "../../../data/classes/FormBuilder"
+import FormBuilder, { FormFieldBasic } from "../../../data/classes/FormBuilder"
 import SystemEndpoints from "../../../services/SystemEndpoints"
 import IsNil from "../../../functions/IsNil"
 import FindValue from "../../../functions/FindValue"
@@ -23,9 +23,9 @@ export default function LoginScreen() {
             }
 
             const form = new FormBuilder({
-                data: FindValue(response.Data, ["Fields"]),
-                formId: "login_form",
-                formSubmitButtonMsg: "Enviar"
+                Data: FindValue(response.Data, ["Fields"]),
+                FormId: "login_form",
+                FormSubmitButtonMsg: "Enviar"
             })
             setLoginForm(form)
         }
@@ -33,11 +33,11 @@ export default function LoginScreen() {
         fetchLoginForm()
     }, [navigate])
 
-    const loginFetch = async (formFieldsValues : FormFieldsValues[]) => {
+    const loginFetch = async (FormFieldBasic : FormFieldBasic[]) => {
         let email : string = ""
         let password : string = ""
 
-        formFieldsValues.map(formFieldValue => {
+        FormFieldBasic.map(formFieldValue => {
             if (formFieldValue.Id === "Email") email = formFieldValue.Value
             if (formFieldValue.Id === "Password") password = formFieldValue.Value
             return null
