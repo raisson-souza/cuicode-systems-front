@@ -1,16 +1,15 @@
 import { Link, useNavigate } from "react-router-dom"
 import ScreenBox from "../../../components/ScreenBox"
 import { useEffect, useState } from "react"
-import FormBuilder, { FormFieldBasic } from "../../../data/classes/FormBuilder"
 import SystemEndpoints from "../../../services/SystemEndpoints"
-import IsNil from "../../../functions/IsNil"
 import FindValue from "../../../functions/FindValue"
 import AuthEndpoints, { LoginResponse } from "../../../services/AuthEndpoints"
 import LocalStorage from "../../../data/classes/LocalStorage"
 import User from "../../../data/classes/User"
+import FormBuilder, { FormFieldBasic } from "../../../components/FormBuilder/Form"
 
 export default function LoginScreen() {
-    const [ loginForm, setLoginForm ] = useState<FormBuilder | null>(null)
+    const [ loginForm, setLoginForm ] = useState<any>(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -22,12 +21,8 @@ export default function LoginScreen() {
                 return
             }
 
-            const form = new FormBuilder({
-                Data: FindValue(response.Data, ["Fields"]),
-                FormId: "login_form",
-                FormSubmitButtonMsg: "Enviar"
-            })
-            setLoginForm(form)
+            const formData = FindValue(response.Data, ["Fields"])
+            setLoginForm(formData)
         }
 
         fetchLoginForm()
@@ -60,17 +55,20 @@ export default function LoginScreen() {
         window.alert(loginResponse.Data)
     }
 
-    const loginFormNode = IsNil(loginForm)
-        ? <></>
-        : loginForm!.BuildForm(loginFetch)
-
     return (
         <ScreenBox>
             <h1>LoginScreen</h1>
             <Link to={'/account_recovery'}>AccountRecovery</Link>
             <Link to={'/home'}>InternalHome</Link>
             <Link to={'/user_registry'}>UserRegistry</Link>
-            { loginFormNode }
+            {
+                FormBuilder({
+                    Data: loginForm,
+                    FormId: "login",
+                    AfterSubmitFunc: loginFetch,
+                    FormSubmitButtonMsg: "Entrar"
+                })
+            }
         </ScreenBox>
     )
 }

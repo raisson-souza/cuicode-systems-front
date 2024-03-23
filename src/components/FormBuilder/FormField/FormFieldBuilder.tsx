@@ -1,6 +1,6 @@
 import { HTMLInputTypeAttribute } from "react"
-import FindValue from "../../functions/FindValue"
-import IsNil from "../../functions/IsNil"
+import FindValue from "../../../functions/FindValue"
+import IsNil from "../../../functions/IsNil"
 import { Checkbox, FormControlLabel, MenuItem, Radio, RadioGroup, Select, Switch, TextField } from "@mui/material"
 
 type Option = {
@@ -12,10 +12,10 @@ type FormFieldProps = {
     Data : any
 }
 
-export default class FormField
+export default class FormFieldBuilder // TODO input de data e hora
 {
     /** Identificador do campo (uso no backend) */
-    FieldId : string
+    Id : string
     /** Título do campo e identificador do controle */
     Name : string
     /** Tipo de input */
@@ -34,9 +34,9 @@ export default class FormField
     NeedsSecondConfirmation : boolean // TODO Implementar
 
     constructor({ // TODO Revisar valores padrões
-        Data,
+        Data, // TODO Verificar se tem chave "Fields" e capturar data dela
     } : FormFieldProps) {
-        this.FieldId = FindValue(Data, ["FieldId"])
+        this.Id = FindValue(Data, ["FieldId"])
         this.Name = FindValue(Data, ["Name"])
         this.Type = FindValue(Data, ["Type"])
         this.PlaceHolder = FindValue(Data, ["PlaceHolder"]) ?? ""
@@ -65,7 +65,7 @@ export default class FormField
         this.Options = options
     }
 
-    BuildField() { // TODO reajustar ordem de parametros
+    BuildField(disabled : boolean) { // TODO reajustar ordem de parametros dos inputs
         if (this.Type === "select") {
             let defaultSelectOptionDescription : string | undefined = undefined
 
@@ -73,23 +73,25 @@ export default class FormField
                 defaultSelectOptionDescription = this.Options
                     .filter((opt) => opt.Id === this.DefaultOptionId)[0].Description
 
-            return (
+            return ( // FIXME não troca de valor
                 <Select
                     labelId="demo-simple-select-label" // TODO revisar este parametro
-                    id={ `${ this.FieldId }` }
-                    key={ `${this.FieldId}` }
+                    id={ `${ this.Id }` }
+                    key={ `${this.Id}` }
                     name={ `${ this.Name }` }
                     value={ this.DefaultOptionId }
                     label={ defaultSelectOptionDescription }
                     required={ this.Nullable }
+                    disabled={ disabled }
                 >
                     {
                         this.Options!.map((option, i) => {
                             return (
                                 <MenuItem
-                                    id={ `${ this.FieldId }_${ i }` }
-                                    key={ `${ this.FieldId }_${ i }` }
+                                    id={ `${ this.Id }_${ i }` }
+                                    key={ `${ this.Id }_${ i }` }
                                     value={ option.Id }
+                                    disabled={ disabled }
                                 >
                                     { option.Description }
                                 </MenuItem>
@@ -104,24 +106,26 @@ export default class FormField
             return (
                 <RadioGroup
                     defaultValue={ this.DefaultOptionId }
-                    id={ `${ this.FieldId }_radio` }
+                    id={ `${ this.Id }_radio` }
                     name={ `${ this.Name }_radio` }
-                    key={ `${ this.FieldId }_radio` }
+                    key={ `${ this.Id }_radio` }
                 >
                     {
                         this.Options!.map((option, i) => {
                             return (
                                 <FormControlLabel
-                                    key={ `${this.FieldId}_radio_label_${ i }` }
+                                    key={ `${this.Id}_radio_label_${ i }` }
                                     name={ `${ this.Name }_radio_label_${ i }` }
                                     value={ option.Id }
                                     label={ option.Description }
+                                    disabled={ disabled }
                                     control={
                                         <Radio
-                                            id={ `${ this.FieldId }_${ i }` }
+                                            id={ `${ this.Id }_${ i }` }
                                             name={ `${ this.Name }_${ i }` }
-                                            key={ `${ this.FieldId }_${ i }` }
+                                            key={ `${ this.Id }_${ i }` }
                                             required={ !this.Nullable }
+                                            disabled={ disabled }
                                         />
                                     }
                                 />
@@ -137,15 +141,17 @@ export default class FormField
                 return (
                     <FormControlLabel
                         label={ this.PlaceHolder }
-                        id={ `${ this.FieldId }_switch` }
+                        id={ `${ this.Id }_switch` }
                         name={ `${ this.Name }_switch` }
-                        key={ `${ this.FieldId }_switch` }
+                        key={ `${ this.Id }_switch` }
+                        disabled={ disabled }
                         control={
                             <Switch
-                                id={ this.FieldId }
+                                id={ this.Id }
                                 name={ this.Name }
-                                key={ this.FieldId }
+                                key={ this.Id }
                                 required={ !this.Nullable }
+                                disabled={ disabled }
                             />
                         }
                     />
@@ -154,10 +160,11 @@ export default class FormField
 
             return (
                 <Switch
-                    key={ this.FieldId }
-                    id={ this.FieldId }
+                    key={ this.Id }
+                    id={ this.Id }
                     name={ this.Name }
                     required={ !this.Nullable }
+                    disabled={ disabled }
                 />
             )
         }
@@ -166,16 +173,18 @@ export default class FormField
             if (!IsNil(this.PlaceHolder)) {
                 return (
                     <FormControlLabel
-                        id={ `${ this.FieldId }_checkbox` }
+                        id={ `${ this.Id }_checkbox` }
                         name={ `${ this.Name }_checkbox` }
-                        key={ `${ this.FieldId }_checkbox` }
+                        key={ `${ this.Id }_checkbox` }
                         label={ this.PlaceHolder }
+                        disabled={ disabled }
                         control={
                             <Checkbox
-                                id={ this.FieldId }
-                                key={ this.FieldId }
+                                id={ this.Id }
+                                key={ this.Id }
                                 name={ this.Name }
                                 required={ !this.Nullable }
+                                disabled={ disabled }
                             />
                         }
                     />
@@ -183,24 +192,26 @@ export default class FormField
             }
             return (
                 <Checkbox
-                    id={ this.FieldId }
-                    key={ this.FieldId }
+                    id={ this.Id }
+                    key={ this.Id }
                     name={ this.Name }
                     required={ !this.Nullable }
+                    disabled={ disabled }
                 />
             )
         }
 
         return (
             <TextField
-                id={ this.FieldId }
-                key={ this.FieldId }
+                id={ this.Id }
+                key={ this.Id }
                 name={ this.Name }
                 helperText={ this.PlaceHolder }
                 required={ !this.Nullable }
                 type={ this.Type }
                 label={ this.Name }
                 maxRows={ this.MaxLen }
+                disabled={ disabled }
             />
         )
     }
