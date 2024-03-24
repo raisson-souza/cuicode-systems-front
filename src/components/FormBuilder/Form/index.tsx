@@ -3,6 +3,8 @@ import FormField from "../FormField/FormFieldBuilder"
 import { Button, Skeleton, Snackbar } from "@mui/material"
 import FindValue from "../../../functions/FindValue"
 import IsNil from "../../../functions/IsNil"
+import "./styles.css"
+import { GetSystemStyle } from "../../InitialFetch"
 
 type FormBuilderProps = {
     Data : any
@@ -46,6 +48,7 @@ export default function FormBuilder({ // TODO reordenar ordem das funções
         fieldsControls: []
     })
     const loading = fields.fields.length === 0 || IsNil(Data)
+    const systemStyles = GetSystemStyle()
 
     useEffect(() => {
         if (IsNil(Data))
@@ -245,12 +248,17 @@ export default function FormBuilder({ // TODO reordenar ordem das funções
             <form
                 onSubmit={ submitForm }
                 id={ FormId }
+                style={{
+                    backgroundColor: systemStyles.PrimaryColor
+                }}
             >
-                {
-                    fields.fields.map(field => {
-                        return field.BuildField(disabled)
-                    })
-                }
+                <div className="form-inputs">
+                    {
+                        fields.fields.map(field => {
+                            return field.BuildField(disabled)
+                        })
+                    }
+                </div>
                 <Button
                     variant="contained"
                     color="success"
