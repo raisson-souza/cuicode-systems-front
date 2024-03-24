@@ -45,6 +45,19 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
             `}}
         />
     )
+    const globalStyleMuiDateCalendar = (
+        <style
+            dangerouslySetInnerHTML={{ __html: `
+                .MuiPickersCalendarHeader-label,
+                .MuiPickersArrowSwitcher-root > .MuiIconButton-root > .MuiSvgIcon-root > path,
+                .MuiPickersCalendarHeader-switchViewButton > .MuiSvgIcon-root > path,
+                .MuiYearCalendar-root > .MuiPickersYear-root > button
+                {
+                    color: black !important;
+                }
+            `}}
+        />
+    )
 
     return (
         <>
@@ -52,6 +65,7 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
             { globalStyleInput }
             { globalStyleButton }
             { globalStyleMuiMenu }
+            { globalStyleMuiDateCalendar }
         </>
     )
 }

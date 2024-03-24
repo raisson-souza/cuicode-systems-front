@@ -2,6 +2,12 @@ import { HTMLInputTypeAttribute } from "react"
 import FindValue from "../../../functions/FindValue"
 import IsNil from "../../../functions/IsNil"
 import { Checkbox, FormControlLabel, MenuItem, Radio, RadioGroup, Select, Switch, TextField } from "@mui/material"
+import { DatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
+import dayjs from "dayjs"
+
+
 
 type Option = {
     Id : string
@@ -12,7 +18,7 @@ type FormFieldProps = {
     Data : any
 }
 
-export default class FormFieldBuilder // TODO input de data e hora
+export default class FormFieldBuilder
 {
     /** Identificador do campo (uso no backend) */
     Id : string
@@ -34,7 +40,7 @@ export default class FormFieldBuilder // TODO input de data e hora
     NeedsSecondConfirmation : boolean // TODO Implementar
 
     constructor({ // TODO Revisar valores padrões
-        Data, // TODO Verificar se tem chave "Fields" e capturar data dela
+        Data,
     } : FormFieldProps) {
         this.Id = FindValue(Data, ["FieldId"])
         this.Name = FindValue(Data, ["Name"])
@@ -199,6 +205,48 @@ export default class FormFieldBuilder // TODO input de data e hora
                     disabled={ disabled }
                 />
             )
+        }
+
+        if (this.Type === "date") {
+            return (
+                <LocalizationProvider
+                    key={ this.Id }
+                    dateAdapter={ AdapterDayjs }
+                >
+                    <DemoContainer components={ ['DatePicker'] }>
+                        <DatePicker
+                            name={ this.Name }
+                            defaultValue={ dayjs(this.PlaceHolder) }
+                            disabled={ disabled }
+                            label={ this.Name }
+                        />
+                    </DemoContainer>
+                </LocalizationProvider>
+            )
+        }
+
+        if (this.Type === "hour") {
+            const timeObj = {
+                "hour": Number.parseInt(this.PlaceHolder.split(":")[0]),
+                "minute": Number.parseInt(this.PlaceHolder.split(":")[1])
+            }
+
+            return (
+                <LocalizationProvider
+                    key={ this.Id }
+                    dateAdapter={ AdapterDayjs }
+                >
+                    <DemoContainer components={ ['TimePicker'] }>
+                        <TimePicker
+                            name={ this.Name }
+                            defaultValue={ dayjs().hour(timeObj.hour).minute(timeObj.minute) }
+                            disabled={ disabled }
+                            label={ this.Name }
+                            ampm={ false }
+                        />
+                    </DemoContainer>
+                </LocalizationProvider>
+            );
         }
 
         return (

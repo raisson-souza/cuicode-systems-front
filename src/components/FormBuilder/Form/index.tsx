@@ -52,6 +52,9 @@ export default function FormBuilder({
         const fields : FormField[] = []
         const formFieldsBasic : FormFieldBasic[] = []
 
+        if (!IsNil(FindValue(Data, ['Fields'])))
+            Data = FindValue(Data, ['Fields'])
+
         Data.forEach((_field: any) => {
             const field = new FormField({
                 Data: _field,
@@ -190,13 +193,17 @@ export default function FormBuilder({
         setDisabled(false)
     }
 
-    if (loading) { // FIXME não funciona
+    if (loading) {
         return (
-            <Box>
+            <div
+                style={{
+                    width: '50%'
+                }}
+            >
                 <Skeleton variant="text" />
                 <Skeleton variant="rectangular" />
                 <Skeleton variant="rounded" />
-            </Box>
+            </div>
         )
     }
 
