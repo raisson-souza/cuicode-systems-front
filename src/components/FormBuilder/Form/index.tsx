@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import FormField from "../FormField/FormFieldBuilder"
-import { Box, Button, Skeleton, Snackbar } from "@mui/material"
+import { Button, Skeleton, Snackbar } from "@mui/material"
 import FindValue from "../../../functions/FindValue"
 import IsNil from "../../../functions/IsNil"
 
@@ -18,6 +18,7 @@ type FormFieldBasic = {
     Type : string
     OptionsLen? : number
     MaxLen : number
+    HasConfirmation : boolean
 }
 
 export type { FormFieldBasic }
@@ -31,14 +32,15 @@ type FieldsControlsProps = {
     fieldsControls : FormFieldBasic[]
 }
 
-export default function FormBuilder({
+export default function FormBuilder({ // TODO reordenar ordem das funções
     Data,
     FormId,
     AfterSubmitFunc = () => {},
     FormSubmitButtonMsg = "Enviar"
 } : FormBuilderProps) {
     const [ disabled, setDisabled ] = useState<boolean>(false)
-    const [ snackbars, setSnackbars ] = useState<SnackbarModel[]>([])
+    const [ snackbarMessage, setSnackbarMessage ] = useState<string | null>(null)
+    const [ openSnackbars, setOpenSnackbars ] = useState<boolean>(false)
     const [ fields, setFields ] = useState<FieldsControlsProps>({
         fields: [],
         fieldsControls: []
@@ -51,9 +53,6 @@ export default function FormBuilder({
 
         const fields : FormField[] = []
         const formFieldsBasic : FormFieldBasic[] = []
-
-        if (!IsNil(FindValue(Data, ['Fields'])))
-            Data = FindValue(Data, ['Fields'])
 
         Data.forEach((_field: any) => {
             const field = new FormField({
@@ -68,7 +67,33 @@ export default function FormBuilder({
                 Value: undefined,
                 OptionsLen: field.Options.length,
                 MaxLen: field.MaxLen,
+                HasConfirmation: field.NeedsSecondConfirmation
             })
+
+            if (field.NeedsSecondConfirmation) {
+                fields.push(new FormField({
+                    Data: {
+                        Id: `${ field.Id }_confirmation_id`,
+                        Name: `Confirmação de ${ field.Name.toLowerCase() }`,
+                        Type: field.Type,
+                        PlaceHolder: field.PlaceHolder,
+                        MaxLen: field.MaxLen,
+                        Nullable: false,
+                        Options: field.Options,
+                        DefaultOptionId: field.DefaultOptionId,
+                        NeedsSecondConfirmation: false
+                    }
+                }))
+                formFieldsBasic.push({
+                    Id: `${ field.Id }_confirmation_id`,
+                    Name: `Confirmação de ${ field.Name.toLowerCase() }`,
+                    Type: field.Type,
+                    Value: undefined,
+                    OptionsLen: field.Options.length,
+                    MaxLen: field.MaxLen,
+                    HasConfirmation: false
+                })
+            }
         })
 
         setFields({
@@ -77,22 +102,20 @@ export default function FormBuilder({
         })
     }, [Data])
 
-    const snackbarsNodes = () => { // TODO testar
-        if (snackbars.length === 0)
-            return null
-
-        return snackbars.map(snackbar => {
-            return <Snackbar message={ snackbar.Msg } autoHideDuration={ 6000 }/>
-        })
-    }
-
-    function ValidateForm() {
+    function ValidateForm(newFieldsControls : FormFieldBasic[]) {
         const messages : SnackbarModel[] = []
-        fields.fieldsControls.forEach(fieldName => {
+        newFieldsControls.forEach((fieldName, i) => {
             if (String(fieldName.Value).length > fieldName.MaxLen) {
                 messages.push({
                     Msg: `O campo ${ fieldName.Name } ultrapassou o limite de ${ fieldName.MaxLen } caracteres.`
                 })
+            }
+            if (fieldName.HasConfirmation) {
+                if (newFieldsControls[i + 1].Value != fieldName.Value) {
+                    messages.push({
+                        Msg: `O campo ${ fieldName.Name } precisa ser igual ao seu campo de confirmação.`
+                    })
+                }
             }
         })
 
@@ -171,15 +194,17 @@ export default function FormBuilder({
                 Name: fieldName.Name,
                 Type: fieldName.Type,
                 Value: value,
-                OptionsLen: fieldName.OptionsLen
+                OptionsLen: fieldName.OptionsLen,
+                HasConfirmation: fieldName.HasConfirmation,
             })
         })
 
-        const { messages, ok } = ValidateForm()
+        const { messages, ok } = ValidateForm(newFieldsNames)
 
         if (!ok) {
+            setOpenSnackbars(true)
             setDisabled(false)
-            setSnackbars(messages)
+            setSnackbarMessage(messages[0].Msg)
             return
         }
 
@@ -207,9 +232,16 @@ export default function FormBuilder({
         )
     }
 
-    return (
+    return ( // TODO configurar cor de fundo das snackbars
         <>
-            { snackbarsNodes() }
+            {
+                <Snackbar
+                    message={ snackbarMessage }
+                    autoHideDuration={ 6000 }
+                    open={ openSnackbars }
+                    onClose={ () => { setOpenSnackbars(false) }}
+                />
+            }
             <form
                 onSubmit={ submitForm }
                 id={ FormId }
