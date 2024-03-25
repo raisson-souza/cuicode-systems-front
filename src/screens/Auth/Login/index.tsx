@@ -7,6 +7,7 @@ import AuthEndpoints, { LoginResponse } from "../../../services/AuthEndpoints"
 import LocalStorage from "../../../data/classes/LocalStorage"
 import User from "../../../data/classes/User"
 import FormBuilder, { FormFieldBasic } from "../../../components/FormBuilder/Form"
+import "./styles.css"
 
 export default function LoginScreen() {
     const [ loginForm, setLoginForm ] = useState<any>(null)
@@ -57,18 +58,25 @@ export default function LoginScreen() {
 
     return (
         <ScreenBox>
-            <h1>LoginScreen</h1>
-            <Link to={'/account_recovery'}>AccountRecovery</Link>
-            <Link to={'/home'}>InternalHome</Link>
-            <Link to={'/user_registry'}>UserRegistry</Link>
-            {
-                FormBuilder({
-                    Data: loginForm,
-                    FormId: "login",
-                    AfterSubmitFunc: loginFetch,
-                    FormSubmitButtonMsg: "Entrar"
-                })
-            }
+            <div className="login-screen">
+                <div className="login-description">
+                    <h2>Faça seu Login em CuiCode Systems</h2>
+                    <div>
+                        <p>Não tem uma conta? <Link to={'/user_registry'}>Crie aqui.</Link></p>
+                        <p>Esqueceu a senha? <Link to={'/account_recovery'}>Recupere sua conta.</Link> </p>
+                    </div>
+                </div>
+                <div className="login-form">
+                    {
+                        FormBuilder({
+                            Data: loginForm,
+                            FormId: "login",
+                            AfterSubmitFunc: loginFetch,
+                            FormSubmitButtonMsg: "Entrar"
+                        })
+                    }
+                </div>
+            </div>
         </ScreenBox>
     )
 }

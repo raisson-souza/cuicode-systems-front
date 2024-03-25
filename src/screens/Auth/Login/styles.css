@@ -1,0 +1,25 @@
+.login-screen {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 50px;
+}
+.login-screen .login-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  gap: 30px;
+}
+
+@media (max-width: 700px) {
+  .login-screen {
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 100px;
+  }
+}/*# sourceMappingURL=styles.css.map */
