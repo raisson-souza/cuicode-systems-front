@@ -1,8 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import ScreenBox from "../../../components/ScreenBox"
-import { GetUserAuth } from "../../../components/ProtectedRoute"
-import IsNil from "../../../functions/IsNil"
 import { useEffect } from "react"
+
+import { GetUserAuth } from "../../../components/ProtectedRoute"
+import ScreenBox from "../../../components/ScreenBox"
+
+import IsNil from "../../../functions/IsNil"
 
 export default function AccountRecoveryScreen() {
     const location = useLocation().pathname

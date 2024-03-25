@@ -1,14 +1,18 @@
 import { Button, Menu, MenuItem, Tooltip } from "@mui/material"
-import User from "../../data/classes/User"
-import "./styles.css"
 import { Menu as MenuIcon } from '@mui/icons-material'
-import { GetSystemStyle } from "../InitialFetch"
-import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { GetUserAuth } from "../ProtectedRoute"
+import { useState } from "react"
+
 import LocalStorage from "../../data/classes/LocalStorage"
-import InvertedTextColor from "../../functions/style/InvertedTextColor"
+import User from "../../data/classes/User"
+
+import { GetSystemStyle } from "../InitialFetch"
+import { GetUserAuth } from "../ProtectedRoute"
 import UserPhoto from "../UserPhoto"
+
+import InvertedTextColor from "../../functions/style/InvertedTextColor"
+
+import "./styles.css"
 
 type AuthUserBoxProps = {
     userAuth : User,

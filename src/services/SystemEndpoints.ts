@@ -1,6 +1,7 @@
-import SystemStyle from "../data/classes/SystemStyle";
-import DefaultSystemStyle from "../data/defaultStyle";
-import Endpoints from "./base/Endpoints";
+import DefaultSystemStyle from "../data/defaultStyle"
+import SystemStyle from "../data/classes/SystemStyle"
+
+import Endpoints from "./base/Endpoints"
 
 export default abstract class SystemEndpoints extends Endpoints
 {

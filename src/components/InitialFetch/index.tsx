@@ -1,11 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import SystemStyle from "../../data/classes/SystemStyle"
-import SystemEndpoints from "../../services/SystemEndpoints"
-import IsNil from "../../functions/IsNil"
-import DefaultSystemStyle from "../../data/defaultStyle"
-import SystemUnderMaintenceScreen from "../../screens/Error/SystemUnderMaintence"
-import LoadingScreen from "../../screens/Loading/LoadingScreen"
+
 import GenerateGlobalStyle from "./GlobalStyles"
+
+import DefaultSystemStyle from "../../data/defaultStyle"
+import SystemStyle from "../../data/classes/SystemStyle"
+
+import IsNil from "../../functions/IsNil"
+
+import LoadingScreen from "../../screens/Loading/LoadingScreen"
+import SystemUnderMaintenceScreen from "../../screens/Error/SystemUnderMaintence"
+
+import SystemEndpoints from "../../services/SystemEndpoints"
 
 type GlobalPropsType = {
     systemStyle : SystemStyle,

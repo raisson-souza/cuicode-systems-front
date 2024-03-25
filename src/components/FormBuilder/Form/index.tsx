@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react"
-import FormField from "../FormField/FormFieldBuilder"
 import { Button, Skeleton, Snackbar } from "@mui/material"
+import React, { useEffect, useState } from "react"
+
+import FormField from "../FormField/FormFieldBuilder"
+
+import { GetSystemStyle } from "../../InitialFetch"
+
 import FindValue from "../../../functions/FindValue"
 import IsNil from "../../../functions/IsNil"
+
 import "./styles.css"
-import { GetSystemStyle } from "../../InitialFetch"
 
 type FormBuilderProps = {
     Data : any

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom"
+
 import LocalStorage from "../../../data/classes/LocalStorage"
+
 import ScreenBox from "../../../components/ScreenBox"
-import { GetUserAuth } from "../../../components/ProtectedRoute"
 
 export default function InternalHomeScreen() {
     const navigate = useNavigate()

@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import AuthEndpoints, { LoginResponse, ValidateJwtResponse } from "../../services/AuthEndpoints"
+
 import LocalStorage from "../../data/classes/LocalStorage"
-import IsNil from "../../functions/IsNil"
 import User from "../../data/classes/User"
+
+import IsNil from "../../functions/IsNil"
+
+import AuthEndpoints, { LoginResponse, ValidateJwtResponse } from "../../services/AuthEndpoints"
 
 type ProtectedRouteContextType = {
     UserAuth : User,

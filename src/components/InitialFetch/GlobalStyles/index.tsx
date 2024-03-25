@@ -1,6 +1,7 @@
 import SystemStyle from "../../../data/classes/SystemStyle"
-import IsNil from "../../../functions/IsNil"
+
 import InvertedTextColor from "../../../functions/style/InvertedTextColor"
+import IsNil from "../../../functions/IsNil"
 
 export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.Element | null {
     if (IsNil(systemStyle))

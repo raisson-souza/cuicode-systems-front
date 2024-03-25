@@ -1,6 +1,7 @@
+import FooterContacts from "../../../components/FooterContacts"
 import ScreenBox from "../../../components/ScreenBox"
 import StuckPresentationalBox from "../../../components/StuckPresentationalBox"
-import FooterContacts from "../../../components/FooterContacts"
+
 import "./styles.css"
 
 export default function ExternalHomeScreen() {

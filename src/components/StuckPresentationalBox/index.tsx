@@ -1,7 +1,9 @@
-import IsNil from "../../functions/IsNil"
+import { GetSystemStyle } from "../InitialFetch"
+
 import DefineLinearGradient from "../../functions/style/DefineLinearGradient"
 import DefineShadow from "../../functions/style/DefineShadow"
-import { GetSystemStyle } from "../InitialFetch"
+import IsNil from "../../functions/IsNil"
+
 import "./styles.css"
 
 type StuckPresentationalBoxProps = {

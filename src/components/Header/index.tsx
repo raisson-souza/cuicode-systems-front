@@ -1,11 +1,15 @@
 import { useLocation } from "react-router-dom"
-import IsNil from "../../functions/IsNil"
+
 import DefineShadow from "../../functions/style/DefineShadowColor"
+import IsNil from "../../functions/IsNil"
+
 import { GetUserAuth } from "../ProtectedRoute"
-import LoginRegistryBox from "../LoginRegistryBox"
 import AuthUserBox from "../AuthUserBox"
-import "./style.css"
+import LoginRegistryBox from "../LoginRegistryBox"
+
 import { GetSystemStyle } from "../InitialFetch"
+
+import "./style.css"
 
 type HeaderProps = {
     hasShadow : boolean

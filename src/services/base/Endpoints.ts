@@ -1,4 +1,5 @@
 import Env from "../../config/Env"
+
 import Response from "../../data/classes/Response"
 
 export default abstract class Endpoints

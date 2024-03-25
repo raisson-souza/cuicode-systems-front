@@ -1,5 +1,6 @@
-import User from "../data/classes/User"
 import Endpoints from "./base/Endpoints"
+
+import User from "../data/classes/User"
 
 export default abstract class AuthEndpoints extends Endpoints
 {

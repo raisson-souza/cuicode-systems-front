@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
+
 import { GetSystemStyle } from "../InitialFetch"
+
 import "./styles.css"
 
 type LoginRegistryBoxProps = { }

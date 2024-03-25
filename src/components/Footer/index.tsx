@@ -1,5 +1,7 @@
 import DefineShadow from "../../functions/style/DefineShadowColor"
+
 import { GetSystemStyle } from "../InitialFetch"
+
 import "./styles.css"
 
 type FooterProps = {

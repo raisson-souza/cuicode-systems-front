@@ -1,12 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import DefineShadow from "../../functions/style/DefineShadowColor"
+
+import { GetSystemStyle } from "../InitialFetch"
+import { GetUserAuth } from "../ProtectedRoute"
+
 import Footer from "../Footer"
 import Header from "../Header"
-import { GetSystemStyle } from "../InitialFetch"
-import "./styles.css"
-import { GetUserAuth } from "../ProtectedRoute"
-import IsNil from "../../functions/IsNil"
+
 import DefineLinearGradient from "../../functions/style/DefineLinearGradient"
+import DefineShadow from "../../functions/style/DefineShadowColor"
+import IsNil from "../../functions/IsNil"
+
+import "./styles.css"
 
 type ScreenBoxScreenProps = {
     children : JSX.Element | JSX.Element[]

@@ -1,4 +1,5 @@
 import { Avatar } from "@mui/material"
+
 import IsNil from "../../functions/IsNil"
 
 type UserPhotoProps = {

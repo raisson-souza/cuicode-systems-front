@@ -1,12 +1,17 @@
 import { Link, useNavigate } from "react-router-dom"
-import ScreenBox from "../../../components/ScreenBox"
 import { useEffect, useState } from "react"
-import SystemEndpoints from "../../../services/SystemEndpoints"
+
 import FindValue from "../../../functions/FindValue"
-import AuthEndpoints, { LoginResponse } from "../../../services/AuthEndpoints"
+
 import LocalStorage from "../../../data/classes/LocalStorage"
 import User from "../../../data/classes/User"
+
+import AuthEndpoints, { LoginResponse } from "../../../services/AuthEndpoints"
+import SystemEndpoints from "../../../services/SystemEndpoints"
+
 import FormBuilder, { FormFieldBasic } from "../../../components/FormBuilder/Form"
+import ScreenBox from "../../../components/ScreenBox"
+
 import "./styles.css"
 
 export default function LoginScreen() {

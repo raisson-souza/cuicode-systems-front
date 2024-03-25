@@ -1,18 +1,16 @@
-// https://www.youtube.com/watch?v=oTIJunBa6MA&t=107s
-// https://reactrouter.com/en/main/routers/create-browser-router
-
 import { createBrowserRouter } from "react-router-dom"
-import ExternalHome from "./screens/Home/ExternalHome"
-import DefaultError from "./screens/Error/DefaultError"
-import User from "./screens/Users/User"
-import Users from "./screens/Users/Users"
-import InternalHome from "./screens/Home/InternalHome"
-import UserRegistryScreen from "./screens/Users/UserRegistry"
-import LoginScreen from "./screens/Auth/Login"
+
 import AccountRecoveryScreen from "./screens/Auth/AccountRecovery"
-import ProtectedRoute from "./components/ProtectedRoute"
-import NotFoundScreen from "./screens/Error/NotFound"
+import DefaultError from "./screens/Error/DefaultError"
+import ExternalHome from "./screens/Home/ExternalHome"
 import InitialFetch from "./components/InitialFetch"
+import InternalHome from "./screens/Home/InternalHome"
+import LoginScreen from "./screens/Auth/Login"
+import NotFoundScreen from "./screens/Error/NotFound"
+import ProtectedRoute from "./components/ProtectedRoute"
+import User from "./screens/Users/User"
+import UserRegistryScreen from "./screens/Users/UserRegistry"
+import Users from "./screens/Users/Users"
 
 type CreateRouteProp = {
     path : string,

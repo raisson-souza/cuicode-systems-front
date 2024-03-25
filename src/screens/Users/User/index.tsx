@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+
 import ScreenBox from "../../../components/ScreenBox"
 
 export default function UserScreen() {
