@@ -14,6 +14,7 @@ export default function AccountRecoveryScreen() {
         if (location === "/account_recovery" && !IsNil(user)) {
             navigate('/home')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

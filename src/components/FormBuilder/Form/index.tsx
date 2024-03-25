@@ -114,7 +114,7 @@ export default function FormBuilder({ // TODO reordenar ordem das funções
                 })
             }
             if (fieldName.HasConfirmation) {
-                if (newFieldsControls[i + 1].Value != fieldName.Value) {
+                if (newFieldsControls[i + 1].Value !== fieldName.Value) {
                     messages.push({
                         Msg: `O campo ${ fieldName.Name } precisa ser igual ao seu campo de confirmação.`
                     })
