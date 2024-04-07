@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         element: <Users />
     }),
     CreateRoute({
-        path: "/user/:userId",
+        path: "/user/:userIdHash",
         element: <User />
     }),
     CreateRoute({
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         element: (<>Rota não desenvolvida</>)
     }),
     CreateRoute({
-        path: "/group/:groupId",
+        path: "/group/:groupIdHash",
         element: (<>Rota não desenvolvida</>)
     }),
     CreateRoute({
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
         element: (<>Rota não desenvolvida</>)
     }),
     CreateRoute({
-        path: "/board/:boardId",
+        path: "/board/:boardIdHash",
         element: (<>Rota não desenvolvida</>)
     }),
     CreateRoute({

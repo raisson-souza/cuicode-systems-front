@@ -2,10 +2,16 @@ import { Link } from "react-router-dom"
 
 import ScreenBox from "../../../components/ScreenBox"
 
-export default function NotFoundScreen() {
+type NotFoundScreeenProps = {
+    msg? : string
+}
+
+export default function NotFoundScreen({
+    msg = "Página não encontrada!"
+} : NotFoundScreeenProps) {
     return (
         <ScreenBox>
-            <h1>Página não encontrada!</h1>
+            <h1>{ msg }</h1>
             <h4>Volte ao <Link to={'/'}>começo</Link>.</h4>
         </ScreenBox>
     )

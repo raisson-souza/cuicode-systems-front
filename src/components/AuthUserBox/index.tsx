@@ -10,6 +10,7 @@ import { GetSystemStyle } from "../InitialFetch"
 import { GetUserAuth } from "../ProtectedRoute"
 import UserPhoto from "../UserPhoto"
 
+import { Base64 } from "../../functions/Formatting/Base64"
 import InvertedTextColor from "../../functions/style/InvertedTextColor"
 
 import "./styles.css"
@@ -30,7 +31,6 @@ export default function AuthUserBox ({
     const systemStyle = GetSystemStyle()
     const authUser = GetUserAuth()
     const navigate = useNavigate()
-    const location = useLocation().pathname
 
     // Estilo contrário de cor para o fundo das opções do menu
     const menuTextColor = { 'color': InvertedTextColor(systemStyle.TextColor) }
@@ -53,11 +53,13 @@ export default function AuthUserBox ({
 
         switch (option) {
             case 1: // Ver Perfil
-                if (location.includes('/user/')) { // Se a pessoa já estiver numa rota de perfil, pula
-                    setAnchorEl(null)
-                    return
-                }
-                navigate(`/user/${ authUser?.UserAuth.Id }`)
+                // if (location.includes('/user/')) { // Se a pessoa já estiver numa rota de perfil, pula
+                //     setAnchorEl(null)
+                //     return
+                // }
+                // TODO: acima, caso a pessoa esteja visitando um perfil e queiro voltar ao seu, poderá, por isso comentei
+                const userAuthIdHash = Base64.ToBase64(authUser?.UserAuth.Id?.toString())
+                navigate(`/user/${ userAuthIdHash }`)
                 break
             case 2: // Editar Perfil
                 // A DESENVOLVER
