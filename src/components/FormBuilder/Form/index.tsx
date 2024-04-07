@@ -1,7 +1,7 @@
 import { Button, Skeleton, Snackbar } from "@mui/material"
 import React, { useEffect, useState } from "react"
 
-import FormField from "../FormField/FormFieldBuilder"
+import FormFieldBuilder from "../FormField/FormFieldBuilder"
 
 import { GetSystemStyle } from "../../InitialFetch"
 
@@ -34,7 +34,7 @@ type SnackbarModel = {
 }
 
 type FieldsControlsProps = {
-    fields : FormField[]
+    fields : FormFieldBuilder[]
     fieldsControls : FormFieldBasic[]
 }
 
@@ -58,11 +58,11 @@ export default function FormBuilder({ // TODO reordenar ordem das funções
         if (IsNil(Data))
             return
 
-        const fields : FormField[] = []
+        const fields : FormFieldBuilder[] = []
         const formFieldsBasic : FormFieldBasic[] = []
 
         Data.forEach((_field: any) => {
-            const field = new FormField({
+            const field = new FormFieldBuilder({
                 Data: _field,
             })
 
@@ -78,7 +78,7 @@ export default function FormBuilder({ // TODO reordenar ordem das funções
             })
 
             if (field.NeedsSecondConfirmation) {
-                fields.push(new FormField({
+                fields.push(new FormFieldBuilder({
                     Data: {
                         Id: `${ field.Id }_confirmation_id`,
                         Name: `Confirmação de ${ field.Name.toLowerCase() }`,
