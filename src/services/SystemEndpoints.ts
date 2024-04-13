@@ -6,39 +6,28 @@ import Endpoints from "./base/Endpoints"
 export default abstract class SystemEndpoints extends Endpoints
 {
     static async GetStyle() {
-        try
-        {
-            const response = await this.Get("/get_style")
+        const response = await this.Get<any>({
+            url: "/get_style",
+            hasAuthorization: true
+        })
 
+        if (response.Success)
             return new SystemStyle(response.Data)
-        }
-        catch
-        {
-            return new SystemStyle(DefaultSystemStyle)
-        }
+
+        return new SystemStyle(DefaultSystemStyle)
     }
 
     static async VerifySystemMaintence() {
-        try
-        {
-            const response = await this.Get("/ok")
-
-            return !response.Success
-        }
-        catch
-        {
-            return true
-        }
+        return await this.Get<string | null>({
+            url: "/ok",
+            hasAuthorization: true
+        })
     }
 
     static async GetForm(form : string) {
-        try
-        {
-            return await this.Get(`/get_form/${ form }`)
-        }
-        catch
-        {
-            return this.FailFetchResponse
-        }
+        return await this.Get<any>({
+            url: `/get_form/${ form }`,
+            hasAuthorization: true
+        })
     }
 }

@@ -4,9 +4,8 @@ import { useEffect, useState } from "react"
 import FindValue from "../../../functions/FindValue"
 
 import LocalStorage from "../../../data/classes/LocalStorage"
-import User from "../../../data/classes/User"
 
-import AuthEndpoints, { LoginResponse } from "../../../services/AuthEndpoints"
+import AuthEndpoints from "../../../services/AuthEndpoints"
 import SystemEndpoints from "../../../services/SystemEndpoints"
 
 import FormBuilder, { FormFieldBasic } from "../../../components/FormBuilder/Form"
@@ -44,15 +43,13 @@ export default function LoginScreen() {
             return null
         })
 
-        const loginResponse = await AuthEndpoints.Login(email, password)
+        const loginResponse = await AuthEndpoints.Login({
+            email: email,
+            password: password
+        })
 
         if (loginResponse.Success) {
-            const login = {
-                token: loginResponse.Data["token"],
-                user: new User(loginResponse.Data["user"])
-            } as LoginResponse
-
-            LocalStorage.SetToken(login.token)
+            LocalStorage.SetToken(loginResponse.Data.token)
             LocalStorage.SetCredentials(email, password)
             navigate('/home')
             return

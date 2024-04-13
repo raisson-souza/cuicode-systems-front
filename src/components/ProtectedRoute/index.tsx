@@ -6,7 +6,7 @@ import User from "../../data/classes/User"
 
 import IsNil from "../../functions/IsNil"
 
-import AuthEndpoints, { LoginResponse, ValidateJwtResponse } from "../../services/AuthEndpoints"
+import AuthEndpoints from "../../services/AuthEndpoints"
 
 type ProtectedRouteContextType = {
     UserAuth : User,
@@ -49,15 +49,10 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
                     invalidToken = true
 
                 if (validateJwtResponse.Success) {
-                    const validateJwt = {
-                        ok: validateJwtResponse.Data["ok"],
-                        user: new User(validateJwtResponse.Data["user"]),
-                    } as ValidateJwtResponse
-
-                    isLogged = validateJwt.ok
+                    isLogged = validateJwtResponse.Data.ok
                     setProtectedRouteContext({
                         Token: token!,
-                        UserAuth: validateJwt.user
+                        UserAuth: new User(validateJwtResponse.Data.user)
                     })
                 }
             }
@@ -70,21 +65,19 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
                     !IsNil(password)
                 )
             ) {
-                const loginResponse = await AuthEndpoints.Login(email!, password!)
+                const loginResponse = await AuthEndpoints.Login({
+                    email: email!,
+                    password: password!
+                })
 
                 if (loginResponse.Success) {
-                    const login = {
-                        token: loginResponse.Data["token"],
-                        user: new User(loginResponse.Data["user"])
-                    } as LoginResponse
-
-                    token = login.token
+                    token = loginResponse.Data.token
                     LocalStorage.SetToken(token)
                     isLogged = true
 
                     setProtectedRouteContext({
                         Token: token!,
-                        UserAuth: login.user
+                        UserAuth: new User(loginResponse.Data.user)
                     })
                 }
             }

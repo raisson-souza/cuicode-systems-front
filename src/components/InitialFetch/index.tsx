@@ -34,7 +34,7 @@ export default function InitialFetch({ children } : InitialFetchProps) {
 
             setGlobalProps({
                 systemStyle: systemStyles,
-                systemUnderMaintence: systemUnderMaintence
+                systemUnderMaintence: !systemUnderMaintence.Success
             })
         }
 

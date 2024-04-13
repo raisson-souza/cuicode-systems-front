@@ -2,30 +2,31 @@ import Endpoints from "./base/Endpoints"
 
 import User from "../data/classes/User"
 
+type LoginRequestProps = {
+    email : string
+    password : string
+}
+
 export default abstract class AuthEndpoints extends Endpoints
 {
     static async ValidateJwt(jwt : string) {
-        try
-        {
-            return await this.Get(`/validate_jwt?jwt=${ jwt }`)
-        }
-        catch
-        {
-            return this.FailFetchResponse
-        }
+        return await this.Get<ValidateJwtResponse>({
+            url: `/validate_jwt?jwt=${ jwt }`
+        })
     }
 
-    static async Login(email : string, password : string) {
-        try
-        {
-            const body = { "email": email, "password": password }
-            return this.Post('/login', body)
-        }
-        catch
-        {
-            return this.FailFetchResponse
-        }
+    static async Login({
+        email,
+        password
+    } : LoginRequestProps) {
+        const body = { "email": email, "password": password }
+        return await this.Post<LoginResponse>({
+            url: '/login',
+            body: body
+        })
     }
+
+    // get_modules endpoint
 }
 
 type ValidateJwtResponse = {
@@ -36,9 +37,4 @@ type ValidateJwtResponse = {
 type LoginResponse = {
     token : string,
     user : User,
-}
-
-export type {
-    ValidateJwtResponse,
-    LoginResponse,
 }

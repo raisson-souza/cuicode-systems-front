@@ -1,6 +1,6 @@
 import { Button, Menu, MenuItem, Tooltip } from "@mui/material"
 import { Menu as MenuIcon } from '@mui/icons-material'
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 import LocalStorage from "../../data/classes/LocalStorage"
