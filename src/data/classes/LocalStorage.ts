@@ -38,4 +38,28 @@ export default abstract class LocalStorage
         this.RemoveToken()
         this.RemoveCredentials()
     }
+
+    static SetUserDailyInfo(userDailyInfo : string) {
+        localStorage.setItem('user_daily_info', userDailyInfo)
+        localStorage.setItem('user_daily_info_fetch', `${ Date.now() }`)
+    }
+
+    static GetUserDailyInfo() {
+        const userDailyInfoLocalStorage = localStorage.getItem('user_daily_info')
+        if (IsNil(userDailyInfoLocalStorage)) return null
+
+        return JSON.parse(userDailyInfoLocalStorage!)
+    }
+
+    static SetAuthorizedModules(authorizedModules : string) {
+        localStorage.setItem('authorized_modules', authorizedModules)
+        localStorage.setItem('authorized_modules_fetch', `${ Date.now() }`)
+    }
+
+    static GetAuthorizedModules() {
+        const authorizedModulesLocalStorage = localStorage.getItem('authorized_modules')
+        if (IsNil(authorizedModulesLocalStorage)) return null
+
+        return JSON.parse(authorizedModulesLocalStorage!)
+    }
 }

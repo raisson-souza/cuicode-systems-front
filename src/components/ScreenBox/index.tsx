@@ -16,17 +16,24 @@ type ScreenBoxScreenProps = {
     children : JSX.Element | JSX.Element[]
     hasFooter? : boolean
     footerComponent? : JSX.Element | JSX.Element[]
+    sectionComponent? : JSX.Element | JSX.Element[]
+    sectionWidth? : number
+    sectionBorderRadius? : number
 }
 
 export default function ScreenBox({
     children,
     hasFooter = false,
     footerComponent = <></>,
+    sectionComponent,
+    sectionWidth = 10,
+    sectionBorderRadius = 0,
 } : ScreenBoxScreenProps) {
     const systemStyle = GetSystemStyle()
     const location = useLocation().pathname
     const navigate = useNavigate()
     const user = GetUserAuth()?.UserAuth
+    const hasSection = !IsNil(sectionComponent)
 
     const boxShadow = () => {
         const [ shadow1 ] = DefineShadow(systemStyle.BackgroundPrimaryColor[1])
@@ -50,24 +57,21 @@ export default function ScreenBox({
                 { footerComponent }
             </Footer>
         )
-        : null
+        : <></>
 
-    const content = (
-        <>
-            <Header hasShadow={ true }>
-                <h1
-                    onClick={ headerClick }
-                    style={{ cursor: 'pointer' }}
-                >
-                    CuiCode Systems
-                </h1>
-            </Header>
-            <main>
-                { children }
-            </main>
-            { footer }
-        </>
-    )
+    const section = hasSection
+        ? (
+            <section
+                style={{
+                    backgroundColor: systemStyle.TerciaryColor,
+                    width: `${ sectionWidth }%`,
+                    borderRadius: sectionBorderRadius,
+                }}
+            >
+                { sectionComponent }
+            </section>
+        )
+        : <></>
 
     return (
         <div
@@ -78,7 +82,21 @@ export default function ScreenBox({
                 ...screenBoxStyle
             }}
         >
-            { content }
+            <Header hasShadow={ true }>
+                <h1
+                    onClick={ headerClick }
+                    style={{ cursor: 'pointer' }}
+                >
+                    CuiCode Systems
+                </h1>
+            </Header>
+            <main>
+                { section }
+                <div className="main-content">
+                    { children }
+                </div>
+            </main>
+            { footer }
         </div>
     )
 }

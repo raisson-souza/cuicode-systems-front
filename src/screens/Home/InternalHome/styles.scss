@@ -1,0 +1,23 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        text-wrap: nowrap;
+        width: fit-content;
+    }
+}
+
+@media (max-width: 900px){
+    #internal-home {
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+}

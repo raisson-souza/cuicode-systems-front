@@ -5,17 +5,32 @@
   flex-grow: 1;
   flex-shrink: 1;
   flex-wrap: nowrap;
-  min-width: 100vw;
   min-height: 100vh;
   -webkit-animation: ScreenBoxAnimation 20s ease infinite;
   animation: ScreenBoxAnimation 20s ease infinite;
 }
 .screen-box main {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
   margin: 10px;
   flex-grow: 1;
+}
+.screen-box main .main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 10px;
+  flex-grow: 1;
+}
+.screen-box section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @-webkit-keyframes ScreenBoxAnimation {
@@ -38,5 +53,17 @@
   }
   100% {
     background-position: 96% 0%;
+  }
+}
+@media (max-width: 900px) {
+  .screen-box main {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .screen-box section {
+    margin-top: 15px;
+    width: 75% !important;
+    flex-wrap: wrap;
   }
 }/*# sourceMappingURL=styles.css.map */

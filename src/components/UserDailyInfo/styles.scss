@@ -1,0 +1,37 @@
+.user-daily-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+
+    a {
+        text-decoration: none;
+    }
+
+    .user-daily-info-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 15px;
+        border-radius: 10px;
+
+        .user-daily-info-group-enclosure {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+
+    .user-daily-info-link {
+        padding: 10px;
+        width: fit-content;
+        border-radius: 10px;
+    }
+
+    .user-daily-info-numbers {
+        gap: 10px !important;
+        width: fit-content;
+        align-self: center;
+    }
+}
