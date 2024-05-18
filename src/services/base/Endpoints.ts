@@ -1,6 +1,6 @@
-import Env from "../../config/Env"
-import LocalStorage from "../../data/classes/LocalStorage"
+import env from "../../config/Env"
 
+import LocalStorage from "../../data/classes/LocalStorage"
 import Response from "../../data/classes/Response"
 
 type DefaultRequestProps = {
@@ -58,7 +58,7 @@ export default abstract class Endpoints
         try
         {
             return await fetch(
-                `${ Env.BaseBack }${ url }`,
+                `${ env.BackendBaseUrl() }${ url }`,
                 {
                     method: 'GET',
                     headers: this.MountHeaders(headers, hasAuthorization)
@@ -86,7 +86,7 @@ export default abstract class Endpoints
         try
         {
             return await fetch(
-                `${ Env.BaseBack }${ url }`,
+                `${ env.BackendBaseUrl() }${ url }`,
                 {
                     method: method,
                     body: JSON.stringify(body),
