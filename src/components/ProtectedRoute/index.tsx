@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
+import env from "../../config/Env"
+
 import LocalStorage from "../../data/classes/LocalStorage"
 import User from "../../data/classes/User"
 
@@ -31,9 +33,18 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
 
         const PerformAuthentication = async () => {
             let token = LocalStorage.GetToken()
-            const { email, password } = LocalStorage.GetCredentials()
+            let { email, password } = LocalStorage.GetCredentials()
             let isLogged = false
             let invalidToken = false
+
+            if (
+                env.Environment() === 'testing' &&
+                !IsNil(env.UserEmail) &&
+                !IsNil(env.UserPassword())
+            ) {
+                email = env.UserEmail()
+                password = env.UserPassword()
+            }
 
             if (
                 IsNil(token) &&

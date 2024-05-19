@@ -69,7 +69,7 @@ export default function AuthUserBox ({
                 navigate('/home')
                 break
             case 4: // Sair
-                LocalStorage.RemoveAllAuth()
+                LocalStorage.LogOff()
                 navigate('/login')
                 break
             default:

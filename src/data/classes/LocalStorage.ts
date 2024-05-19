@@ -34,9 +34,13 @@ export default abstract class LocalStorage
         localStorage.removeItem('cuicode_systems_user_password')
     }
 
-    static RemoveAllAuth() {
+    static LogOff() {
         this.RemoveToken()
         this.RemoveCredentials()
+        localStorage.removeItem('user_daily_info')
+        localStorage.removeItem('user_daily_info_fetch')
+        localStorage.removeItem('authorized_modules')
+        localStorage.removeItem('authorized_modules_fetch')
     }
 
     static SetUserDailyInfo(userDailyInfo : string) {

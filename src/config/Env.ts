@@ -2,8 +2,8 @@ type envProps = {
     BackendBaseUrl: () => string,
     SystemKey: () => string,
     Environment: () => string,
-    UserEmail: () => string,
-    UserPassword: () => string,
+    UserEmail: () => string | null,
+    UserPassword: () => string | null,
 }
 
 const env : envProps = {
@@ -25,27 +25,15 @@ const env : envProps = {
     },
     Environment: () => {
         const _ = String(process.env["REACT_APP_ENV"])
-        if (_ === '' || _ === 'undefined') {
-            console.error("REACT_APP_ENV não encontrado no ENV.")
-            throw new Error("REACT_APP_ENV não encontrado no ENV.")
-        }
-        return _
+        return _ === '' || _ === 'undefined' ? 'testing' : _
     },
     UserEmail: () => {
         const _ = String(process.env["REACT_APP_USER_EMAIL"])
-        if (_ === '' || _ === 'undefined') {
-            console.error("REACT_APP_USER_EMAIL não encontrado no ENV.")
-            throw new Error("REACT_APP_USER_EMAIL não encontrado no ENV.")
-        }
-        return _
+        return _ === '' || _ === 'undefined' ? null : _
     },
     UserPassword: () => {
         const _ = String(process.env["REACT_APP_USER_PASSWORD"])
-        if (_ === '' || _ === 'undefined') {
-            console.error("REACT_APP_USER_PASSWORD não encontrado no ENV.")
-            throw new Error("REACT_APP_USER_PASSWORD não encontrado no ENV.")
-        }
-        return _
+        return _ === '' || _ === 'undefined' ? null : _
     },
 }
 

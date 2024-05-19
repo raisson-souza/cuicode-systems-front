@@ -4,9 +4,7 @@ import { GetSystemStyle } from "../InitialFetch"
 
 import "./styles.css"
 
-type LoginRegistryBoxProps = { }
-
-export default function LoginRegistryBox({ } : LoginRegistryBoxProps) {
+export default function LoginRegistryBox() {
     const systemStyle = GetSystemStyle()
     const navigate = useNavigate()
 

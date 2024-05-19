@@ -9,6 +9,7 @@ import LocalStorage from "../../../data/classes/LocalStorage"
 
 import AuthEndpoints, { GetUserAuthorizedModulesResponse } from "../../../services/AuthEndpoints"
 
+import IsNil from "../../../functions/IsNil"
 import ShouldFetch from "../../../functions/Routes/ShouldFetch"
 
 import "./styles.css"
@@ -33,7 +34,9 @@ export default function InternalHomeScreen() {
             return
         }
 
-        setModules(LocalStorage.GetAuthorizedModules())
+        const localStorageModules = LocalStorage.GetAuthorizedModules()
+
+        if (!IsNil(localStorageModules)) setModules(localStorageModules)
     }, [])
 
     return (
