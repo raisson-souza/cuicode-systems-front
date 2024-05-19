@@ -1,5 +1,8 @@
 import IsNil from "../../functions/IsNil"
 
+import { GetUserAuthorizedModulesResponse } from "../../services/AuthEndpoints"
+import { GetUserDailyInfoResponse } from "../../services/UserEndpoints"
+
 export default abstract class LocalStorage
 {
     static GetToken() {
@@ -48,11 +51,11 @@ export default abstract class LocalStorage
         localStorage.setItem('user_daily_info_fetch', `${ Date.now() }`)
     }
 
-    static GetUserDailyInfo() {
+    static GetUserDailyInfo() : GetUserDailyInfoResponse | null {
         const userDailyInfoLocalStorage = localStorage.getItem('user_daily_info')
         if (IsNil(userDailyInfoLocalStorage)) return null
 
-        return JSON.parse(userDailyInfoLocalStorage!)
+        return JSON.parse(userDailyInfoLocalStorage!) as GetUserDailyInfoResponse
     }
 
     static SetAuthorizedModules(authorizedModules : string) {
@@ -60,10 +63,10 @@ export default abstract class LocalStorage
         localStorage.setItem('authorized_modules_fetch', `${ Date.now() }`)
     }
 
-    static GetAuthorizedModules() {
+    static GetAuthorizedModules() : GetUserAuthorizedModulesResponse | null {
         const authorizedModulesLocalStorage = localStorage.getItem('authorized_modules')
         if (IsNil(authorizedModulesLocalStorage)) return null
 
-        return JSON.parse(authorizedModulesLocalStorage!)
+        return JSON.parse(authorizedModulesLocalStorage!) as GetUserAuthorizedModulesResponse
     }
 }

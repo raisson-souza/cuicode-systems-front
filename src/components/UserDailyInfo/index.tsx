@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 
+import env from "../../config/Env"
+
 import { GetSystemStyle } from "../InitialFetch"
 
 import LocalStorage from "../../data/classes/LocalStorage"
@@ -29,48 +31,52 @@ export default function UserDailyInfo() {
         const fetchUserDailyInfo = async () => {
             const userDailyInfoResponse = await UserEndpoints.getUserDailyInfo()
 
-            // const MOCK : GetUserDailyInfoResponse = {
-            //     groupsIncluded: [
-            //         {
-            //             Id: 12,
-            //             Name: 'Grupo do Usuário'
-            //         },
-            //         {
-            //             Id: 22,
-            //             Name: 'Colegas do Trabalho'
-            //         }
-            //     ],
-            //     mySolicitations: [
-            //         {
-            //             Id: 21,
-            //             Name: 'Pagar assinatura da fulana'
-            //         },
-            //         {
-            //             Id: 32,
-            //             Name: 'Agenda consulta'
-            //         },
-            //         {
-            //             Id: 44,
-            //             Name: 'Entrar em contato com organizadores da festa'
-            //         }
-            //     ],
-            //     myDelayedSolicitations: [
-            //         {
-            //             Id: 23,
-            //             Name: 'Levar carro na oficina'
-            //         }
-            //     ],
-            //     userParticipatingChats: 5,
-            //     userDreams: 22,
-            //     hestiaTasksThisWeek: 1,
-            //     hestiaTasksPending: 1,
-            //     minervaOpenPlans: 1
-            // }
+            if (env.Environment() === 'testing') { // DADOS MOCKADOS!
+                const MOCK : GetUserDailyInfoResponse = {
+                    groupsIncluded: [
+                        {
+                            Id: 12,
+                            Name: 'Amigos do Clube'
+                        },
+                        {
+                            Id: 22,
+                            Name: 'Colegas de Trabalho'
+                        }
+                    ],
+                    mySolicitations: [
+                        {
+                            Id: 21,
+                            Name: 'Pagar fulana'
+                        },
+                        {
+                            Id: 32,
+                            Name: 'Agendar consulta no oftalmo'
+                        },
+                        {
+                            Id: 44,
+                            Name: 'Entrar em contato com organizadores da festa'
+                        }
+                    ],
+                    myDelayedSolicitations: [
+                        {
+                            Id: 57,
+                            Name: 'Levar carro na oficina'
+                        }
+                    ],
+                    userParticipatingChats: 5,
+                    userDreams: 17,
+                    hestiaTasksThisWeek: 3,
+                    hestiaTasksPending: 1,
+                    minervaOpenPlans: 7
+                }
+
+                LocalStorage.SetUserDailyInfo(JSON.stringify(MOCK))
+                setUserDailyInfo(MOCK)
+                return
+            }
 
             if (userDailyInfoResponse.Success) {
-                // LocalStorage.SetUserDailyInfo(JSON.stringify(MOCK))
                 LocalStorage.SetUserDailyInfo(JSON.stringify(userDailyInfoResponse.Data))
-                // setUserDailyInfo(MOCK)
                 setUserDailyInfo(userDailyInfoResponse.Data)
             }
         }
@@ -83,7 +89,9 @@ export default function UserDailyInfo() {
             return
         }
 
-        setUserDailyInfo(LocalStorage.GetUserDailyInfo())
+        const userDailyInfoLocalStorage = LocalStorage.GetUserDailyInfo()
+
+        if (!IsNil(userDailyInfoLocalStorage)) setUserDailyInfo(userDailyInfoLocalStorage!)
     }, [])
 
     if (IsNil(userDailyInfo))
