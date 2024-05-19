@@ -6,7 +6,7 @@ import ExternalHome from "./screens/Home/ExternalHome"
 import InitialFetch from "./components/InitialFetch"
 import InternalHome from "./screens/Home/InternalHome"
 import LoginScreen from "./screens/Auth/Login"
-import NotFoundScreen from "./screens/Error/NotFound"
+import NotReadyRoute from "./components/NotReadyRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
 import User from "./screens/Users/User"
 import UserRegistryScreen from "./screens/Users/UserRegistry"
@@ -37,7 +37,7 @@ function CreateRoute({ path, element, protectedRoute = true } : CreateRouteProp)
 const router = createBrowserRouter([
     CreateRoute({
         path: "*",
-        element: <NotFoundScreen />,
+        element: <NotReadyRoute />,
         protectedRoute: false
     }),
     CreateRoute({
@@ -74,27 +74,27 @@ const router = createBrowserRouter([
     }),
     CreateRoute({
         path: "/group_registry",
-        element: (<>Rota não desenvolvida</>)
+        element: (<NotReadyRoute />)
     }),
     CreateRoute({
         path: "/group/:groupIdHash",
-        element: (<>Rota não desenvolvida</>)
+        element: (<NotReadyRoute />)
     }),
     CreateRoute({
         path: "/groups",
-        element: (<>Rota não desenvolvida</>)
+        element: (<NotReadyRoute />)
     }),
     CreateRoute({
         path: "/board_registry",
-        element: (<>Rota não desenvolvida</>)
+        element: (<NotReadyRoute />)
     }),
     CreateRoute({
         path: "/board/:boardIdHash",
-        element: (<>Rota não desenvolvida</>)
+        element: (<NotReadyRoute />)
     }),
     CreateRoute({
         path: "/boards",
-        element: (<>Rota não desenvolvida</>)
+        element: (<NotReadyRoute />)
     }),
 ])
 

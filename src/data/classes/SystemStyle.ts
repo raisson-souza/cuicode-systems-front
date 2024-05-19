@@ -14,6 +14,7 @@ export default class SystemStyle
     TerciaryColor : string
     TextColor : string
     StyleName : string
+    OppositeTextColor : string
 
     constructor(data : any) {
         this.HeaderColor = data["HeaderColor"]
@@ -30,5 +31,6 @@ export default class SystemStyle
         this.TerciaryColor = data["TerciaryColor"]
         this.TextColor = data["TextColor"]
         this.StyleName = data["StyleName"]
+        this.OppositeTextColor = data["TextColor"] === 'white' ? 'black' : 'white'
     }
 }
