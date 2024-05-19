@@ -63,10 +63,10 @@ export default abstract class LocalStorage
         localStorage.setItem('authorized_modules_fetch', `${ Date.now() }`)
     }
 
-    static GetAuthorizedModules() : GetUserAuthorizedModulesResponse | null {
+    static GetAuthorizedModules() : GetUserAuthorizedModulesResponse[] | null {
         const authorizedModulesLocalStorage = localStorage.getItem('authorized_modules')
         if (IsNil(authorizedModulesLocalStorage)) return null
 
-        return JSON.parse(authorizedModulesLocalStorage!) as GetUserAuthorizedModulesResponse
+        return JSON.parse(authorizedModulesLocalStorage!) as GetUserAuthorizedModulesResponse[]
     }
 }

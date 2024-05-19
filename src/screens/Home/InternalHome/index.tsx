@@ -36,7 +36,7 @@ export default function InternalHomeScreen() {
 
         const localStorageModules = LocalStorage.GetAuthorizedModules()
 
-        if (!IsNil(localStorageModules)) setModules(localStorageModules)
+        if (!IsNil(localStorageModules)) setModules(localStorageModules!)
     }, [])
 
     return (
