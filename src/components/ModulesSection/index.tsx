@@ -3,9 +3,9 @@ import { Tooltip } from "@mui/material"
 
 import { GetSystemStyle } from "../InitialFetch"
 
-import { GetUserAuthorizedModulesResponse } from "../../services/AuthEndpoints"
-
 import ModulesAssetsSvg from "../../assets/modules/ModulesAssetsSvg"
+
+import { GetUserAuthorizedModulesResponse } from "../../services/types/AuthEndpointsProps"
 
 import "./styles.css"
 
@@ -43,11 +43,11 @@ export default function ModulesSection({
                             },
                             onClick: () => { navigate(`/${ module.moduleUrl }`) }
                         }) }
-                        <Tooltip title={ `Módulo ${ module.ModuleName }` }>
+                        <Tooltip title={ `Módulo ${ module.moduleName }` }>
                             <p>
                                 <b>
                                     <Link to={ `/${ module.moduleUrl }` }>
-                                        { module.ModuleName }
+                                        { module.moduleName }
                                     </Link>
                                 </b>
                             </p>

@@ -6,23 +6,25 @@ import env from "../../config/Env"
 import { GetSystemStyle } from "../InitialFetch"
 
 import LocalStorage from "../../data/classes/LocalStorage"
-import UserEndpoints, { GetUserDailyInfoResponse } from "../../services/UserEndpoints"
+import UserEndpoints from "../../services/UserEndpoints"
 
 import { Base64 } from "../../functions/Formatting/Base64"
 import IsNil from "../../functions/IsNil"
 import ShouldFetch from "../../functions/Routes/ShouldFetch"
 
+import { GetUserDailyInfoResponse } from "../../services/types/UserEndpointsProps"
+
 import "./styles.css"
 
 export default function UserDailyInfo() {
     const [ userDailyInfo, setUserDailyInfo ] = useState<GetUserDailyInfoResponse>({
-        groupsIncluded: [],
-        mySolicitations: [],
-        myDelayedSolicitations: [],
-        userParticipatingChats: 0,
-        userDreams: 0,
-        hestiaTasksThisWeek: 0,
-        hestiaTasksPending: 0,
+        groups: [],
+        solicitations: [],
+        delayedSolicitations: [],
+        chatsNumber: 0,
+        dreamsNumber: 0,
+        hestiaTasksThisWeekNumber: 0,
+        hestiaPendingTasksNumber: 0,
         minervaOpenPlans: 0
     })
     const systemStyle = GetSystemStyle()
@@ -33,7 +35,7 @@ export default function UserDailyInfo() {
 
             if (env.Environment() === 'testing') { // DADOS MOCKADOS!
                 const MOCK : GetUserDailyInfoResponse = {
-                    groupsIncluded: [
+                    groups: [
                         {
                             Id: 12,
                             Name: 'Amigos do Clube'
@@ -43,7 +45,7 @@ export default function UserDailyInfo() {
                             Name: 'Colegas de Trabalho'
                         }
                     ],
-                    mySolicitations: [
+                    solicitations: [
                         {
                             Id: 21,
                             Name: 'Pagar fulana'
@@ -57,16 +59,16 @@ export default function UserDailyInfo() {
                             Name: 'Entrar em contato com organizadores da festa'
                         }
                     ],
-                    myDelayedSolicitations: [
+                    delayedSolicitations: [
                         {
                             Id: 57,
                             Name: 'Levar carro na oficina'
                         }
                     ],
-                    userParticipatingChats: 5,
-                    userDreams: 17,
-                    hestiaTasksThisWeek: 3,
-                    hestiaTasksPending: 1,
+                    chatsNumber: 5,
+                    dreamsNumber: 17,
+                    hestiaTasksThisWeekNumber: 3,
+                    hestiaPendingTasksNumber: 1,
                     minervaOpenPlans: 7
                 }
 
@@ -111,13 +113,13 @@ export default function UserDailyInfo() {
                 }}
             >
                 {
-                    userDailyInfo!.groupsIncluded.length > 0
+                    userDailyInfo!.groups.length > 0
                         ? (
                             <>
                                 <h3>Meus Grupos</h3>
                                 <div className="user-daily-info-group-enclosure">
                                     {
-                                        userDailyInfo.groupsIncluded.map(group => (
+                                        userDailyInfo.groups.map(group => (
                                             <div
                                                 key={ group.Id }
                                                 className="user-daily-info-link"
@@ -144,13 +146,13 @@ export default function UserDailyInfo() {
                 }}
             >
                 {
-                    userDailyInfo.mySolicitations.length > 0
+                    userDailyInfo.solicitations.length > 0
                         ? (
                             <>
                                 <h3>Minhas Solicitações</h3>
                                 <div className="user-daily-info-group-enclosure">
                                     {
-                                        userDailyInfo.mySolicitations.map(solicitation => (
+                                        userDailyInfo.solicitations.map(solicitation => (
                                             <div
                                                 key={ solicitation.Id }
                                                 className="user-daily-info-link"
@@ -175,13 +177,13 @@ export default function UserDailyInfo() {
                 }}
             >
                 {
-                    userDailyInfo.myDelayedSolicitations.length > 0
+                    userDailyInfo.delayedSolicitations.length > 0
                         ? (
                             <>
                                 <h3>Minhas Solicitações Atrasadas</h3>
                                 <div className="user-daily-info-group-enclosure">
                                     {
-                                        userDailyInfo.myDelayedSolicitations.map(delayedSolicitation => (
+                                        userDailyInfo.delayedSolicitations.map(delayedSolicitation => (
                                             <div
                                                 key={ delayedSolicitation.Id }
                                                 className="user-daily-info-link"
@@ -206,23 +208,23 @@ export default function UserDailyInfo() {
                 }}
             >
                 {
-                    userDailyInfo.userParticipatingChats > 0
-                        ? <Link to={"/chats"}><p>Chats que estou incluido: <b>{ userDailyInfo.userParticipatingChats }</b></p></Link>
+                    userDailyInfo.chatsNumber > 0
+                        ? <Link to={"/chats"}><p>Chats que estou incluido: <b>{ userDailyInfo.chatsNumber }</b></p></Link>
                         : <Link to={"/chats"}><p>Nenhum chat.</p></Link>
                 }
                 {
-                    userDailyInfo.userDreams > 0
-                        ? <Link to={"/morfeus"}><p>Meus sonhos: <b>{ userDailyInfo.userDreams }</b></p></Link>
+                    userDailyInfo.dreamsNumber > 0
+                        ? <Link to={"/morfeus"}><p>Meus sonhos: <b>{ userDailyInfo.dreamsNumber }</b></p></Link>
                         : <Link to={"/morfeus"}><p>Nenhum sonho cadastrado.</p></Link>
                 }
                 {
-                    userDailyInfo.hestiaTasksThisWeek > 0
-                        ? <Link to={"/hestia"}><p>Tarefas desta semana: <b>{ userDailyInfo.hestiaTasksThisWeek }</b></p></Link>
+                    userDailyInfo.hestiaTasksThisWeekNumber > 0
+                        ? <Link to={"/hestia"}><p>Tarefas desta semana: <b>{ userDailyInfo.hestiaTasksThisWeekNumber }</b></p></Link>
                         : <Link to={"/hestia"}><p>Nenhuma tarefa para essa semana</p></Link>
                 }
                 {
-                    userDailyInfo.hestiaTasksPending > 0
-                        ? <Link to={"/hestia"}><p>Tarefas atrasadas: <b>{ userDailyInfo.hestiaTasksPending }</b></p></Link>
+                    userDailyInfo.hestiaPendingTasksNumber > 0
+                        ? <Link to={"/hestia"}><p>Tarefas atrasadas: <b>{ userDailyInfo.hestiaPendingTasksNumber }</b></p></Link>
                         : <Link to={"/hestia"}><p>Nenhuma tarefa atrasada</p></Link>
                 }
                 {

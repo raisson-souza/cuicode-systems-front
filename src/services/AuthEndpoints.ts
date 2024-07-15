@@ -1,8 +1,11 @@
 import Endpoints from "./base/Endpoints"
 
-import User from "../data/classes/User"
-
-import ModulesEnum from "../data/enums/ModulesEnum"
+import AuthorizationTypeEnum from "../data/enums/AuthorizationTypeEnum"
+import {
+    GetUserAuthorizedModulesResponse,
+    LoginResponse,
+    RefreshTokenResponse
+} from "./types/AuthEndpointsProps"
 
 type LoginRequestProps = {
     email : string
@@ -11,10 +14,11 @@ type LoginRequestProps = {
 
 export default abstract class AuthEndpoints extends Endpoints
 {
-    /** Realiza a validação de um JWT */
-    static async ValidateJwt(jwt : string) {
-        return await this.Get<ValidateJwtResponse>({
-            url: `/validate_jwt?jwt=${ jwt }`
+    /** Realiza o refresh de um JWT */
+    static async RefreshToken(jwt : string) {
+        return await this.Get<RefreshTokenResponse>({
+            url: `/auth/refresh_token?token=${ jwt }`,
+            authorizationType: AuthorizationTypeEnum.User
         })
     }
 
@@ -25,41 +29,17 @@ export default abstract class AuthEndpoints extends Endpoints
     } : LoginRequestProps) {
         const body = { "email": email, "password": password }
         return await this.Post<LoginResponse>({
-            url: '/login',
-            body: body
+            url: '/auth/login',
+            body: body,
+            authorizationType: AuthorizationTypeEnum.System
         })
     }
 
     /** Captura os módulos disponíveis ao usuário */
     static async GetUserAuthorizedModules() {
         return await this.Get<GetUserAuthorizedModulesResponse[]>({
-            url: '/user_authorized_modules',
-            hasAuthorization: true
+            url: '/auth/user_authorized_modules',
+            authorizationType: AuthorizationTypeEnum.User
         })
     }
-}
-
-type ValidateJwtResponse = {
-    ok : boolean,
-    user : User,
-}
-
-type LoginResponse = {
-    token : string,
-    user : User,
-}
-
-type GetUserAuthorizedModulesResponse = {
-    /** Identificação do módulo */
-    moduleEnum : ModulesEnum
-    /** URL do módulo */
-    moduleUrl : string
-    /** Módulo já acessado (define novidade no frontend) */
-    usedModule : boolean
-    /** Nome do módulo */
-    ModuleName : string
-}
-
-export type {
-    GetUserAuthorizedModulesResponse
 }

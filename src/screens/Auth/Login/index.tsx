@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import FindValue from "../../../functions/FindValue"
-
 import LocalStorage from "../../../data/classes/LocalStorage"
 
 import AuthEndpoints from "../../../services/AuthEndpoints"
@@ -26,8 +24,7 @@ export default function LoginScreen() {
                 return
             }
 
-            const formData = FindValue(response.Data, ["Fields"])
-            setLoginForm(formData)
+            setLoginForm(response.Data)
         }
 
         fetchLoginForm()

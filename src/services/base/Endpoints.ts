@@ -3,29 +3,16 @@ import env from "../../config/Env"
 import LocalStorage from "../../data/classes/LocalStorage"
 import Response from "../../data/classes/Response"
 
-type DefaultRequestProps = {
-    url : string
-    headers? : any
-    hasAuthorization? : boolean
-}
+import AuthorizationTypeEnum from "../../data/enums/AuthorizationTypeEnum"
 
-type GetProps = DefaultRequestProps
-
-type PostProps = {
-    body : any
-} & DefaultRequestProps
-
-type PutProps = PostProps
-
-type DeleteProps = PostProps
-
-type DefaultErrorResponseProps = {
-    data : null
-    errorMessage : string
-    length : number
-    success : boolean
-    action : string
-}
+import {
+    DefaultErrorResponseProps,
+    DeleteProps,
+    GetProps,
+    PostProps,
+    PostRequestProps,
+    PutProps
+} from "./EndpointsProps"
 
 export default abstract class Endpoints
 {
@@ -41,19 +28,19 @@ export default abstract class Endpoints
 
     private static DefaultHeaders = { 'Content-Type': 'application/json' }
 
-    private static MountHeaders = (headers : any, hasAuthorization : boolean) => {
-        return hasAuthorization
-            ? {
-                ...headers,
-                "Authorization": `Bearer ${ LocalStorage.GetToken() }`
-            }
-            : headers
+    private static MountHeaders = (headers : any, authorizationType : AuthorizationTypeEnum) => {
+        return {
+            ...headers,
+            "Authorization": authorizationType === AuthorizationTypeEnum.User
+                ? LocalStorage.GetToken() ?? ""
+                : env.SystemKey()
+        }
     }
 
     static async Get<T>({
         url,
         headers = this.DefaultHeaders,
-        hasAuthorization = false
+        authorizationType
     } : GetProps) {
         try
         {
@@ -61,7 +48,7 @@ export default abstract class Endpoints
                 `${ env.BackendBaseUrl() }${ url }`,
                 {
                     method: 'GET',
-                    headers: this.MountHeaders(headers, hasAuthorization)
+                    headers: this.MountHeaders(headers, authorizationType)
                 }
             )
             .then(async (res) => {
@@ -74,23 +61,16 @@ export default abstract class Endpoints
         }
     }
 
-    private static async PostRequest<T>(
-        method : "POST" | "PUT" | "DELETE",
-        {
-            body,
-            url,
-            headers,
-            hasAuthorization = false
-        } : PostProps
-    ) {
+    private static async PostRequest<T>(props : PostRequestProps) {
         try
         {
+            const { authorizationType, body, method, url, headers } = props
             return await fetch(
                 `${ env.BackendBaseUrl() }${ url }`,
                 {
                     method: method,
                     body: JSON.stringify(body),
-                    headers: this.MountHeaders(headers, hasAuthorization)
+                    headers: this.MountHeaders(headers, authorizationType)
                 }
             )
             .then(async (res) => {
@@ -107,50 +87,44 @@ export default abstract class Endpoints
         url,
         body,
         headers = this.DefaultHeaders,
-        hasAuthorization = false
+        authorizationType
     } : PostProps) {
-        return await this.PostRequest<T>(
-            "POST",
-            {
-                body: body,
-                url: url,
-                headers: headers,
-                hasAuthorization
-            }
-        )
+        return await this.PostRequest<T>({
+            method: "POST",
+            body: body,
+            url: url,
+            headers: headers,
+            authorizationType: authorizationType
+        })
     }
 
     static async Put<T>({
         url,
         body,
         headers = this.DefaultHeaders,
-        hasAuthorization = false
+        authorizationType
     } : PutProps) {
-        return await this.PostRequest<T>(
-            "PUT",
-            {
-                body: body,
-                url: url,
-                headers: headers,
-                hasAuthorization
-            }
-        )
+        return await this.PostRequest<T>({
+            method: "PUT",
+            body: body,
+            url: url,
+            headers: headers,
+            authorizationType: authorizationType
+        })
     }
 
     static async Delete<T>({
         url,
         body,
         headers = this.DefaultHeaders,
-        hasAuthorization = false
+        authorizationType
     } : DeleteProps) {
-        return await this.PostRequest<T>(
-            "DELETE",
-            {
-                body: body,
-                url: url,
-                headers: headers,
-                hasAuthorization
-            }
-        )
+        return await this.PostRequest<T>({
+            method: "DELETE",
+            body: body,
+            url: url,
+            headers: headers,
+            authorizationType: authorizationType
+        })
     }
 }

@@ -7,10 +7,12 @@ import UserDailyInfo from "../../../components/UserDailyInfo"
 
 import LocalStorage from "../../../data/classes/LocalStorage"
 
-import AuthEndpoints, { GetUserAuthorizedModulesResponse } from "../../../services/AuthEndpoints"
+import AuthEndpoints from "../../../services/AuthEndpoints"
 
 import IsNil from "../../../functions/IsNil"
 import ShouldFetch from "../../../functions/Routes/ShouldFetch"
+
+import { GetUserAuthorizedModulesResponse } from "../../../services/types/AuthEndpointsProps"
 
 import "./styles.css"
 

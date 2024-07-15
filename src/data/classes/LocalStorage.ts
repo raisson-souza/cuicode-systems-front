@@ -1,7 +1,7 @@
 import IsNil from "../../functions/IsNil"
 
-import { GetUserAuthorizedModulesResponse } from "../../services/AuthEndpoints"
-import { GetUserDailyInfoResponse } from "../../services/UserEndpoints"
+import { GetUserAuthorizedModulesResponse } from "../../services/types/AuthEndpointsProps"
+import { GetUserDailyInfoResponse } from "../../services/types/UserEndpointsProps"
 
 export default abstract class LocalStorage
 {

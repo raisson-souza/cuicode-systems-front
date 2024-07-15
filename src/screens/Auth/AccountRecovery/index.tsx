@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
 import { GetUserAuth } from "../../../components/ProtectedRoute"
@@ -22,8 +22,6 @@ export default function AccountRecoveryScreen() {
     return (
         <ScreenBox>
             <h1>AccountRecovery</h1>
-            <Link to={'/home'}>InternalHome</Link>
-            <Link to={'/login'}>Login</Link>
         </ScreenBox>
     )
 }
