@@ -13,7 +13,7 @@ export default class User
     PermissionLevelId? : number
     PermissionLevel? : string
     Phone? : string
-    PhotoBase64? : string
+    Photo? : string
     RecoveryEmail? : string
     SexId? : number
     Sex? : string
@@ -31,7 +31,7 @@ export default class User
         this.PermissionLevelId = Number.parseInt(FindValue(data["PermissionLevel"] ?? data["permission_level"], ["Value", "value"]))
         this.PermissionLevel = FindValue(data["PermissionLevel"] ?? data["permission_level"], ["Description", "description"])
         this.Phone = FindValue(data, ["Phone", "phone"])
-        this.PhotoBase64 = FindValue(data, ["PhotoBase64", "photo_base_64"])
+        this.Photo = FindValue(data, ["PhotoBase64", "photo_base_64", "Photo", "photo"])
         this.RecoveryEmail = FindValue(data, ["RecoveryEmail", "recovery_email"])
         this.SexId = Number.parseInt(FindValue(data["Sex"] ?? data["sex"], ["Value", "value"]))
         this.Sex = FindValue(data["Sex"] ?? data["sex"], ["Description", "description"])

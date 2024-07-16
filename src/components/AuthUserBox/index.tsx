@@ -87,7 +87,7 @@ export default function AuthUserBox ({
                 style={ gridAreasStyle }
             >
                 <div id="user_img">
-                    <UserPhoto userName={ userAuth.Name } userPhoto={ userAuth.PhotoBase64 } />
+                    <UserPhoto userName={ userAuth.Name } userPhoto={ userAuth.Photo } />
                 </div>
             </Tooltip>
             <Tooltip
