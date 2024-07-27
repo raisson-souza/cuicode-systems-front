@@ -1,13 +1,8 @@
-import { useLocation, useNavigate } from "react-router-dom"
-
 import { GetSystemStyle } from "../InitialFetch"
-import { GetUserAuth } from "../ProtectedRoute"
 
 import Footer from "../Footer"
 import Header from "../Header"
 
-import DefineLinearGradient from "../../functions/style/DefineLinearGradient"
-import DefineShadow from "../../functions/style/DefineShadowColor"
 import IsNil from "../../functions/IsNil"
 
 import "./styles.css"
@@ -30,19 +25,11 @@ export default function ScreenBox({
     sectionBorderRadius = 0,
 } : ScreenBoxScreenProps) {
     const systemStyle = GetSystemStyle()
-    const location = useLocation().pathname
-    const navigate = useNavigate()
-    const user = GetUserAuth()?.UserAuth
     const hasSection = !IsNil(sectionComponent)
 
     const boxShadow = () => {
-        const [ shadow1 ] = DefineShadow(systemStyle.BackgroundPrimaryColor[1])
+        const [ shadow1 ] = systemStyle.BackgroundShadowColor(1)
         return `inset 5px 5px 10px ${ shadow1 }, inset -5px -5px 10px ${ shadow1 }`
-    }
-
-    const headerClick = () => {
-        if (location === '/' || location === '/home') return
-        navigate(IsNil(user) ? '/' : '/home')
     }
 
     const screenBoxStyle = {
@@ -77,19 +64,12 @@ export default function ScreenBox({
         <div
             className="screen-box"
             style={{
-                background: DefineLinearGradient(systemStyle),
+                background: systemStyle.BackgroundPrimaryColor,
                 boxShadow: boxShadow(),
                 ...screenBoxStyle
             }}
         >
-            <Header hasShadow={ true }>
-                <h1
-                    onClick={ headerClick }
-                    style={{ cursor: 'pointer' }}
-                >
-                    CuiCode Systems
-                </h1>
-            </Header>
+            <Header hasShadow={ true } />
             <main>
                 { section }
                 <div className="main-content">

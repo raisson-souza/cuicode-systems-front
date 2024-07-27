@@ -11,7 +11,6 @@ import { GetUserAuth } from "../ProtectedRoute"
 import UserPhoto from "../UserPhoto"
 
 import { Base64 } from "../../functions/Formatting/Base64"
-import InvertedTextColor from "../../functions/style/InvertedTextColor"
 
 import "./styles.css"
 
@@ -33,7 +32,7 @@ export default function AuthUserBox ({
     const navigate = useNavigate()
 
     // Estilo contrário de cor para o fundo das opções do menu
-    const menuTextColor = { 'color': InvertedTextColor(systemStyle.TextColor) }
+    const menuTextColor = { 'color': systemStyle.OppositeTextColor }
 
     // Elemento âncora referente ao botão do menu
     const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null)

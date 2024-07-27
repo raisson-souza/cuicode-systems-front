@@ -15,7 +15,7 @@ export default function UserPhoto({
         return (
             <Avatar
                 alt={ userName }
-                {...stringAvatar(userName)}
+                {...stringAvatar(userName) }
             >
                 { userName[0] }
             </Avatar>
@@ -51,6 +51,5 @@ function stringToColor(str : string) {
 function stringAvatar(name: string) {
     return {
         "sx": { bgcolor: stringToColor(name) },
-        "children": `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     }
 }

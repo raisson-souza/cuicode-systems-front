@@ -1,5 +1,4 @@
-import DefineShadow from "../../functions/style/DefineShadowColor"
-
+import SystemStyle from "../../data/classes/SystemStyle"
 import { GetSystemStyle } from "../InitialFetch"
 
 import "./styles.css"
@@ -9,25 +8,31 @@ type FooterProps = {
     hasShadow : boolean
 }
 
-const defineBoxShadow = (hasShadow : boolean, screenBackgroundFirstHexStr : string) => {
-    const [ shadow1 ] = DefineShadow(screenBackgroundFirstHexStr)
+type DefineBoxShadowProps = {
+    hasShadow : boolean
+    systemStyle : SystemStyle
+}
+
+const defineBoxShadow = (props : DefineBoxShadowProps) => {
+    const { systemStyle, hasShadow } = props
     return hasShadow
-        ? `5px 5px 20px ${ shadow1 }, -5px -5px 20px ${ shadow1 }`
+        ? `5px 5px 20px ${ systemStyle.BackgroundShadowColor(1) }, -5px -5px 20px ${ systemStyle.BackgroundShadowColor(1) }`
         : 'none'
 }
 
-export default function Footer({
-    children,
-    hasShadow,
-} : FooterProps) {
+export default function Footer(props : FooterProps) {
+    const { children, hasShadow } = props
     const systemStyle = GetSystemStyle()
 
     return (
         <div
             className="footer"
             style={{
-                backgroundColor: systemStyle.FooterColor,
-                boxShadow: defineBoxShadow(hasShadow, systemStyle.BackgroundPrimaryColor[1]),
+                backgroundColor: systemStyle.HeaderColor,
+                boxShadow: defineBoxShadow({
+                    hasShadow: hasShadow,
+                    systemStyle: systemStyle
+                }),
             }}
         >
             { children }

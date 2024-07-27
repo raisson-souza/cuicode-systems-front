@@ -1,13 +1,10 @@
 import SystemStyle from "../../../data/classes/SystemStyle"
 
-import InvertedTextColor from "../../../functions/style/InvertedTextColor"
 import IsNil from "../../../functions/IsNil"
 
 export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.Element | null {
     if (IsNil(systemStyle))
         return null
-
-    const invertedTextColor = InvertedTextColor(systemStyle!.TextColor)
 
     return (
         <>
@@ -17,11 +14,11 @@ export default function GenerateGlobalStyle(systemStyle? : SystemStyle) : JSX.El
                         color: ${ systemStyle!.TextColor };
                     };
                     input {
-                        background-color: ${ invertedTextColor };
+                        background-color: ${ systemStyle!.OppositeTextColor };
                         border-radius: 5px
                     };
                     button {
-                        background-color: ${ invertedTextColor }
+                        background-color: ${ systemStyle!.OppositeTextColor }
                     };
                     li.MuiButtonBase-root {
                         color: black !important;
