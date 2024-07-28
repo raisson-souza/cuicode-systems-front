@@ -56,7 +56,9 @@ export default function LoginScreen() {
     }
 
     return (
-        <ScreenBox>
+        <ScreenBox
+            hasHeaderUserInterationBox={ false }
+        >
             <div className="login-screen">
                 <div className="login-description">
                     <h2>Faça seu Login em CuiCode Systems</h2>

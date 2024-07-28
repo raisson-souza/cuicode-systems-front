@@ -43,10 +43,6 @@ export default function AuthUserBox ({
     const buttonAriaControls = userOptionsMenuOpen ? 'basic-menu' : undefined
     const buttonAriaExpanded = userOptionsMenuOpen ? 'true' : undefined
 
-    const authUserBoxStyle = {
-        background: `linear-gradient(145deg, ${ systemStyle.PrimaryColor }, ${ systemStyle.SecondaryColor })`
-    }
-
     const optHandleClick = (event : any) => {
         const option = Number.parseInt(event.target.value)
 
@@ -79,13 +75,15 @@ export default function AuthUserBox ({
     return (
         <div
             className="auth_user_box"
-            style={ authUserBoxStyle }
+            style={{
+                background: systemStyle.PrimariesLinearGradient()
+            }}
         >
             <Tooltip
                 title="Foto do Usuário"
                 style={ gridAreasStyle }
             >
-                <div id="user_img">
+                <div id="user-photo">
                     <UserPhoto userName={ userAuth.Name } userPhoto={ userAuth.Photo } />
                 </div>
             </Tooltip>
@@ -93,10 +91,15 @@ export default function AuthUserBox ({
                 title="Nome do Usuário"
                 style={ gridAreasStyle }
             >
-                <p id="user_use">{ userAuth.Username }</p>
+                <p
+                    style={{
+                        fontSize: 20
+                    }}
+                >
+                    <b>{ userAuth.Username }</b>
+                </p>
             </Tooltip>
             <div
-                id="user_opt"
                 style={ gridAreasStyle }
             >
                 <Button

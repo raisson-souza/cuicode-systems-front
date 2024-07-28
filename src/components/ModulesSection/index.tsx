@@ -20,12 +20,7 @@ export default function ModulesSection({
     const navigate = useNavigate()
 
     return (
-        <div
-            className="modules-section"
-            style={{
-                width: '100%',
-            }}
-        >
+        <div className="modules-section">
             {
                 modules.map((module, i) => (
                     <div
@@ -36,17 +31,17 @@ export default function ModulesSection({
                             moduleEnum: module.moduleEnum,
                             fill: systemStyle.TextColor,
                             cursor: "pointer",
-                            customStyle: {
-                                padding: 3,
-                                backgroundColor: systemStyle.PrimaryColor,
-                                borderRadius: 10
-                            },
                             onClick: () => { navigate(`/${ module.moduleUrl }`) }
                         }) }
                         <Tooltip title={ `Módulo ${ module.moduleName }` }>
                             <p>
                                 <b>
-                                    <Link to={ `/${ module.moduleUrl }` }>
+                                    <Link
+                                        to={ `/${ module.moduleUrl }` }
+                                        style={{
+                                            textDecoration: "none"
+                                        }}
+                                    >
                                         { module.moduleName }
                                     </Link>
                                 </b>

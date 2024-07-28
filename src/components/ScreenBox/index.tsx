@@ -13,7 +13,7 @@ type ScreenBoxScreenProps = {
     footerComponent? : JSX.Element | JSX.Element[]
     sectionComponent? : JSX.Element | JSX.Element[]
     sectionWidth? : number
-    sectionBorderRadius? : number
+    hasHeaderUserInterationBox? : boolean
 }
 
 export default function ScreenBox({
@@ -22,15 +22,10 @@ export default function ScreenBox({
     footerComponent = <></>,
     sectionComponent,
     sectionWidth = 10,
-    sectionBorderRadius = 0,
+    hasHeaderUserInterationBox = true
 } : ScreenBoxScreenProps) {
     const systemStyle = GetSystemStyle()
     const hasSection = !IsNil(sectionComponent)
-
-    const boxShadow = () => {
-        const [ shadow1 ] = systemStyle.BackgroundShadowColor(1)
-        return `inset 5px 5px 10px ${ shadow1 }, inset -5px -5px 10px ${ shadow1 }`
-    }
 
     const screenBoxStyle = {
         "justifyContent": hasFooter
@@ -46,13 +41,12 @@ export default function ScreenBox({
         )
         : <></>
 
-    const section = hasSection
+    const section = hasSection // TODO: remover opcionalidade de componente para a section e deixar fixado o ModulesSection
         ? (
             <section
                 style={{
-                    backgroundColor: systemStyle.TerciaryColor,
-                    width: `${ sectionWidth }%`,
-                    borderRadius: sectionBorderRadius,
+                    backgroundColor: systemStyle.ModulesColumnColor,
+                    // width: `${ sectionWidth }%`,
                 }}
             >
                 { sectionComponent }
@@ -65,14 +59,20 @@ export default function ScreenBox({
             className="screen-box"
             style={{
                 background: systemStyle.BackgroundPrimaryColor,
-                boxShadow: boxShadow(),
                 ...screenBoxStyle
             }}
         >
-            <Header hasShadow={ true } />
+            <Header
+                hasHeaderUserInterationBox={ hasHeaderUserInterationBox }
+            />
             <main>
                 { section }
-                <div className="main-content">
+                <div
+                    className="main-content"
+                    style={{
+                        backgroundColor: systemStyle.BackgroundSecondaryColor
+                    }}
+                >
                     { children }
                 </div>
             </main>

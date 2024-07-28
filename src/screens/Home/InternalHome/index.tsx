@@ -44,7 +44,6 @@ export default function InternalHomeScreen() {
     return (
         <ScreenBox
             sectionComponent={ ModulesSection({ modules: modules }) }
-            sectionBorderRadius={ 30 }
         >
             <main id="internal-home">
                 <header>

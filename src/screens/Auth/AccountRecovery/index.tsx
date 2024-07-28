@@ -20,7 +20,9 @@ export default function AccountRecoveryScreen() {
     }, [])
 
     return (
-        <ScreenBox>
+        <ScreenBox
+            hasHeaderUserInterationBox={ false }
+        >
             <h1>AccountRecovery</h1>
         </ScreenBox>
     )

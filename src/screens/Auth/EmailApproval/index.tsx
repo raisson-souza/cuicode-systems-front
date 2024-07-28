@@ -1,11 +1,11 @@
 import ScreenBox from "../../../components/ScreenBox"
 
-export default function UserRegistryScreen() {
+export default function EmailApprovalScreen() {
     return (
         <ScreenBox
             hasHeaderUserInterationBox={ false }
         >
-            <h1>UserRegistry</h1>
+            <h1>EmailApprovalScreen</h1>
         </ScreenBox>
     )
 }

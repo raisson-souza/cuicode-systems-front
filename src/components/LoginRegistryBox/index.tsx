@@ -12,7 +12,7 @@ export default function LoginRegistryBox() {
         <div
             className="login_registry_box"
             style={{
-                background: `linear-gradient(145deg, ${ systemStyle.PrimaryColor }, ${ systemStyle.SecondaryColor })`
+                background: systemStyle.PrimariesLinearGradient()
             }}
         >
             <div
@@ -24,7 +24,13 @@ export default function LoginRegistryBox() {
                     navigate('/login')
                 } }
             >
-                <h4>LOGIN</h4>
+                <p
+                    style={{
+                        fontSize: 15
+                    }}
+                >
+                    <b>LOGIN</b>
+                </p>
             </div>
             <div
                 style={{
@@ -35,7 +41,13 @@ export default function LoginRegistryBox() {
                     navigate('/user_registry')
                 } }
             >
-                <h4>REGISTRAR-SE</h4>
+                <p
+                    style={{
+                        fontSize: 15
+                    }}
+                >
+                    <b>REGISTRAR-SE</b>
+                </p>
             </div>
         </div>
     )

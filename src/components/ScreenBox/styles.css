@@ -6,15 +6,12 @@
   flex-shrink: 1;
   flex-wrap: nowrap;
   min-height: 100vh;
-  -webkit-animation: ScreenBoxAnimation 20s ease infinite;
-  animation: ScreenBoxAnimation 20s ease infinite;
 }
 .screen-box main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  margin: 10px;
   flex-grow: 1;
 }
 .screen-box main .main-content {
@@ -23,38 +20,15 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 10px;
+  margin: 10px 0 0 10px;
   flex-grow: 1;
 }
 .screen-box section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
-@-webkit-keyframes ScreenBoxAnimation {
-  0% {
-    background-position: 96% 0%;
-  }
-  50% {
-    background-position: 5% 100%;
-  }
-  100% {
-    background-position: 96% 0%;
-  }
-}
-@keyframes ScreenBoxAnimation {
-  0% {
-    background-position: 96% 0%;
-  }
-  50% {
-    background-position: 5% 100%;
-  }
-  100% {
-    background-position: 96% 0%;
-  }
-}
 @media (max-width: 900px) {
   .screen-box main {
     flex-direction: column;

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 
 import AccountRecoveryScreen from "./screens/Auth/AccountRecovery"
 import DefaultError from "./screens/Error/DefaultError"
+import EmailApprovalScreen from "./screens/Auth/EmailApproval"
 import ExternalHome from "./screens/Home/ExternalHome"
 import InitialFetch from "./components/InitialFetch"
 import InternalHome from "./screens/Home/InternalHome"
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
     CreateRoute({
         path: "/account_recovery",
         element: <AccountRecoveryScreen />,
+        protectedRoute: false
+    }),
+    CreateRoute({
+        path: "/email_approval",
+        element: <EmailApprovalScreen />,
         protectedRoute: false
     }),
     CreateRoute({

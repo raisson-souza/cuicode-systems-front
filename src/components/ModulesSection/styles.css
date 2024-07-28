@@ -7,8 +7,6 @@
   text-align: center;
   padding: 10px;
   gap: 20px;
-  border-radius: 10px;
-  margin: 10px;
 }
 .modules-section .module {
   display: flex;
@@ -17,7 +15,6 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 5px;
 }
 
 @media (max-width: 900px) {

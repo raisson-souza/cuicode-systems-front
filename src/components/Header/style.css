@@ -2,10 +2,19 @@ header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-radius: 0px 0px 20px 20px;
+}
+header #logo-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: min-content;
+}
+header #logo-header img {
+  width: 90px;
 }
 
 @media (max-width: 700px) {
