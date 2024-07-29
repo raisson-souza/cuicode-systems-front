@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Tooltip } from "@mui/material"
 
 import { GetSystemStyle } from "../InitialFetch"
@@ -18,14 +18,33 @@ export default function ModulesSection({
 } : ModulesSectionProps) {
     const systemStyle = GetSystemStyle()
     const navigate = useNavigate()
+    const actualModuleName = useLocation().pathname.replace("/", "")
+    const actualModuleId : number = modules.findIndex(module => {
+        return module.moduleUrl === actualModuleName
+    })
+
+    const chosedModuleStyle = {
+        "border": `1px solid ${ systemStyle.PrimaryColor }`,
+        "borderRadius": '5px'
+    }
 
     return (
-        <div className="modules-section">
+        <div
+            className="modules-section"
+            style={{
+                boxShadow: systemStyle.DefineBasicShadow()
+            }}
+        >
             {
                 modules.map((module, i) => (
                     <div
                         key={ i }
                         className="module"
+                        style={ 
+                            actualModuleId === i
+                                ? chosedModuleStyle
+                                : {}
+                        }
                     >
                         { ModulesAssetsSvg({
                             moduleEnum: module.moduleEnum,

@@ -38,11 +38,14 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
+            .main-content {
+                margin: 10px 0 0 0;
+            }
         }
 
         section {
-            margin-top: 15px;
-            width: 75% !important;
+            width: 100% !important;
             flex-wrap: wrap;
         }
     }

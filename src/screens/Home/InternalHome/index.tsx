@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
 import { GetUserAuth } from "../../../components/ProtectedRoute"
-import ModulesSection from "../../../components/ModulesSection"
 import ScreenBox from "../../../components/ScreenBox"
 import UserDailyInfo from "../../../components/UserDailyInfo"
 
@@ -18,7 +17,8 @@ import "./styles.css"
 
 export default function InternalHomeScreen() {
     // TODO: armazenar no context global e tratar com ShouldFetch
-    const [ modules, setModules ] = useState<GetUserAuthorizedModulesResponse[]>([])
+    // eslint-disable-next-line
+    const [ _, setModules ] = useState<GetUserAuthorizedModulesResponse[]>([])
     const userAuth = GetUserAuth()
 
     useEffect(() => {
@@ -42,9 +42,7 @@ export default function InternalHomeScreen() {
     }, [])
 
     return (
-        <ScreenBox
-            sectionComponent={ ModulesSection({ modules: modules }) }
-        >
+        <ScreenBox>
             <main id="internal-home">
                 <header>
                     <h2>Bem { userAuth?.UserAuth.Sex === "male" ? "vindo" : "vinda" } de volta, { userAuth?.UserAuth.Name }!</h2>

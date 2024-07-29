@@ -44,6 +44,7 @@ export default function Header(props : HeaderProps) {
         <header
             style={{
                 backgroundColor: systemStyle.HeaderColor,
+                boxShadow: systemStyle.DefineBasicShadow()
             }}
         >
             <div id="logo-header">

@@ -1,5 +1,3 @@
-import IsNil from "../../functions/IsNil"
-
 export default class SystemStyle
 {
     StyleName : string
@@ -115,68 +113,72 @@ export default class SystemStyle
         }
     }
 
-    /** Retorna css de sombra para as cores de background. */
-    BackgroundShadowColor(backgroundColor = 1 | 2) {
-        const hexCaracter = this.GetFirstHexCaracter(backgroundColor === 1 ? this.BackgroundPrimaryColor : this.BackgroundSecondaryColor)
-        switch (hexCaracter) {
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-                return ['#000', '#818181']
-            case '9':
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-                return ['#bebebe', '#ffffff']
-            default:
-                return ['#bebebe', '#ffffff']
-        }
-    }
+    // /** Retorna css de sombra para as cores de background. */
+    // BackgroundShadowColor(backgroundColor = 1 | 2) {
+    //     const hexCaracter = this.GetFirstHexCaracter(backgroundColor === 1 ? this.BackgroundPrimaryColor : this.BackgroundSecondaryColor)
+    //     switch (hexCaracter) {
+    //         case '1':
+    //         case '2':
+    //         case '3':
+    //         case '4':
+    //         case '5':
+    //         case '6':
+    //         case '7':
+    //         case '8':
+    //             return ['#000', '#818181']
+    //         case '9':
+    //         case 'A':
+    //         case 'B':
+    //         case 'C':
+    //         case 'D':
+    //         case 'E':
+    //         case 'F':
+    //             return ['#bebebe', '#ffffff']
+    //         default:
+    //             return ['#bebebe', '#ffffff']
+    //     }
+    // }
 
-    /** Retorna css de sombra para as cores primárias. */
-    PrimariesShadowColor(primaryColor = 1 | 2 | 3) {
-        const hexCaracter = this.GetFirstHexCaracter(
-            primaryColor === 1
-                ? this.PrimaryColor
-                : primaryColor === 2
-                    ? this.SecondaryColor
-                    : this.TerciaryColor
-        )
-        switch (hexCaracter) {
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-                return ['#000', '#818181']
-            case '9':
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-                return ['#bebebe', '#ffffff']
-            default:
-                return ['#bebebe', '#ffffff']
-        }
-    }
+    // /** Retorna css de sombra para as cores primárias. */
+    // PrimariesShadowColor(primaryColor = 1 | 2 | 3) {
+    //     const hexCaracter = this.GetFirstHexCaracter(
+    //         primaryColor === 1
+    //             ? this.PrimaryColor
+    //             : primaryColor === 2
+    //                 ? this.SecondaryColor
+    //                 : this.TerciaryColor
+    //     )
+    //     switch (hexCaracter) {
+    //         case '1':
+    //         case '2':
+    //         case '3':
+    //         case '4':
+    //         case '5':
+    //         case '6':
+    //         case '7':
+    //         case '8':
+    //             return ['#000', '#818181']
+    //         case '9':
+    //         case 'A':
+    //         case 'B':
+    //         case 'C':
+    //         case 'D':
+    //         case 'E':
+    //         case 'F':
+    //             return ['#bebebe', '#ffffff']
+    //         default:
+    //             return ['#bebebe', '#ffffff']
+    //     }
+    // }
 
-    /** Define uma cor de sombra correspondente a uma ou duas cores. */
-    DefineShadow(color1 : string, color2? : string) {
-        return IsNil(color2)
-            ? `5px 5px 10px ${ color1 }, -5px -5px 10px ${ color1 }`
-            : `5px 5px 10px ${ color1 }, -5px -5px 10px ${ color2 }`
+    // /** Define uma cor de sombra correspondente a uma ou duas cores. */
+    // DefineShadow(color1 : string, color2? : string) {
+    //     return IsNil(color2)
+    //         ? `5px 5px 10px ${ color1 }, -5px -5px 10px ${ color1 }`
+    //         : `5px 5px 10px ${ color1 }, -5px -5px 10px ${ color2 }`
+    // }
+
+    DefineBasicShadow(color : string =  "#000000") {
+        return `0px 0px 15px 0px ${ color }`
     }
 }

@@ -1,4 +1,4 @@
-import SystemStyle from "../../data/classes/SystemStyle"
+// import SystemStyle from "../../data/classes/SystemStyle"
 import { GetSystemStyle } from "../InitialFetch"
 
 import "./styles.css"
@@ -8,18 +8,19 @@ type FooterProps = {
     hasShadow : boolean
 }
 
-type DefineBoxShadowProps = {
-    hasShadow : boolean
-    systemStyle : SystemStyle
-}
+// type DefineBoxShadowProps = {
+//     hasShadow : boolean
+//     systemStyle : SystemStyle
+// }
 
-const defineBoxShadow = (props : DefineBoxShadowProps) => {
-    const { systemStyle, hasShadow } = props
-    return hasShadow
-        ? `5px 5px 20px ${ systemStyle.BackgroundShadowColor(1) }, -5px -5px 20px ${ systemStyle.BackgroundShadowColor(1) }`
-        : 'none'
-}
+// const defineBoxShadow = (props : DefineBoxShadowProps) => {
+//     const { systemStyle, hasShadow } = props
+//     return hasShadow
+//         ? `5px 5px 20px ${ systemStyle.BackgroundShadowColor(1) }, -5px -5px 20px ${ systemStyle.BackgroundShadowColor(1) }`
+//         : 'none'
+// }
 
+/** DEPRECATED! */
 export default function Footer(props : FooterProps) {
     const { children, hasShadow } = props
     const systemStyle = GetSystemStyle()
@@ -29,10 +30,10 @@ export default function Footer(props : FooterProps) {
             className="footer"
             style={{
                 backgroundColor: systemStyle.HeaderColor,
-                boxShadow: defineBoxShadow({
-                    hasShadow: hasShadow,
-                    systemStyle: systemStyle
-                }),
+                // boxShadow: defineBoxShadow({
+                //     hasShadow: hasShadow,
+                //     systemStyle: systemStyle
+                // }),
             }}
         >
             { children }
