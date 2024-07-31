@@ -24,6 +24,8 @@ type InitialFetchProps = {
 }
 
 export default function InitialFetch({ children } : InitialFetchProps) {
+    useEffect(() => { document.title = "CuiCode Systems" }, [])
+
     const [ globalProps, setGlobalProps ] = useState<GlobalPropsType | null>(null)
     let globalStyle = GenerateGlobalStyle(globalProps?.systemStyle)
 

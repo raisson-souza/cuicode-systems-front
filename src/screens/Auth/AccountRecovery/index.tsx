@@ -7,6 +7,8 @@ import ScreenBox from "../../../components/ScreenBox"
 import IsNil from "../../../functions/IsNil"
 
 export default function AccountRecoveryScreen() {
+    useEffect(() => { document.title = "CuiCode Systems - Recuperação de Conta" }, [])
+
     const location = useLocation().pathname
     const navigate = useNavigate()
     const user = GetUserAuth()?.UserAuth

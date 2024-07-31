@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 import NotFoundScreen from "../../Error/NotFound"
@@ -12,6 +13,8 @@ export default function UserScreen() {
             useParams<{ userIdHash: string }>().userIdHash
         )
     )
+
+    useEffect(() => { document.title = `CuiCode Systems - Usuário ${ userId }` }, [userId])
 
     if (IsNil(userId) || Number.isNaN(userId))
         return <NotFoundScreen msg="Usuário não encontrado!" />

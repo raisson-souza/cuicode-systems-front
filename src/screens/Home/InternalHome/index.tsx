@@ -24,6 +24,7 @@ import { GetUserAuthorizedModulesResponse } from "../../../services/types/AuthEn
 import "./styles.css"
 
 export default function InternalHomeScreen() {
+    useEffect(() => { document.title = "CuiCode Systems - Home" }, [])
     // TODO: armazenar no context global e tratar com ShouldFetch
     // eslint-disable-next-line
     const [ _, setModules ] = useState<GetUserAuthorizedModulesResponse[]>([])

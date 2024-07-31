@@ -1,6 +1,10 @@
+import { useEffect } from "react"
+
 import ScreenBox from "../../../components/ScreenBox"
 
 export default function SystemUnderMaintenceScreen() {
+    useEffect(() => { document.title = "CuiCode Systems - Em Manutenção!" }, [])
+
     return (
         <ScreenBox
             hasHeaderUserInterationBox={ false }

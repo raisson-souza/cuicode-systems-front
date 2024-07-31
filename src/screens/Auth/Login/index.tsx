@@ -12,6 +12,8 @@ import ScreenBox from "../../../components/ScreenBox"
 import "./styles.css"
 
 export default function LoginScreen() {
+    useEffect(() => { document.title = "CuiCode Systems - Login" }, [])
+
     const [ loginForm, setLoginForm ] = useState<any>(null)
     const navigate = useNavigate()
 

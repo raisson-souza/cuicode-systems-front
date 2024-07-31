@@ -1,6 +1,10 @@
+import { useEffect } from "react"
+
 import ScreenBox from "../../../components/ScreenBox"
 
 export default function UserRegistryScreen() {
+    useEffect(() => { document.title = "CuiCode Systems - Cadastro" }, [])
+
     return (
         <ScreenBox
             hasHeaderUserInterationBox={ false }
