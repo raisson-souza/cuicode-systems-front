@@ -3,6 +3,8 @@ import IsNil from "../../functions/IsNil"
 import { GetUserAuthorizedModulesResponse } from "../../services/types/AuthEndpointsProps"
 import { GetUserDailyInfoResponse } from "../../services/types/UserEndpointsProps"
 
+import User from "./User"
+
 export default abstract class LocalStorage
 {
     static GetToken() {
@@ -68,5 +70,17 @@ export default abstract class LocalStorage
         if (IsNil(authorizedModulesLocalStorage)) return null
 
         return JSON.parse(authorizedModulesLocalStorage!) as GetUserAuthorizedModulesResponse[]
+    }
+
+    static SetLastRegisteredUser(user : User) {
+        localStorage.setItem('last_registered_user', JSON.stringify(user))
+        localStorage.setItem('last_registered_user_fetch', `${ Date.now() }`)
+    }
+
+    static GetLastRegisteredUser() : User | null {
+        const user = localStorage.getItem('last_registered_user')
+        if (IsNil(user)) return null
+
+        return JSON.parse(user!) as User
     }
 }

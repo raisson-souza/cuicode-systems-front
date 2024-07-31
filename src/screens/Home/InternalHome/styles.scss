@@ -1,10 +1,22 @@
-main {
-    display: flex;
+#internal-home {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "gre gre gre"
+        "dai dai lev"
+        "dai dai las"
+        "dai dai con";
     justify-content: center;
     align-items: center;
+    grid-auto-flow: column;
+    margin-bottom: 10px;
 
     header {
+        align-self: center;
+        justify-self: center;
         display: flex;
+        grid-area: gre;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -12,12 +24,56 @@ main {
         text-wrap: nowrap;
         width: fit-content;
     }
-}
 
-@media (max-width: 900px){
-    #internal-home {
+    #user-daily-info, #user-level, #last-registered-user, #contacts {
+        align-self: center;
+        justify-self: center;
+    }
+
+    #user-level, #last-registered-user, #contacts {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 30px;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 15px;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    #user-daily-info {
+        grid-area: dai;
+        width: 75%;
+    }
+
+    #user-level {
+        grid-area: lev;
+        flex-direction: row !important;
+    }
+
+    #last-registered-user {
+        grid-area: las;
+
+        #last-registered-user-content {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+
+    #contacts {
+        grid-area: con;
+    }
+}
+
+@media (max-width: 800px){
+    #internal-home {
+        display: flex;
+        flex-direction: column;
     }
 }

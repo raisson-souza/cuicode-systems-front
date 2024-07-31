@@ -1,6 +1,7 @@
 import DefaultSystemStyle from "../data/defaultStyle"
 
 import SystemStyle from "../data/classes/SystemStyle"
+import User from "../data/classes/User"
 import Endpoints from "./base/Endpoints"
 
 import AuthorizationTypeEnum from "../data/enums/AuthorizationTypeEnum"
@@ -29,6 +30,13 @@ export default abstract class SystemEndpoints extends Endpoints
     static async GetForm(form : string) {
         return await this.Get<any>({
             url: `/system/get_form/${ form }`,
+            authorizationType: AuthorizationTypeEnum.System
+        })
+    }
+
+    static async GetLastRegisteredUser() {
+        return await this.Get<User>({
+            url: "/system/last_registered_user",
             authorizationType: AuthorizationTypeEnum.System
         })
     }

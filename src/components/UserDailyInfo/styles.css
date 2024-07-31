@@ -5,27 +5,36 @@
   padding: 15px;
   border-radius: 10px;
 }
+.user-daily-info #user-daily-info-title {
+  align-self: center;
+  justify-self: center;
+}
 .user-daily-info a {
   text-decoration: none;
 }
-.user-daily-info .user-daily-info-group {
+.user-daily-info .user-daily-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.user-daily-info .user-daily-info-content .user-daily-info-group {
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 15px;
   border-radius: 10px;
 }
-.user-daily-info .user-daily-info-group .user-daily-info-group-enclosure {
+.user-daily-info .user-daily-info-content .user-daily-info-group .user-daily-info-group-enclosure {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-.user-daily-info .user-daily-info-link {
+.user-daily-info .user-daily-info-content .user-daily-info-link {
   padding: 10px;
   width: fit-content;
   border-radius: 10px;
 }
-.user-daily-info .user-daily-info-numbers {
+.user-daily-info .user-daily-info-content .user-daily-info-numbers {
   gap: 10px !important;
   width: fit-content;
   align-self: center;
