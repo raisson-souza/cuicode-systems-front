@@ -46,8 +46,10 @@ export default abstract class LocalStorage
         localStorage.removeItem('user_daily_info_fetch')
         localStorage.removeItem('authorized_modules')
         localStorage.removeItem('authorized_modules_fetch')
-        localStorage.removeItem('last_registered_user')
-        localStorage.removeItem('last_registered_user_fetch')
+        // Informações do último usuário NÃO removidas no processo de logoff devido a não necessidade
+        // de reload das mesmas, tendo em vista que não compete ao mesmo usuário
+        // localStorage.removeItem('last_registered_user')
+        // localStorage.removeItem('last_registered_user_fetch')
     }
 
     static SetUserDailyInfo(userDailyInfo : string) {
