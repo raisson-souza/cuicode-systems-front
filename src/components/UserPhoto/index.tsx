@@ -5,17 +5,23 @@ import IsNil from "../../functions/IsNil"
 type UserPhotoProps = {
     userName? : string
     userPhoto? : string | null
+    onClick? : () => void
+    pointerCursor? : boolean
 }
 
 export default function UserPhoto({
     userName = "",
     userPhoto,
+    onClick = () => {},
+    pointerCursor = false
 } : UserPhotoProps) {
     if (IsNil(userPhoto)) {
         return (
             <Avatar
                 alt={ userName }
                 {...stringAvatar(userName) }
+                onClick={ onClick }
+                style={{ "cursor": pointerCursor ? "pointer" : "auto" }}
             >
                 { userName[0] }
             </Avatar>
@@ -26,6 +32,8 @@ export default function UserPhoto({
         <Avatar
             alt={ userName }
             src={ `data:image/png;base64, ${ userPhoto! }` }
+            onClick={ onClick }
+            style={{ "cursor": pointerCursor ? "pointer" : "auto" }}
         />
     )
 }

@@ -46,6 +46,8 @@ export default abstract class LocalStorage
         localStorage.removeItem('user_daily_info_fetch')
         localStorage.removeItem('authorized_modules')
         localStorage.removeItem('authorized_modules_fetch')
+        localStorage.removeItem('last_registered_user')
+        localStorage.removeItem('last_registered_user_fetch')
     }
 
     static SetUserDailyInfo(userDailyInfo : string) {

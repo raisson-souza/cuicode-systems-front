@@ -15,6 +15,7 @@ import User from "../../../data/classes/User"
 import AuthEndpoints from "../../../services/AuthEndpoints"
 import SystemEndpoints from "../../../services/SystemEndpoints"
 
+import { Base64 } from "../../../functions/Formatting/Base64"
 import IsNil from "../../../functions/IsNil"
 import PermissionLevelFormatter from "../../../functions/Formatting/PermissionLevelFormatter"
 import ShouldFetch from "../../../functions/Routes/ShouldFetch"
@@ -57,7 +58,11 @@ export default function InternalHomeScreen() {
             time: 5,
         })) {
             fetchModules()
-            return
+        }
+        else
+        {
+            const localStorageModules = LocalStorage.GetAuthorizedModules()
+            if (!IsNil(localStorageModules)) setModules(localStorageModules!)
         }
         if (ShouldFetch({ // TODO: Refatorar conforme issue 20
             key: 'last_registered_user',
@@ -65,14 +70,12 @@ export default function InternalHomeScreen() {
             timeType: "hour"
         })) {
             fetchLastRegisteredUser()
-            return
         }
-
-        const localStorageModules = LocalStorage.GetAuthorizedModules()
-        const localLastRegisteredUser = LocalStorage.GetLastRegisteredUser()
-
-        if (!IsNil(localStorageModules)) setModules(localStorageModules!)
-        if (!IsNil(localLastRegisteredUser)) setLastRegisteredUser(localLastRegisteredUser!)
+        else
+        {
+            const localLastRegisteredUser = LocalStorage.GetLastRegisteredUser()
+            if (!IsNil(localLastRegisteredUser)) setLastRegisteredUser(localLastRegisteredUser!)
+        }
     }, [])
 
     const modalButtonsStyle = {
@@ -92,6 +95,8 @@ export default function InternalHomeScreen() {
             ? "pointer"
             : "auto"
     }
+
+    const lastRegisteredUserOnClick = () => { navigate(`/user/${ Base64.ToBase64(`${ lastRegisteredUser?.Id }`)}`) }
 
     return (
         <ScreenBox>
@@ -127,10 +132,17 @@ export default function InternalHomeScreen() {
                                 : (
                                     <>
                                         <UserPhoto
-                                            userName={ lastRegisteredUser?.Name }
-                                            userPhoto={ lastRegisteredUser?.Photo }
+                                            userName={ lastRegisteredUser!.Name }
+                                            userPhoto={ lastRegisteredUser!.Photo }
+                                            onClick={ lastRegisteredUserOnClick }
+                                            pointerCursor
                                         />
-                                        <p><b>{ lastRegisteredUser?.Username }</b></p>
+                                        <p
+                                            onClick={ lastRegisteredUserOnClick }
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            <b>{ lastRegisteredUser?.Username }</b>
+                                        </p>
                                     </>
                                 )
                         }
