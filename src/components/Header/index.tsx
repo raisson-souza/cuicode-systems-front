@@ -36,8 +36,8 @@ export default function Header(props : HeaderProps) {
     }
 
     const headerClick = () => {
-        if (location === '/' || location === '/home') return
-        navigate(IsNil(user) ? '/' : '/home')
+        if (location === "home") return
+        navigate("/home")
     }
 
     return (
@@ -47,18 +47,16 @@ export default function Header(props : HeaderProps) {
                 boxShadow: systemStyle.DefineBasicShadow()
             }}
         >
-            <div id="logo-header">
+            <div
+                id="logo-header"
+                onClick={ headerClick }
+                style={{ cursor: 'pointer' }}
+            >
                 <img
                     src={ systemStyle.GetLogoPath() }
                     alt="Logo CuiCode Systems"
                 />
-                <p
-                    onClick={ headerClick }
-                    style={{
-                        fontSize: 24,
-                        cursor: 'pointer'
-                    }}
-                >
+                <p style={{ fontSize: 24 }}>
                     <b>CuiCode<br />Systems</b>
                 </p>
             </div>
