@@ -11,11 +11,17 @@ import IsNil from "../../functions/IsNil"
 import AuthEndpoints from "../../services/AuthEndpoints"
 
 type ProtectedRouteContextType = {
-    UserAuth : User,
-    Token : string,
+    userAuth : User | null,
+    setUserAuth : React.Dispatch<React.SetStateAction<User | null>>
+    token : string | null,
+    setToken : React.Dispatch<React.SetStateAction<string | null>>
 }
 
-const ProtectedRouteContext = createContext<ProtectedRouteContextType | null>(null)
+const ProtectedRouteContext = createContext<ProtectedRouteContextType | undefined>(undefined)
+
+export function GetProtectedRouteContext() {
+    return useContext(ProtectedRouteContext)
+}
 
 type ProtectedRouteProps = {
     children : JSX.Element
@@ -23,7 +29,16 @@ type ProtectedRouteProps = {
 
 export default function ProtectedRoute({ children } : ProtectedRouteProps) {
     const navigate = useNavigate()
-    const [ protectedRouteContext, setProtectedRouteContext ] = useState<ProtectedRouteContextType | null>(null)
+
+    const [ userAuth, setUserAuth ] = useState<User | null>(null)
+    const [ token, setToken ] = useState<string | null>(null)
+
+    const protectedRouteContext : ProtectedRouteContextType = {
+        userAuth: userAuth,
+        setUserAuth: setUserAuth,
+        token: token,
+        setToken: setToken
+    }
 
     useEffect(() => {
         /** Redireciona para a tela de login. */
@@ -63,10 +78,8 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
                     isLogged = true
                     token = refreshTokenResponse.Data.newToken
                     LocalStorage.SetToken(token)
-                    setProtectedRouteContext({
-                        Token: token!,
-                        UserAuth: new User(refreshTokenResponse.Data.user)
-                    })
+                    setUserAuth(new User(refreshTokenResponse.Data.user))
+                    setToken(token)
                     return
                 }
             }
@@ -86,11 +99,8 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
                     isLogged = true
                     token = loginResponse.Data.token
                     LocalStorage.SetToken(token)
-
-                    setProtectedRouteContext({
-                        Token: token!,
-                        UserAuth: new User(loginResponse.Data.user)
-                    })
+                    setUserAuth(new User(loginResponse.Data.user))
+                    setToken(token)
                     return
                 }
             }
@@ -100,7 +110,8 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
         }
 
         PerformAuthentication()
-    }, [navigate])
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <ProtectedRouteContext.Provider value={ protectedRouteContext }>
@@ -109,6 +120,11 @@ export default function ProtectedRoute({ children } : ProtectedRouteProps) {
     )
 }
 
-function GetUserAuth() { return useContext(ProtectedRouteContext) }
+function GetUserAuth() { return useContext(ProtectedRouteContext)?.userAuth }
 
-export { GetUserAuth }
+function GetUserToken() { return useContext(ProtectedRouteContext)?.token }
+
+export {
+    GetUserAuth,
+    GetUserToken,
+}

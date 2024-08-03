@@ -30,7 +30,7 @@ export default function LoginScreen() {
         }
 
         fetchLoginForm()
-    }, [navigate])
+    }, [])
 
     const loginFetch = async (FormFieldBasic : FormFieldBasic[]) => {
         let email : string = ""

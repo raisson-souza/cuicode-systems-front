@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom"
 
+import { GetSystemStyle } from "../InitialFetch"
 import IsNil from "../../functions/IsNil"
 
 import { GetUserAuth } from "../ProtectedRoute"
 import AuthUserBox from "../AuthUserBox"
 import LoginRegistryBox from "../LoginRegistryBox"
 
-import { GetSystemStyle } from "../InitialFetch"
 
 import "./style.css"
 
@@ -15,7 +15,7 @@ type HeaderProps = {
 }
 
 export default function Header(props : HeaderProps) {
-    const user = GetUserAuth()?.UserAuth
+    const userAuth = GetUserAuth()
     const location = useLocation().pathname
     const systemStyle = GetSystemStyle()
     const navigate = useNavigate()
@@ -30,9 +30,9 @@ export default function Header(props : HeaderProps) {
         )
             return null
 
-        return IsNil(user)
+        return IsNil(userAuth)
             ? <LoginRegistryBox />
-            : <AuthUserBox userAuth={ user! } />
+            : <AuthUserBox userAuth={ userAuth! } />
     }
 
     const headerClick = () => {

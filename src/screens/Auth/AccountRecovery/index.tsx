@@ -1,5 +1,5 @@
-import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import { GetUserAuth } from "../../../components/ProtectedRoute"
 import ScreenBox from "../../../components/ScreenBox"
@@ -11,11 +11,11 @@ export default function AccountRecoveryScreen() {
 
     const location = useLocation().pathname
     const navigate = useNavigate()
-    const user = GetUserAuth()?.UserAuth
+    const userAuth = GetUserAuth()
 
     useEffect(() => {
         // Se o usuário estiver logado e acessar a recuperação de conta.
-        if (location === "/account_recovery" && !IsNil(user)) {
+        if (location === "/account_recovery" && !IsNil(userAuth)) {
             navigate('/home')
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

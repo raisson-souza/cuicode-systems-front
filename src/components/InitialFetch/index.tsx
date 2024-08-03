@@ -1,23 +1,26 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
-import GenerateGlobalStyle from "./GlobalStyles"
-
 import DefaultSystemStyle from "../../data/defaultStyle"
+import LocalStorage from "../../data/classes/LocalStorage"
+import SystemEndpoints from "../../services/SystemEndpoints"
 import SystemStyle from "../../data/classes/SystemStyle"
-
-import IsNil from "../../functions/IsNil"
 
 import LoadingScreen from "../../screens/Loading/LoadingScreen"
 import SystemUnderMaintenceScreen from "../../screens/Error/SystemUnderMaintence"
 
-import SystemEndpoints from "../../services/SystemEndpoints"
+import GenerateGlobalStyle from "./GlobalStyles"
+import IsNil from "../../functions/IsNil"
+import ShouldFetch from "../../functions/Routes/ShouldFetch"
 
-type GlobalPropsType = {
-    systemStyle : SystemStyle,
-    systemUnderMaintence : boolean,
+type GlobalPropsContextType = {
+    systemStyle : SystemStyle | null
 }
 
-const GlobalProps = createContext<GlobalPropsType | null>(null)
+const GlobalPropsContext = createContext<GlobalPropsContextType | undefined>(undefined)
+
+export function GetGlobalPropsContext() {
+    return useContext(GlobalPropsContext)
+}
 
 type InitialFetchProps = {
     children: JSX.Element
@@ -26,54 +29,76 @@ type InitialFetchProps = {
 export default function InitialFetch({ children } : InitialFetchProps) {
     useEffect(() => { document.title = "CuiCode Systems" }, [])
 
-    const [ globalProps, setGlobalProps ] = useState<GlobalPropsType | null>(null)
-    let globalStyle = GenerateGlobalStyle(globalProps?.systemStyle)
+    const [ systemStyle, setSystemStyle ] = useState<SystemStyle | null>(null)
+    const [ systemUnderMaintence, setSystemUnderMaintence ] = useState<boolean>(false)
+    const [ loading, setLoading ] = useState<boolean>(true)
 
-    useEffect(() => {
-        const fetchAll = async () => {
-            const systemUnderMaintence = await SystemEndpoints.VerifySystemMaintence()
-            const systemStyles = await SystemEndpoints.GetStyle()
+    let globalStyle = GenerateGlobalStyle(systemStyle)
 
-            setGlobalProps({
-                systemStyle: systemStyles,
-                systemUnderMaintence: !systemUnderMaintence.Success
-            })
-        }
-
-        if (IsNil(globalProps))
-            fetchAll()
-    }, [globalProps])
-
-    if (!IsNil(globalProps)) {
-        if (globalProps?.systemUnderMaintence) {
-            return (
-                <GlobalProps.Provider value={ globalProps }>
-                    { globalStyle }
-                    <SystemUnderMaintenceScreen />
-                </GlobalProps.Provider>
-            )
-        }
+    const globalPropsContext : GlobalPropsContextType = {
+        systemStyle: systemStyle,
     }
 
-    if (IsNil(globalProps))
+    useEffect(() => {
+        const fetchSystemUnderMaintence = async () => {
+            const systemUnderMaintenceResponse = await SystemEndpoints.VerifySystemMaintence()
+            setSystemUnderMaintence(!systemUnderMaintenceResponse.Success)
+            setLoading(false)
+        }
+        const fetchSystemStyles = async () => {
+            const systemStylesResponse = await SystemEndpoints.GetStyle()
+            LocalStorage.SetSystemStyle(systemStylesResponse)
+            setSystemStyle(systemStylesResponse)
+        }
+
+        const defineSystemStyles = () => {
+            if (ShouldFetch({
+                key: "system_style",
+                time: 5
+            })) { fetchSystemStyles() }
+            else {
+                setSystemStyle(LocalStorage.GetSystemStyle())
+            }
+        }
+
+        defineSystemStyles()
+        fetchSystemUnderMaintence()
+    }, [])
+
+    if (loading)
         return (<LoadingScreen />)
 
+    if (systemUnderMaintence) {
+        return (
+            <GlobalPropsContext.Provider value={ globalPropsContext }>
+                { globalStyle }
+                <SystemUnderMaintenceScreen />
+            </GlobalPropsContext.Provider>
+        )
+    }
+
     return (
-        <GlobalProps.Provider value={ globalProps }>
+        <GlobalPropsContext.Provider value={ globalPropsContext }>
             { globalStyle }
             { children }
-        </GlobalProps.Provider>
+        </GlobalPropsContext.Provider>
     )
 }
 
-function GetGlobalProps() { return useContext(GlobalProps) }
-
 function GetSystemStyle() {
-    const systemStyles = useContext(GlobalProps)?.systemStyle
-
-    return IsNil(systemStyles)
-        ? new SystemStyle(DefaultSystemStyle)
-        : systemStyles!
+    const contextSystemStyle = useContext(GlobalPropsContext)?.systemStyle
+    if (!IsNil(contextSystemStyle))
+        return contextSystemStyle!
+    else if (!ShouldFetch({
+        key: "system_style",
+        time: 5
+    })) {
+        const localStorageSystemStyle = LocalStorage.GetSystemStyle()
+        return !IsNil(localStorageSystemStyle)
+            ? localStorageSystemStyle!
+            : new SystemStyle(DefaultSystemStyle)
+    }
+    return new SystemStyle(DefaultSystemStyle)
 }
 
-export { GetGlobalProps, GetSystemStyle }
+export { GetSystemStyle }

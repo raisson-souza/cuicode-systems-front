@@ -53,7 +53,7 @@ export default function AuthUserBox ({
                 //     return
                 // }
                 // TODO: acima, caso a pessoa esteja visitando um perfil e queiro voltar ao seu, poderá, por isso comentei
-                const userAuthIdHash = Base64.ToBase64(authUser?.UserAuth.Id?.toString())
+                const userAuthIdHash = Base64.ToBase64(authUser?.Id?.toString())
                 navigate(`/user/${ userAuthIdHash }`)
                 break
             case 2: // Editar Perfil

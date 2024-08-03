@@ -37,7 +37,7 @@ export default function InternalHomeScreen() {
     const [ openContactModal, setopenContactModal ] = useState(false)
 
     const userAuth = GetUserAuth()
-    const userLevelFormatted = PermissionLevelFormatter(userAuth?.UserAuth.PermissionLevel)
+    const userLevelFormatted = PermissionLevelFormatter(userAuth?.PermissionLevel)
     const systemStyle = GetSystemStyle()
     const navigate = useNavigate()
 
@@ -91,9 +91,11 @@ export default function InternalHomeScreen() {
         "textShadow": `0 0 5px ${ systemStyle.TextColor }`,
         "fontSize": 24,
         "fontWeight": "bold",
-        "cursor": userAuth!.UserAuth.PermissionLevelId! >= 3
-            ? "pointer"
-            : "auto"
+        "cursor": IsNil(userAuth)
+            ? "auto"
+            : userAuth!.PermissionLevelId! >= 3
+                ? "pointer"
+                : "auto"
     }
 
     const lastRegisteredUserOnClick = () => { navigate(`/user/${ Base64.ToBase64(`${ lastRegisteredUser?.Id }`)}`) }
@@ -102,7 +104,7 @@ export default function InternalHomeScreen() {
         <ScreenBox>
             <main id="internal-home">
                 <header id="greetings">
-                    <h2>Bem { userAuth?.UserAuth.Sex === "male" ? "vindo" : "vinda" } de volta, { userAuth?.UserAuth.Name }!</h2>
+                    <h2>Bem { userAuth?.Sex === "male" ? "vindo" : "vinda" } de volta, { userAuth?.Name }!</h2>
                 </header>
                 <UserDailyInfo />
                 <div
@@ -113,7 +115,7 @@ export default function InternalHomeScreen() {
                     <p
                         style={ userLevelStyle }
                         onClick={ () => {
-                            if (userAuth!.UserAuth.PermissionLevelId! >= 3)
+                            if (userAuth!.PermissionLevelId! >= 3)
                                 navigate("/operational")
                         }}
                     >

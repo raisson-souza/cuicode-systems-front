@@ -3,10 +3,23 @@ import IsNil from "../../functions/IsNil"
 import { GetUserAuthorizedModulesResponse } from "../../services/types/AuthEndpointsProps"
 import { GetUserDailyInfoResponse } from "../../services/types/UserEndpointsProps"
 
+import SystemStyle from "./SystemStyle"
 import User from "./User"
 
 export default abstract class LocalStorage
 {
+    static GetSystemStyle() {
+        const systemStyleLocalStorage = localStorage.getItem('system_style')
+        return !IsNil(systemStyleLocalStorage)
+            ? new SystemStyle(JSON.parse(systemStyleLocalStorage!))
+            : null
+    }
+
+    static SetSystemStyle(systemStyle : SystemStyle) {
+        localStorage.setItem('system_style', JSON.stringify(systemStyle))
+        localStorage.setItem('system_style_fetch', `${ Date.now() }`)
+    }
+
     static GetToken() {
         const token = localStorage.getItem('cuicode_systems_user_token')
         return IsNil(token)
