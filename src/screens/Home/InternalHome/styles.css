@@ -58,6 +58,14 @@
 #internal-home #contacts {
   grid-area: con;
 }
+#internal-home #contacts div {
+  padding: 1px;
+  border-radius: 15px;
+}
+#internal-home #contacts div:hover {
+  border: 1px solid black;
+  padding: 0px;
+}
 
 @media (max-width: 800px) {
   #internal-home {

@@ -68,6 +68,16 @@
 
     #contacts {
         grid-area: con;
+
+        div {
+            padding: 1px;
+            border-radius: 15px;
+
+            &:hover {
+                border: 1px solid black;
+                padding: 0px;
+            }
+        }
     }
 }
 

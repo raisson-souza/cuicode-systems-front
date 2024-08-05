@@ -157,15 +157,21 @@ export default function InternalHomeScreen() {
                     <BugFoundModal state={ openBugModal } setState={ setOpenBugModal } />
                     <SugestionModal state={ openSugestionModal } setState={ setopenSugestionModal } />
                     <ContactModal state={ openContactModal } setState={ setopenContactModal } />
-                    <button style={ modalButtonsStyle } onClick={ () => setOpenBugModal(true) }>
-                        <b>ACHEI UM BUG</b>
-                    </button>
-                    <button style={ modalButtonsStyle } onClick={ () => setopenSugestionModal(true) }>
-                        <b>TENHO UMA SUGESTÃO</b>
-                    </button>
-                    <button style={ modalButtonsStyle } onClick={ () => setopenContactModal(true) }>
-                        <b>FALAR COM O DESENVOLVEDOR</b>
-                    </button>
+                    <div>
+                        <button style={ modalButtonsStyle } onClick={ () => setOpenBugModal(true) }>
+                            <b>ACHEI UM BUG</b>
+                        </button>
+                    </div>
+                    <div>
+                        <button style={ modalButtonsStyle } onClick={ () => setopenSugestionModal(true) }>
+                            <b>TENHO UMA SUGESTÃO</b>
+                        </button>
+                    </div>
+                    <div>
+                        <button style={ modalButtonsStyle } onClick={ () => setopenContactModal(true) }>
+                            <b>FALAR COM O DESENVOLVEDOR</b>
+                        </button>
+                    </div>
                 </div>
             </main>
         </ScreenBox>
