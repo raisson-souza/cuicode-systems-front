@@ -1,5 +1,27 @@
 #external-home {
-  display: grid;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+#external-home img {
+  width: 20vw;
+}
+#external-home #presentation {
+  display: flex;
   flex-direction: column;
-  gap: 50px;
+  justify-content: flex-start;
+  align-items: start;
+  width: 70%;
+  padding: 5px 0 5px 5px;
+  gap: 15px;
+}
+
+@media (max-width: 900px) {
+  #external-home {
+    flex-direction: column;
+  }
+  #external-home img {
+    order: -1;
+  }
 }/*# sourceMappingURL=styles.css.map */

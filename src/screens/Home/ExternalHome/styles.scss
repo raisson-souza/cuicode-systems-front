@@ -1,5 +1,30 @@
 #external-home {
-    display: grid;
-    flex-direction: column;
-    gap: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+
+    img {
+        width: 20vw;
+    }
+
+    #presentation {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: start;
+        width: 70%;
+        padding: 5px 0 5px 5px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 900px){
+    #external-home {
+        flex-direction: column;
+
+        img {
+            order: -1;
+        }
+    }
 }
