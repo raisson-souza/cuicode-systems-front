@@ -11,15 +11,15 @@ export default function GlobalStyle(props : GlobalStyleProps) {
         <style
             dangerouslySetInnerHTML={{ __html: `
                 * {
-                    color: ${ systemStyle!.TextColor };
-                    font-family: "Montserrat", sans-serif
+                    color: ${ systemStyle.TextColor };
+                    font-family: "Montserrat", sans-serif !important
                 };
                 input {
-                    background-color: ${ systemStyle!.OppositeTextColor };
+                    background-color: ${ systemStyle.OppositeTextColor };
                     border-radius: 5px
                 };
                 button {
-                    background-color: ${ systemStyle!.OppositeTextColor }
+                    background-color: ${ systemStyle.OppositeTextColor }
                 };
                 li.MuiButtonBase-root {
                     color: black !important;

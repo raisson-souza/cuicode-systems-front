@@ -61,15 +61,15 @@ export default function LoginScreen() {
         <ScreenBox
             hasHeaderUserInterationBox={ false }
         >
-            <div className="login-screen">
-                <div className="login-description">
-                    <h2>Faça seu Login em CuiCode Systems</h2>
+            <div id="login-screen">
+                <div id="login-description">
+                    <h2>Faça seu login em CuiCode Systems</h2>
                     <div>
-                        <p>Não tem uma conta? <Link to={'/user_registry'}>Crie aqui.</Link></p>
-                        <p>Esqueceu a senha? <Link to={'/account_recovery'}>Recupere sua conta.</Link> </p>
+                        <p><Link to={'/user_registry'}>Não tem uma conta?</Link></p>
+                        <p><Link to={'/account_recovery'}>Esqueceu a senha?</Link> </p>
                     </div>
                 </div>
-                <div className="login-form">
+                <div id="login-form">
                     {
                         FormBuilder({
                             Data: loginForm,

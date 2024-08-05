@@ -1,11 +1,11 @@
-.login-screen {
+#login-screen {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
     padding: 50px;
 
-    .login-description {
+    #login-description {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -17,7 +17,7 @@
 }
 
 @media (max-width: 700px){
-    .login-screen {
+    #login-screen {
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
