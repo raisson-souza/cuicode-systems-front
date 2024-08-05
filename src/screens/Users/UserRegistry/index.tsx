@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-import ScreenBox from "../../../components/ScreenBox"
+import ScreenBox from "../../../components/base/ScreenBox"
 
 export default function UserRegistryScreen() {
     useEffect(() => { document.title = "CuiCode Systems - Cadastro" }, [])

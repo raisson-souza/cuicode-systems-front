@@ -7,7 +7,7 @@ import AuthEndpoints from "../../../services/AuthEndpoints"
 import SystemEndpoints from "../../../services/SystemEndpoints"
 
 import FormBuilder, { FormFieldBasic } from "../../../components/FormBuilder/Form"
-import ScreenBox from "../../../components/ScreenBox"
+import ScreenBox from "../../../components/base/ScreenBox"
 
 import "./styles.css"
 

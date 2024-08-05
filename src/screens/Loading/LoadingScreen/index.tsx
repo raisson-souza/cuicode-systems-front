@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material"
-import ScreenBox from "../../../components/ScreenBox"
+import ScreenBox from "../../../components/base/ScreenBox"
 
 export default function LoadingScreen() {
     return (

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import ScreenBox from "../../../components/ScreenBox"
+import ScreenBox from "../../../components/base/ScreenBox"
 
 export default function DefaultErrorScreen() {
     return (

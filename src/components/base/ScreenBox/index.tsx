@@ -1,10 +1,10 @@
-import Header from "../Header"
-import ModulesSection from "../ModulesSection"
+import Header from "../../Header"
+import ModulesSection from "../../ModulesSection"
 
-import { GetSystemStyle } from "../base/InitialFetch"
-import IsNil from "../../functions/IsNil"
+import { GetSystemStyle } from "../../base/InitialFetch"
+import IsNil from "../../../functions/IsNil"
 
-import LocalStorage from "../../data/classes/LocalStorage"
+import LocalStorage from "../../../data/classes/LocalStorage"
 
 import "./styles.css"
 

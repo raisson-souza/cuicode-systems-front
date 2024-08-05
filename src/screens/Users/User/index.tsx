@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 import NotFoundScreen from "../../Error/NotFound"
-import ScreenBox from "../../../components/ScreenBox"
+import ScreenBox from "../../../components/base/ScreenBox"
 
 import { Base64 } from "../../../functions/Formatting/Base64"
 import IsNil from "../../../functions/IsNil"

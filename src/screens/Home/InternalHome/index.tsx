@@ -5,7 +5,7 @@ import { CircularProgress } from "@mui/material"
 import { GetSystemStyle } from "../../../components/base/InitialFetch"
 import { GetUserAuth } from "../../../components/base/ProtectedRoute"
 import ModalMessage from "../../../components/ModalMessage"
-import ScreenBox from "../../../components/ScreenBox"
+import ScreenBox from "../../../components/base/ScreenBox"
 import UserDailyInfo from "../../../components/UserDailyInfo"
 import UserPhoto from "../../../components/UserPhoto"
 

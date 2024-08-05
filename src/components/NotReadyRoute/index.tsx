@@ -4,7 +4,7 @@ import ModulesAssetsSvg from "../../assets/modules/ModulesAssetsSvg"
 
 import { GetSystemStyle } from "../base/InitialFetch"
 import NotFoundScreen from "../../screens/Error/NotFound"
-import ScreenBox from "../ScreenBox"
+import ScreenBox from "../base/ScreenBox"
 
 import ModulesEnum from "../../data/enums/ModulesEnum"
 
