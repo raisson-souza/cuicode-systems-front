@@ -2,12 +2,11 @@ import { useLocation } from "react-router-dom"
 
 import ModulesAssetsSvg from "../../assets/modules/ModulesAssetsSvg"
 
+import { GetSystemStyle } from "../base/InitialFetch"
+import NotFoundScreen from "../../screens/Error/NotFound"
 import ScreenBox from "../ScreenBox"
 
-import { GetSystemStyle } from "../InitialFetch"
-
 import ModulesEnum from "../../data/enums/ModulesEnum"
-import NotFoundScreen from "../../screens/Error/NotFound"
 
 export default function NotReadyRoute() {
     const moduleName = useLocation().pathname.replace('/', '')

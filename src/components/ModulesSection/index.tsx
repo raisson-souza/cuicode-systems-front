@@ -1,9 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Tooltip } from "@mui/material"
 
-import { GetSystemStyle } from "../InitialFetch"
-
 import ModulesAssetsSvg from "../../assets/modules/ModulesAssetsSvg"
+
+import { GetSystemStyle } from "../base/InitialFetch"
 
 import { GetUserAuthorizedModulesResponse } from "../../services/types/AuthEndpointsProps"
 

@@ -6,11 +6,11 @@ import { useState } from "react"
 import LocalStorage from "../../data/classes/LocalStorage"
 import User from "../../data/classes/User"
 
-import { GetSystemStyle } from "../InitialFetch"
-import { GetUserAuth } from "../ProtectedRoute"
 import UserPhoto from "../UserPhoto"
 
 import { Base64 } from "../../functions/Formatting/Base64"
+import { GetSystemStyle } from "../base/InitialFetch"
+import { GetUserAuth } from "../base/ProtectedRoute"
 
 import "./styles.css"
 

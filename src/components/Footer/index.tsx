@@ -1,5 +1,6 @@
 // import SystemStyle from "../../data/classes/SystemStyle"
-import { GetSystemStyle } from "../InitialFetch"
+
+import { GetSystemStyle } from "../base/InitialFetch"
 
 import "./styles.css"
 

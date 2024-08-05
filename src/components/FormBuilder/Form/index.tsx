@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react"
 
 import FormFieldBuilder from "../FormField/FormFieldBuilder"
 
-import { GetSystemStyle } from "../../InitialFetch"
-
+import { GetSystemStyle } from "../../base/InitialFetch"
 import FindValue from "../../../functions/FindValue"
 import IsNil from "../../../functions/IsNil"
 

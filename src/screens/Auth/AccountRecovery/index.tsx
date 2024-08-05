@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
-import { GetUserAuth } from "../../../components/ProtectedRoute"
+import { GetUserAuth } from "../../../components/base/ProtectedRoute"
 import ScreenBox from "../../../components/ScreenBox"
 
 import IsNil from "../../../functions/IsNil"

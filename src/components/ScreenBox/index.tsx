@@ -1,12 +1,12 @@
-import { GetSystemStyle } from "../InitialFetch"
-
 import Header from "../Header"
 import ModulesSection from "../ModulesSection"
 
+import { GetSystemStyle } from "../base/InitialFetch"
 import IsNil from "../../functions/IsNil"
 
-import "./styles.css"
 import LocalStorage from "../../data/classes/LocalStorage"
+
+import "./styles.css"
 
 type ScreenBoxScreenProps = {
     children : JSX.Element | JSX.Element[]

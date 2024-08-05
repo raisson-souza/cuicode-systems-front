@@ -1,12 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom"
 
-import { GetSystemStyle } from "../InitialFetch"
-import IsNil from "../../functions/IsNil"
-
-import { GetUserAuth } from "../ProtectedRoute"
 import AuthUserBox from "../AuthUserBox"
 import LoginRegistryBox from "../LoginRegistryBox"
 
+import { GetSystemStyle } from "../base/InitialFetch"
+import { GetUserAuth } from "../base/ProtectedRoute"
+import IsNil from "../../functions/IsNil"
 
 import "./style.css"
 

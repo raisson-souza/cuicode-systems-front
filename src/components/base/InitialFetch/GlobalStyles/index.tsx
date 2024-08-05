@@ -1,6 +1,6 @@
-import SystemStyle from "../../../data/classes/SystemStyle"
+import SystemStyle from "../../../../data/classes/SystemStyle"
 
-import IsNil from "../../../functions/IsNil"
+import IsNil from "../../../../functions/IsNil"
 
 export default function GenerateGlobalStyle(systemStyle? : SystemStyle | null) : JSX.Element | null {
     if (IsNil(systemStyle))

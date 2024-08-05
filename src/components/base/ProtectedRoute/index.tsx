@@ -1,14 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-import env from "../../config/Env"
+import env from "../../../config/Env"
 
-import LocalStorage from "../../data/classes/LocalStorage"
-import User from "../../data/classes/User"
+import LocalStorage from "../../../data/classes/LocalStorage"
+import User from "../../../data/classes/User"
 
-import IsNil from "../../functions/IsNil"
+import IsNil from "../../../functions/IsNil"
 
-import AuthEndpoints from "../../services/AuthEndpoints"
+import AuthEndpoints from "../../../services/AuthEndpoints"
+
 
 type ProtectedRouteContextType = {
     userAuth : User | null,

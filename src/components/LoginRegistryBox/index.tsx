@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-import { GetSystemStyle } from "../InitialFetch"
+import { GetSystemStyle } from "../base/InitialFetch"
 
 import "./styles.css"
 

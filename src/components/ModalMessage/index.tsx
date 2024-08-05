@@ -1,6 +1,6 @@
 import { Modal } from "@mui/material"
 
-import { GetSystemStyle } from "../InitialFetch"
+import { GetSystemStyle } from "../base/InitialFetch"
 
 type ModalMessageProps = {
     children : JSX.Element

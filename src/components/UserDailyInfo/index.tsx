@@ -5,7 +5,7 @@ import LocalStorage from "../../data/classes/LocalStorage"
 import UserEndpoints from "../../services/UserEndpoints"
 
 import { Base64 } from "../../functions/Formatting/Base64"
-import { GetSystemStyle } from "../InitialFetch"
+import { GetSystemStyle } from "../base/InitialFetch"
 import IsNil from "../../functions/IsNil"
 import ShouldFetch from "../../functions/Routes/ShouldFetch"
 
