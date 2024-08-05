@@ -5,10 +5,10 @@ import LocalStorage from "../../../data/classes/LocalStorage"
 import SystemEndpoints from "../../../services/SystemEndpoints"
 import SystemStyle from "../../../data/classes/SystemStyle"
 
+import GlobalStyle from "../GlobalStyle"
 import LoadingScreen from "../../../screens/Loading/LoadingScreen"
 import SystemUnderMaintenceScreen from "../../../screens/Error/SystemUnderMaintence"
 
-import GenerateGlobalStyle from "./GlobalStyles"
 import IsNil from "../../../functions/IsNil"
 import ShouldFetch from "../../../functions/Routes/ShouldFetch"
 
@@ -32,8 +32,6 @@ export default function InitialFetch({ children } : InitialFetchProps) {
     const [ systemStyle, setSystemStyle ] = useState<SystemStyle | null>(null)
     const [ systemUnderMaintence, setSystemUnderMaintence ] = useState<boolean>(false)
     const [ loading, setLoading ] = useState<boolean>(true)
-
-    let globalStyle = GenerateGlobalStyle(systemStyle)
 
     const globalPropsContext : GlobalPropsContextType = {
         systemStyle: systemStyle,
@@ -71,16 +69,18 @@ export default function InitialFetch({ children } : InitialFetchProps) {
     if (systemUnderMaintence) {
         return (
             <GlobalPropsContext.Provider value={ globalPropsContext }>
-                { globalStyle }
-                <SystemUnderMaintenceScreen />
+                <GlobalStyle>
+                    <SystemUnderMaintenceScreen />
+                </GlobalStyle>
             </GlobalPropsContext.Provider>
         )
     }
 
     return (
         <GlobalPropsContext.Provider value={ globalPropsContext }>
-            { globalStyle }
-            { children }
+            <GlobalStyle>
+                { children }
+            </GlobalStyle>
         </GlobalPropsContext.Provider>
     )
 }
